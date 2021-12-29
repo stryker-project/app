@@ -1,0 +1,168 @@
+#!/system/bin/sh
+
+## R1 by @ZALEXDEV
+###
+FROM_ZALEXDEV_TO_WORLD=$(readlink -f $0)
+. ${FROM_ZALEXDEV_TO_WORLD%/*}/bootroot_env
+###
+
+
+######### CHECK IF WORKING CHROOT DIR EXISTS #########
+f_chk_chroot() {
+    [ ! -f $MNT$CHROOT_EXEC ] && echo "[-] sudo not installed." && return 1
+    if ! $BUSYBOX chroot $MNT /bin/uname; then
+        echo "[-] Chroot is corrupted. Error code [-0]"
+        return 1
+    fi
+    return 0
+}
+
+######### CHECK IF FS IS ALL MOUNTED ALREADY #########
+f_isAllReady(){
+    local FS
+    FS=(proc sys dev dev/pts system sdcard)
+    for i in "${FS[@]}"; do
+        if [ "$(grep $MNT/$i /proc/mounts)" ]; then
+            echo "[+] $i was mounted already."
+            continue
+        else
+            echo "[-] FS is NOT all mounted yet."
+            return 1
+        fi
+    done
+    [ ! -e "/dev/net/tun" ] && return 1
+    [ ! -e "/dev/fd" -o ! -e "/dev/stdin" -o ! -e "/dev/stdout" -o ! -e "/dev/stderr" ] && return 1
+    echo "[+] The Chroot has been started already." && return 0
+}
+
+######### MOUNT SDCARD #########
+
+f_mount_sdcard() {
+    if [ -d "$MNT/sdcard" ]; then
+        $BUSYBOX mountpoint -q "$MNT/sdcard" && return 0
+        rm -rf $MNT/sdcard
+    fi
+    mkdir -p $MNT/sdcard
+    for sdcard in \
+        "$EXTERNAL_STORAGE" \
+        /storage/emulated/0 \
+        /storage/emulated/legacy \
+        /storage/sdcard0 \
+        /sdcard
+    do
+        [ -d "$sdcard" ] &&
+            $BUSYBOX mount -o bind "$sdcard" "$MNT/sdcard" && echo "[+] mounted /sdcard" &&
+                return 0
+    done
+    return 1
+}
+
+######### [ MOUNTING AND BINDING FILESYSTEM ] #########
+f_mount_fs() {
+
+    $BUSYBOX mount -o remount,suid /data
+    $BUSYBOX chmod +s $MNT$CHROOT_EXEC
+
+    ######### SET FD, Thanks @feefik and @zer0conf ########
+    if [ ! -e "/dev/fd" -o ! -e "/dev/stdin" -o ! -e "/dev/stdout" -o ! -e "/dev/stderr" ]; then
+        [ -e "/dev/fd" ] || ln -s /proc/self/fd /dev/ && echo "[+] linked /proc/self/fd to /dev/"
+        [ -e "/dev/stdin" ] || ln -s /proc/self/fd/0 /dev/stdin && echo "[+] linked /proc/self/fd/0 to /dev/stdin"
+        [ -e "/dev/stdout" ] || ln -s /proc/self/fd/1 /dev/stdout && echo "[+] linked /proc/self/fd/1 to /dev/stdout"
+        [ -e "/dev/stderr" ] || ln -s /proc/self/fd/2 /dev/stderr && echo "[+] linked /proc/self/fd/2 to /dev/stderr"
+    fi
+
+    ######### SET TUN ########
+    if [ ! -e "/dev/net/tun" ]; then
+        [ ! -d "/dev/net" ] && mkdir -p /dev/net
+        mknod /dev/net/tun c 10 200 && echo "[+] created /dev/net/tun"
+    fi
+
+    ######### SET DEV ########
+    if [ ! "$($BUSYBOX mountpoint $MNT/dev 2> /dev/null | grep 'is a')" ]; then
+        [ -d $MNT/dev ] && rm -rf $MNT/dev
+        [ ! -d $MNT/dev ] && mkdir -p $MNT/dev
+        $BUSYBOX mount -o bind /dev $MNT/dev && echo "[+] mounted /dev"
+    fi
+
+    ######### SET DEV PTS ########
+    if [ ! "$($BUSYBOX mountpoint $MNT/dev/pts 2> /dev/null | grep 'is a')" ]; then
+        $BUSYBOX mount -t devpts devpts $MNT/dev/pts && echo "[+] mounted /dev/pts"
+    fi
+
+    ######### SET DEV SHM ########
+    if [ ! "$($BUSYBOX mountpoint $MNT/dev/shm 2> /dev/null | grep 'is a')" ]; then
+        [ ! -d $MNT/dev/shm ] && mkdir -p $MNT/dev/shm
+        $BUSYBOX mount -o rw,nosuid,nodev,mode=1777 -t tmpfs tmpfs $MNT/dev/shm && echo "[+] mounted /dev/shm"
+    fi
+
+    ######### SET PROC ########
+    if [ ! "$($BUSYBOX mountpoint $MNT/proc 2> /dev/null | grep 'is a')" ]; then
+        [ -d $MNT/proc ] && rm -rf $MNT/proc
+        [ ! -d $MNT/proc ] && mkdir -p $MNT/proc
+        $BUSYBOX mount -t proc proc $MNT/proc && echo "[+] mounted /proc"
+    fi
+
+    ######### SET SYS ########
+    if [ ! "$($BUSYBOX mountpoint $MNT/sys 2> /dev/null | grep 'is a')" ]; then
+        [ -d $MNT/sys ] && rm -rf $MNT/sys
+        [ ! -d $MNT/sys ] && mkdir -p $MNT/sys
+        $BUSYBOX mount -t sysfs sys $MNT/sys && echo "[+] mounted /sys"
+    fi
+
+    ######### SET SYSTEM ########
+    if [ ! "$($BUSYBOX mountpoint $MNT/system 2> /dev/null | grep 'is a')" ]; then
+        [ -d $MNT/system ] && rm -rf $MNT/system
+        [ ! -d $MNT/system ] && mkdir -p $MNT/system
+        $BUSYBOX mount -o bind /system $MNT/system && echo "[+] mounted /system"
+    fi
+
+    ######### SET INTERNAL SDCARD ########
+    f_mount_sdcard
+
+    ######### SET 250MB TO ALLOW POSTGRESQL #########
+    $BUSYBOX sysctl -w kernel.shmmax=268435456
+
+    ######### SET DNS ########
+    > $MNT/etc/resolv.conf # empty dns entries
+    for i in 1 2 3 4; do
+        if [ -z "$(getprop net.dns${i})" ]; then
+            # we go through 1-4 dns servers and break out of loop on empty
+            break
+        else
+            # add local/device dns server first
+            echo "nameserver $(getprop net.dns${i})" >> $MNT/etc/resolv.conf
+        fi
+    done
+
+    chmod 644 $MNT/etc/resolv.conf
+
+    ######### SET NETWORK AND HOSTNAME ########
+    $BUSYBOX sysctl -w net.ipv4.ip_forward=1
+    echo "127.0.0.1		 localhost stryker"                                       > $MNT/etc/hosts
+    echo "::1				 localhost ip6-localhost ip6-loopback" >> $MNT/etc/hosts
+    echo "stryker"                                                                            > $MNT/proc/sys/kernel/hostname
+
+    ######### Setup done #########
+    echo "[+] The Chroot has been started."
+}
+
+################################
+########## MAIN PART ###########
+################################
+
+######### First to check if chroot directory exists #########
+echo "[!] Checking chroot environment."
+f_chk_chroot
+RES=$?
+if [ $RES -eq 1 ]; then
+    echo "[-] Please check again. Aborted."
+    exit 1
+fi
+
+## Lastly check if all Filesystems are mounted.
+f_isAllReady
+RES=$?
+if [ $RES -eq 1 ]; then
+    echo "[!] Mounting fs to chroot."
+    f_mount_fs
+fi

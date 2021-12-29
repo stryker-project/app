@@ -1,0 +1,40 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    compileSdk 31
+
+    defaultConfig {
+        applicationId "com.zalexdev.stryker"
+        minSdk 22
+        targetSdk 31
+        versionCode 5
+        versionName "1.0 Release"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.4.0'
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.github.cachapa:ExpandableLayout:2.9.2'
+    implementation 'com.airbnb.android:lottie:4.2.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation 'com.github.seancfoley:ipaddress:5.3.3'
+    implementation 'org.jsoup:jsoup:1.13.1'
+}

@@ -1,0 +1,38 @@
+#!/system/bin/sh
+### Bootroot environment. stryker
+
+unset LD_PRELOAD
+
+## Define the owner app package name.
+APP_PGK_NAME=com.zalexdev.stryker
+
+## Define chroot sudo path
+CHROOT_EXEC=/usr/bin/sudo
+
+## Combine android $PATH to chroot $PATH
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$PATH
+
+## Define busybox path.
+BUSYBOX=/data/data/$APP_PGK_NAME/cache/busybox
+
+## Define stryker binaries.
+chmod 777 /data/data/$APP_PGK_NAME/cache/busybox
+chmod 777 /data/data/$APP_PGK_NAME/cache/chroot_exec
+chmod 777 /data/data/$APP_PGK_NAME/cache/boot_bash
+
+## Define chroot path to MNT variable.
+chmod +x /data/data/$APP_PGK_NAME/shared_prefs/com.zalexdev.stryker_preferences.xml
+MNT=`cat /data/data/$APP_PGK_NAME/shared_prefs/com.zalexdev.stryker_preferences.xml | grep "\"chroot_path\"" | sed "s/^.*\"chroot_path\">\(.*\)<\/string>/\1/g"`
+
+## Validate busybox path.
+if [ -z "$BUSYBOX" ]; then
+    echo "[-] No busybox found."
+    exit 1
+fi
+
+## Validate Chroot path.
+if [ ! -d "$MNT" ]; then
+    echo "[-] \"$MNT\" directory does not exist!"
+    cat /data/data/$APP_PGK_NAME/shared_prefs/com.zalexdev.stryker_preferences.xml | grep "\"chroot_path\"" | sed "s/^.*\"chroot_path\">\(.*\)<\/string>/\1/g"
+    exit 2
+fi

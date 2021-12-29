@@ -1,0 +1,5 @@
+#!/system/bin/sh
+BUSYBOX=/data/data/com.zalexdev.stryker/cache/busybox
+MNT=/data/local/stryker/beta/
+CHROOT_EXEC=/usr/bin/sudo
+$BUSYBOX chroot $MNT $CHROOT_EXEC -E PATH=$PATH ash
