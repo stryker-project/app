@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".wifi.Wifi">
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:gravity="center"
+       android:id="@+id/scanlayout"
+
+      android:orientation="vertical">
+
+      <ImageView
+          android:id="@+id/scan_img"
+          android:layout_width="250dp"
+          android:layout_height="250dp"
+          android:src="@drawable/wifi"
+          app:tint="#606060" />
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Scanning networks..."
+          android:textSize="15dp"
+          android:gravity="center"
+          android:id="@+id/scan_text"
+          android:textStyle="bold" />
+   </LinearLayout>
+
+   <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:id="@+id/refresh">
+
+<androidx.recyclerview.widget.RecyclerView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/wifilist"/>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</RelativeLayout>

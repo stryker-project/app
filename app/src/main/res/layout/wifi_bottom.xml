@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:paddingBottom="15dp"
+    android:layout_height="wrap_content">
+
+<LinearLayout
+    android:layout_width="150dp"
+    android:layout_height="8dp"
+    android:background="@drawable/rectangle"
+    android:layout_gravity="center"
+
+    android:layout_marginTop="8dp"/>
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/wifi"
+        app:tint="#1565C0" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/wifi_name_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/ubuntu"
+        android:text="Wifi name"
+        android:textSize="30dp"
+        android:textStyle="bold" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/wifi_mac_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/ubuntu"
+        android:text="MAC adress"
+        android:layout_marginTop="5dp"
+        android:textIsSelectable="true"
+        android:textSize="15dp" />
+    <net.cachapa.expandablelayout.ExpandableLayout
+        android:layout_width="match_parent"
+        app:el_duration="500"
+        app:el_expanded="true"
+        android:id="@+id/expand"
+        app:el_parallax="0.5"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackground"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/pixie_dust"
+            android:layout_height="30dp"/>
+
+        <TextView
+            android:id="@+id/pixie"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/ubuntu"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+
+            android:text="Pixie Dust attack"
+            android:textSize="20dp" />
+
+    </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?attr/selectableItemBackground"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/brute"
+                    android:layout_height="30dp"/>
+
+                <TextView
+                    android:id="@+id/brute"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/ubuntu"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+
+                    android:text="Bruteforce pin"
+                    android:textSize="20dp" />
+
+            </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackground"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/handshake"
+            android:layout_height="30dp"/>
+
+        <TextView
+            android:id="@+id/handshake"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/ubuntu"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+
+            android:text="Try capture handshake"
+            android:textSize="20dp" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackground"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/deauth"
+            android:layout_height="30dp"/>
+
+        <TextView
+            android:id="@+id/deauther"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/ubuntu"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+
+            android:text="Deauth clients"
+            android:textSize="20dp" />
+
+    </LinearLayout>
+
+        </LinearLayout>
+    </net.cachapa.expandablelayout.ExpandableLayout>
+    <net.cachapa.expandablelayout.ExpandableLayout
+        android:layout_width="match_parent"
+        app:el_duration="500"
+        app:el_expanded="false"
+        android:id="@+id/expand_console"
+        app:el_parallax="0.5"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@drawable/console"
+                android:padding="10dp"
+                android:id="@+id/output"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text=""
+                android:textColor="@color/white"/>
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:indeterminate="true"
+                app:indicatorColor="@color/blue"
+                android:layout_marginTop="3dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                />
+
+        </LinearLayout>
+    </net.cachapa.expandablelayout.ExpandableLayout>
+    <net.cachapa.expandablelayout.ExpandableLayout
+        android:layout_width="match_parent"
+        app:el_duration="500"
+        app:el_expanded="false"
+        android:id="@+id/expand_result"
+        app:el_parallax="0.5"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:text="Password: "
+                android:gravity="center"
+                android:textIsSelectable="true"
+                android:layout_margin="15dp"
+                android:id="@+id/getedpass"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:text="WPS Pin: "
+                android:gravity="center"
+                android:textIsSelectable="true"
+                android:layout_margin="15dp"
+                android:id="@+id/getedpin"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="AUTO-CONNECT"
+                android:drawableLeft="@drawable/wifi"
+                android:visibility="gone"
+                android:enabled="false"
+                android:backgroundTint="@color/blue"
+                android:layout_margin="10dp"
+                android:id="@+id/connect"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="Return back"
+                android:backgroundTint="@color/blue"
+                android:layout_margin="10dp"
+                android:id="@+id/back"/>
+        </LinearLayout>
+    </net.cachapa.expandablelayout.ExpandableLayout>
+    <net.cachapa.expandablelayout.ExpandableLayout
+        android:layout_width="match_parent"
+        app:el_duration="500"
+        app:el_expanded="false"
+        android:id="@+id/expand_brute"
+        app:el_parallax="0.5"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/wps_speed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/ubuntu"
+
+                android:paddingLeft="15dp"
+                android:text="Speed: calculating..."
+
+                android:textSize="18dp" />
+            <TextView
+                android:id="@+id/wps_percent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/ubuntu"
+                android:paddingLeft="15dp"
+                android:text="Percent: calculating... "
+
+                android:textSize="18dp" />
+            <TextView
+                android:id="@+id/wps_now"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/ubuntu"
+
+                android:paddingLeft="15dp"
+                android:text="Waiting... "
+
+                android:textSize="20dp" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:text="Cancel"
+                android:enabled="false"
+                android:layout_margin="1dp"
+                android:id="@+id/cancel_brute"/>
+        </LinearLayout>
+    </net.cachapa.expandablelayout.ExpandableLayout>
+    <net.cachapa.expandablelayout.ExpandableLayout
+        android:layout_width="match_parent"
+        app:el_duration="500"
+        app:el_expanded="false"
+        android:id="@+id/expand_handshake"
+        app:el_parallax="0.5"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@drawable/console"
+                android:padding="10dp"
+                android:id="@+id/hs_output"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text=""
+                android:gravity="bottom"
+                android:scrollbars="vertical"
+                android:textColor="@color/white"/>
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:indeterminate="true"
+                app:indicatorColor="@color/blue"
+                android:layout_marginTop="3dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:text="Cancel"
+                android:enabled="false"
+                android:layout_margin="10dp"
+                android:id="@+id/cancel_hs"/>
+        </LinearLayout>
+    </net.cachapa.expandablelayout.ExpandableLayout>
+    <net.cachapa.expandablelayout.ExpandableLayout
+        android:layout_width="match_parent"
+        app:el_duration="500"
+        app:el_expanded="false"
+        android:id="@+id/expand_deauth"
+        app:el_parallax="0.5"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="25dp"
+                android:text="Deauthing..."
+                android:gravity="center"
+                android:textIsSelectable="true"
+                android:layout_marginTop="10dp"
+                />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:text="Cancel"
+                android:enabled="false"
+                android:layout_margin="10dp"
+                android:id="@+id/cancel_deauth"/>
+        </LinearLayout>
+    </net.cachapa.expandablelayout.ExpandableLayout>
+</LinearLayout>

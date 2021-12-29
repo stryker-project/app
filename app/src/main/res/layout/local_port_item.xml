@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+<com.google.android.material.card.MaterialCardView
+    android:layout_width="match_parent"
+    app:cardCornerRadius="8dp"
+    android:id="@+id/ports_item"
+    android:clickable="true"
+    android:focusable="true"
+    android:layout_margin="5dp"
+    android:background="?attr/selectableItemBackground"
+    android:elevation="18dp"
+    app:strokeWidth="1px"
+    app:strokeColor="#DA515151"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        android:baselineAligned="false">
+
+<LinearLayout
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:layout_marginTop="3dp"
+    android:layout_marginStart="10dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/local_device_port"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/ubuntu"
+        android:text="Port (Service)"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+    <net.cachapa.expandablelayout.ExpandableLayout
+        android:layout_width="match_parent"
+        app:el_duration="500"
+        app:el_expanded="false"
+        android:id="@+id/expand_actions"
+        app:el_parallax="0.5"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/action_one"
+                android:text="NO ACTION"
+                android:visibility="invisible"
+                android:layout_marginRight="10dp"
+                android:textSize="15dp"
+                android:textColor="#1E88E5"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/action_two"
+                android:layout_marginRight="10dp"
+                android:text="NO ACTION"
+                android:visibility="invisible"
+                android:textSize="15dp"
+                android:textColor="#1E88E5"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/action_three"
+                android:layout_marginRight="10dp"
+                android:text="NO ACTION"
+                android:visibility="invisible"
+                android:textSize="15dp"
+                android:textColor="#1E88E5"/>
+        </LinearLayout>
+        <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/action_result"
+        android:layout_marginRight="10dp"
+        android:text=""
+        android:textIsSelectable="true"
+        android:visibility="invisible"
+        android:textSize="15dp"
+        android:textColor="#1E88E5"/>
+        </LinearLayout>
+    </net.cachapa.expandablelayout.ExpandableLayout>
+
+
+
+
+
+</LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/local_cutted"
+                    android:layout_width="25dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:visibility="invisible"
+                    android:src="@drawable/cut_network"
+                    android:textSize="30px"
+                    android:textStyle="bold"
+                    app:tint="#B71C1C" />
+
+
+
+            </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+</LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
+
+
+</RelativeLayout>

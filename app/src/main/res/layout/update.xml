@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+<com.airbnb.lottie.LottieAnimationView
+    android:id="@+id/update"
+    android:layout_width="250dp"
+    app:lottie_autoPlay="true"
+    app:lottie_loop="true"
+    android:layout_height="250dp"
+    app:lottie_rawRes="@raw/update"
+    android:layout_marginBottom="20dp"
+    />
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        app:trackCornerRadius="15dp"
+
+        android:id="@+id/prog_update"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:id="@+id/update_status"
+        android:fontFamily="@font/ubuntu"
+        android:text="Starting..."/>
+
+    <TextView
+        android:id="@+id/welcome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/ubuntu"
+        android:gravity="center"
+        android:visibility="invisible"
+        android:text="Welcome to Stryker ⚡"
+        android:textSize="23dp"
+        android:textStyle="bold" />
+</LinearLayout>

@@ -1,0 +1,28 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.stryker" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">#283593</item>
+        <item name="colorPrimaryVariant">#283593</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_200</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="navigationViewStyle">@style/Widget.App.NavigationView</item>
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+    <style name="Widget.App.NavigationView" parent="Widget.MaterialComponents.NavigationView">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.NavigationView</item>
+        <item name="itemIconTint">@color/white</item>
+        <item name="itemTextColor">@color/white</item>
+        <item name="itemShapeFillColor">@color/selected</item>
+    </style>
+
+    <style name="ThemeOverlay.App.NavigationView" parent="">
+        <item name="colorPrimary">@color/purple_700</item>
+
+    </style>
+</resources>

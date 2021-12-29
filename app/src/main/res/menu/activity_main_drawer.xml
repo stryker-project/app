@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/dashboard_menu"
+            android:icon="@drawable/dashboard"
+            android:title="Dashboard" />
+        <item
+            android:id="@+id/wifi"
+            android:icon="@drawable/wifi"
+            android:title="Wifi" />
+        <item
+            android:id="@+id/local"
+            android:icon="@drawable/local"
+            android:title="Local devices" />
+        <item
+            android:id="@+id/router"
+            android:icon="@drawable/router"
+            android:title="Router Scan" />
+        <item
+            android:id="@+id/settings"
+            android:icon="@drawable/settings"
+            android:title="Settings" />
+        <item
+            android:id="@+id/about"
+            android:icon="@drawable/about"
+            android:title="About" />
+    </group>
+</menu>

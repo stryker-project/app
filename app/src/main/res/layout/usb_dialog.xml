@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+
+        android:text="Waiting..."
+        android:textSize="30dp" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/usbinfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="invisible"
+        android:text="Information"
+        android:textSize="20dp" />
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/detected"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="invisible"
+        android:text="Detected: "
+        android:textSize="16dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Checking drivers..."
+
+            android:layout_gravity="center"
+            android:visibility="invisible"
+            android:id="@+id/drivercheck"
+            android:layout_marginLeft="15dp"
+            android:textSize="20dp"/>
+
+    </LinearLayout>
+<Button
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:drawableLeft="@drawable/wifi"
+    android:drawableTint="@color/white"
+    android:text="Start monitor mode"
+    android:enabled="false"
+    android:onClick="mon1"
+    android:id="@+id/monbutton"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:text="Cancel"
+
+        android:id="@+id/dismiss"/>
+</LinearLayout>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="320dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/dialog_bg"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/ubuntu"
+        android:lineSpacingExtra="5dp"
+        android:text="Connect to 3wifi"
+        android:textSize="18dp"
+        android:layout_marginBottom="15dp"
+        android:id="@+id/module_title"
+        android:textStyle="bold" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/ubuntu"
+        android:lineSpacingExtra="5dp"
+        android:text="Login"
+        android:textSize="12dp"
+        />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/login3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:hint="Login">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="60dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/ubuntu"
+        android:lineSpacingExtra="5dp"
+        android:text="Password"
+        android:textSize="12dp"
+        />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/pass3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:hint="Password">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="60dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/connect_3wifi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Connect"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:drawableLeft="@drawable/connect"
+        android:drawableTint="@color/main"/>
+
+
+</LinearLayout>

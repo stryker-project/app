@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="320dp"
+    android:background="@drawable/dialog_bg"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/ubuntu"
+        android:lineSpacingExtra="5dp"
+        android:text="Module title and author"
+        android:textSize="18dp"
+        android:id="@+id/module_title"
+        android:textStyle="bold" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+        <RelativeLayout
+            android:layout_width="60dp"
+            android:gravity="center"
+            android:layout_height="60dp">
+
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/module_prog"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_centerInParent="true"
+                android:max="100"
+
+                android:progress="10" />
+
+            <ImageView
+                android:id="@+id/module_img_status"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/no"
+                android:visibility="invisible" />
+        </RelativeLayout>
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:id="@+id/module_progress"
+    android:textSize="14dp"
+    android:layout_gravity="center"
+    android:textIsSelectable="true"
+    android:layout_marginBottom="10dp"
+    android:layout_marginLeft="10dp"
+    android:text="Installing module..."
+    android:fontFamily="@font/ubuntu"
+    android:lineSpacingExtra="5dp"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/ubuntu"
+        android:text="Cancel"
+        android:id="@+id/module_cancel"
+        android:textAlignment="textEnd"
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/blue2"
+        android:layout_marginRight="20dp"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+</LinearLayout>

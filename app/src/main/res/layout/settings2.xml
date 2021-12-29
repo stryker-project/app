@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:isScrollContainer="true"
+    android:nestedScrollingEnabled="true"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_weight="1"
+            app:cardElevation="6dp"
+            app:checkedIconSize="20dp"
+            android:id="@+id/settings_speed"
+            android:checkable="true"
+            android:clickable="true"
+            android:focusable="true"
+            app:checkedIconTint="#01579B"
+            app:rippleColor="#01579B"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="15dp">
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/speed"
+                android:tint="#01579B"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/ubuntu"
+                android:gravity="right"
+                android:paddingRight="10dp"
+                android:text="Speed scan"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="70dp"
+                android:fontFamily="@font/ubuntu"
+                android:paddingLeft="10dp"
+                android:padding="10dp"
+                android:text="Less ports - more speed"
+                android:textSize="16dp"
+                />
+        </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_weight="1"
+            app:cardElevation="6dp"
+            android:clickable="true"
+            app:checkedIconSize="20dp"
+            android:checkable="true"
+            app:checkedIconTint="#4A148C"
+            android:id="@+id/settings_hide"
+            app:rippleColor="#4A5E35B1"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="15dp">
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/hidemac"
+                android:tint="#4A148C"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/ubuntu"
+                android:gravity="right"
+                android:paddingRight="10dp"
+                android:text="Hide macs"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="70dp"
+                android:fontFamily="@font/ubuntu"
+                android:padding="10dp"
+
+                android:text="Hide macs in all application parts"
+                android:textSize="16dp"
+                 />
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        >
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_margin="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            app:checkedIconSize="20dp"
+
+            app:checkedIconTint="#4A006064"
+            android:id="@+id/settings_scan"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="6dp"
+            app:rippleColor="#4A006064">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/interface_scan"
+                android:tint="#006064" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/ubuntu"
+                android:gravity="right"
+                android:paddingRight="10dp"
+                android:text="Set scan \ninterface"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="70dp"
+                android:fontFamily="@font/ubuntu"
+                android:padding="10dp"
+                android:id="@+id/scan_text"
+                android:text="Set custom scan interface.\nCurrent: wlan0"
+                android:textSize="16dp"
+                />
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_margin="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:id="@+id/settings_deauth"
+            app:cardCornerRadius="15dp"
+
+            app:checkedIconSize="20dp"
+            app:checkedIconTint="#4FE65100"
+            app:cardElevation="6dp"
+            app:rippleColor="#4FE65100">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/interface_deauth"
+                android:tint="#C54500" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/ubuntu"
+                android:gravity="right"
+                android:paddingRight="10dp"
+                android:text="Set deauth\ninterface"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="70dp"
+                android:fontFamily="@font/ubuntu"
+                android:padding="10dp"
+                android:id="@+id/deauth_text"
+                android:text="Set custom deauth interface.\nCurrent: wlan1"
+                android:textSize="16dp"
+                 />
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_weight="1"
+            app:cardElevation="6dp"
+            app:checkedIconSize="20dp"
+            android:id="@+id/settings_debug"
+            android:checkable="true"
+            android:clickable="true"
+            android:focusable="true"
+            app:checkedIconTint="#636363"
+            app:rippleColor="#90686868"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="15dp">
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/debug"
+                android:tint="#717171"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/ubuntu"
+                android:gravity="right"
+                android:paddingRight="10dp"
+                android:text="Debug\nmode"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="70dp"
+                android:fontFamily="@font/ubuntu"
+                android:paddingLeft="10dp"
+                android:padding="10dp"
+                android:text="Catch all commands output and errors"
+                android:textSize="16dp"
+                />
+        </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_weight="1"
+            app:cardElevation="6dp"
+            android:clickable="true"
+            app:checkedIconTint="#16BAA7"
+            android:id="@+id/settings_module"
+            app:rippleColor="#4A35B1AD"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="15dp">
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/module"
+                android:tint="#32AABA"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/ubuntu"
+                android:gravity="right"
+                android:paddingRight="10dp"
+                android:text="Install\nmodule"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="70dp"
+                android:fontFamily="@font/ubuntu"
+                android:padding="10dp"
+                android:text="Easy chroot modifications and fixes"
+                android:textSize="16dp"
+                />
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        >
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_margin="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            app:checkedIconSize="20dp"
+
+            app:checkedIconTint="#4A006064"
+            android:id="@+id/settings_unmount"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="6dp"
+            app:rippleColor="#4A006064">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/unmount"
+                android:tint="#880E4F" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/ubuntu"
+                android:gravity="right"
+                android:paddingRight="10dp"
+                android:text="Unmount\nChroot"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="70dp"
+                android:fontFamily="@font/ubuntu"
+                android:padding="10dp"
+
+                android:text="Safe modification. Data lose prevent"
+                android:textSize="16dp"
+                />
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_margin="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:id="@+id/settings_delete"
+            app:cardCornerRadius="15dp"
+
+            app:checkedIconSize="20dp"
+            app:checkedIconTint="#4FE65100"
+            app:cardElevation="6dp"
+            app:rippleColor="#4FE65100">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/delete"
+                android:tint="#B71C1C" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/ubuntu"
+                android:gravity="right"
+                android:paddingRight="10dp"
+                android:text="Delete\nStryker"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="70dp"
+                android:fontFamily="@font/ubuntu"
+                android:padding="10dp"
+                android:text="Delete Stryker and chroot."
+                android:textSize="16dp"
+                />
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_weight="1"
+            app:cardElevation="6dp"
+            app:checkedIconSize="20dp"
+            android:id="@+id/pixie_off"
+            android:checkable="true"
+            android:clickable="true"
+            android:focusable="true"
+            app:checkedIconTint="#311B92"
+            app:rippleColor="#A3311B92"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="15dp">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="44dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/noof"
+                android:tint="#311B92" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/ubuntu"
+                android:gravity="right"
+                android:paddingRight="10dp"
+                android:text="Not\nTurn off"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="70dp"
+                android:fontFamily="@font/ubuntu"
+                android:paddingLeft="10dp"
+                android:padding="10dp"
+                android:text="Do not turn off the wifi for pixie dust"
+                android:textSize="16dp"
+                />
+        </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_weight="1"
+            app:cardElevation="6dp"
+            app:checkedIconSize="20dp"
+            android:id="@+id/auto_update"
+            android:checkable="true"
+            android:clickable="true"
+            android:focusable="true"
+            app:checkedIconTint="#1B5E20"
+            app:rippleColor="#33691E"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="15dp">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="44dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/update"
+                android:tint="#1B5E20" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/ubuntu"
+                android:gravity="right"
+                android:paddingRight="10dp"
+                android:text="Auto\nUpdate"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="70dp"
+                android:fontFamily="@font/ubuntu"
+                android:paddingLeft="10dp"
+                android:padding="10dp"
+                android:text="Automatically check for updates"
+                android:textSize="16dp"
+                />
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+</LinearLayout>
+</ScrollView>

@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:isScrollContainer="true"
+    >
+<com.google.android.material.card.MaterialCardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:elevation="6dp"
+    app:cardCornerRadius="15dp">
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_margin="20dp"
+        app:lottie_loop="false"
+        app:lottie_autoPlay="true"
+        app:lottie_rawRes="@raw/phone"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/ubuntu"
+        android:text="Stryker"
+        android:layout_marginTop="35dp"
+        android:gravity="right"
+        android:layout_marginRight="20dp"
+        android:textSize="30dp"
+        android:textStyle="bold" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/ubuntu"
+        android:text="Version 1.2 BETA"
+        android:layout_marginTop="80dp"
+        android:gravity="right"
+        android:layout_marginRight="20dp"
+        android:textSize="15dp"
+        android:textStyle="bold" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/ubuntu"
+        android:autoLink="all"
+        android:layout_marginBottom="20dp"
+        android:textColorLink="@color/blue"
+        android:text="By @zalexdev"
+        android:layout_marginTop="100dp"
+        android:gravity="right"
+        android:layout_marginRight="20dp"
+        android:textSize="15dp"
+        android:textStyle="bold" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/ubuntu"
+        android:autoLink="all"
+        android:id="@+id/device_info"
+        android:layout_marginBottom="20dp"
+        android:textColorLink="@color/blue"
+        android:text="Device info\nOS"
+        android:layout_marginTop="120dp"
+        android:gravity="right"
+        android:layout_marginRight="20dp"
+        android:textSize="15dp"
+        android:textStyle="bold" />
+</com.google.android.material.card.MaterialCardView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:layout_weight="1"
+            app:cardElevation="6dp"
+            app:checkedIconSize="20dp"
+            android:id="@+id/about_tg"
+            android:clickable="true"
+            android:focusable="true"
+            app:checkedIconTint="#01579B"
+            app:rippleColor="#01579B"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="15dp">
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/telegram"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/ubuntu"
+                android:gravity="right"
+                android:paddingRight="10dp"
+                android:text="Telegram"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:fontFamily="@font/ubuntu"
+                android:paddingLeft="10dp"
+                android:padding="10dp"
+                android:text="Our telegram chat, news, problem solving and blog are here!"
+                android:textSize="16dp"
+                />
+        </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:layout_weight="1"
+            app:cardElevation="6dp"
+            android:clickable="true"
+            app:checkedIconSize="20dp"
+            app:checkedIconTint="#4A148C"
+            android:id="@+id/about_4pda"
+            app:rippleColor="#4A5E35B1"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="15dp">
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/pda"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/ubuntu"
+                android:gravity="right"
+                android:paddingRight="10dp"
+                android:text="4PDA"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:fontFamily="@font/ubuntu"
+                android:padding="10dp"
+
+                android:text="Application page, modules, updates here!"
+                android:textSize="16dp"
+                />
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Donation"
+            android:textSize="30dp"
+            android:fontFamily="@font/ubuntu"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="If you can, support the author with a coin or tell your friends about the application!"
+        android:textSize="15dp"
+        android:layout_margin="10dp"
+        android:fontFamily="@font/ubuntu"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            app:cardElevation="6dp"
+            app:checkedIconSize="20dp"
+            android:id="@+id/about_btc"
+            android:clickable="true"
+            android:focusable="true"
+            app:checkedIconTint="#F57F17"
+            app:rippleColor="#FF6F00"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="15dp">
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/bitcoin"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/ubuntu"
+                android:gravity="right"
+                android:paddingRight="10dp"
+                android:text="Bitcoin (BTC)"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:fontFamily="@font/ubuntu"
+                android:paddingLeft="10dp"
+                android:padding="10dp"
+                android:text="Click to copy!"
+                android:textSize="16dp"
+                />
+        </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            app:cardElevation="6dp"
+            android:clickable="true"
+            app:checkedIconSize="20dp"
+            app:checkedIconTint="#1A237E"
+            android:id="@+id/about_card"
+            app:rippleColor="#0D47A1"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="15dp">
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/creditcard"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/ubuntu"
+                android:gravity="right"
+                android:paddingRight="10dp"
+                android:text="Card (UAH🇺🇦)"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:fontFamily="@font/ubuntu"
+                android:padding="10dp"
+
+                android:text="Click to copy!"
+
+                android:textSize="16dp"
+                />
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+</LinearLayout>
+</ScrollView>
