@@ -2,9 +2,12 @@ package com.zalexdev.stryker;
 
 
 import android.annotation.SuppressLint;
+import android.app.AlarmManager;
 import android.app.DownloadManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -119,7 +122,11 @@ public class Setup extends Fragment {
                                                 setText(status, "Setting up core...");
                                                 boolean untar = new CustomCommand("/data/data/com.zalexdev.stryker/cache/busybox tar -xf /storage/emulated/0/Download/stryker.tar.gz -C /data/local/stryker", core).execute().get();
                                                 if (untar) {
-                                                    setText(status, "Successful installed! Please restart app...");
+                                                    Intent intent = new Intent(getContext(), MainActivity.class);
+                                                    PendingIntent mPendingIntent = PendingIntent.getActivity(getContext(), 1000, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+                                                    AlarmManager alarm = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+                                                    alarm.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
+                                                    System.exit(0);
                                                 }
                                             } else {
                                                 status.setText("File corrupted!");
