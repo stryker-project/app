@@ -592,7 +592,7 @@ public class WiFI_Adapter extends RecyclerView.Adapter<WiFI_Adapter.ViewHolder> 
                                     }
                                 }, 10000, 20000);
                             } else {
-                                settext(core.str("monit"), output);
+                                settext(core.str("error_monit"), output);
                             }
                         } else {
                             activity.runOnUiThread(() -> {

@@ -428,7 +428,7 @@ public class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.ViewHolder> 
                         setProgColor(prog, image, 1);
                     } else {
                         setText(progress,
-                                core.str("web_auth") + router.getAuth() + core.str("ssid") + router.getSsid() + core.str("psk") + router.getPsk() + core.str("wps") + router.getWps());
+                                core.str("webauth") + router.getAuth() + core.str("ssid") + router.getSsid() + core.str("psk") + router.getPsk() + core.str("wps") + router.getWps());
                         setProgColor(prog, image, 2);
                     }
                 } catch (ExecutionException | InterruptedException e) {
