@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="6" by="lint 7.1.0" type="baseline" client="gradle" dependencies="false" name="AGP (7.1.0)" variant="fatal" version="7.1.0">
+
+    <issue
+        id="DuplicateIds"
+        message="Duplicate id `@+id/category_wifi`, already defined earlier in this layout"
+        errorLine1="        android:id=&quot;@+id/category_wifi&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/settings2r.xml"
+            line="72"
+            column="9"/>
+        <location
+            file="src/main/res/layout/settings2r.xml"
+            line="23"
+            column="13"
+            message="Duplicate id `@+id/category_wifi` originally defined here"/>
+    </issue>
+
+    <issue
+        id="DuplicateIds"
+        message="Duplicate id `@+id/category_wifi`, already defined earlier in this layout"
+        errorLine1="        android:id=&quot;@+id/category_wifi&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/settings2r.xml"
+            line="121"
+            column="9"/>
+        <location
+            file="src/main/res/layout/settings2r.xml"
+            line="23"
+            column="13"
+            message="Duplicate id `@+id/category_wifi` originally defined here"/>
+    </issue>
+
+</issues>
