@@ -1,7 +1,5 @@
 package com.zalexdev.stryker.utils;
 
-import static android.content.ContentValues.TAG;
-
 import android.annotation.SuppressLint;
 import android.app.DownloadManager;
 import android.content.Context;
@@ -9,14 +7,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
-import android.util.Log;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.util.concurrent.ExecutionException;
 
 public class DownloadFile extends AsyncTask<Void, String, Boolean> {
 
@@ -25,12 +15,14 @@ public class DownloadFile extends AsyncTask<Void, String, Boolean> {
     public String urlDownload;
     public String filename;
     public DownloadManager manager;
-    public DownloadFile(DownloadManager m,Context cont,String url,String name) {
+
+    public DownloadFile(DownloadManager m, Context cont, String url, String name) {
         context = cont;
         urlDownload = url;
-        filename=name;
+        filename = name;
         manager = m;
     }
+
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
@@ -44,7 +36,7 @@ public class DownloadFile extends AsyncTask<Void, String, Boolean> {
         request.setDescription("Please, wait...");
         request.setTitle("Downloading files...");
         request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, filename);
-        boolean b  = false;
+        boolean b = false;
         final long downloadId = manager.enqueue(request);
         boolean downloading = true;
         while (downloading) {

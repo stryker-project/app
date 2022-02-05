@@ -7,26 +7,58 @@
         <item
             android:id="@+id/dashboard_menu"
             android:icon="@drawable/dashboard"
-            android:title="Dashboard" />
+            android:title="@string/dashboard" />
         <item
             android:id="@+id/wifi"
             android:icon="@drawable/wifi"
-            android:title="Wifi" />
+            android:title="@string/wifi" />
         <item
             android:id="@+id/local"
-            android:icon="@drawable/local"
-            android:title="Local devices" />
+            android:icon="@drawable/hub"
+            android:title="@string/local_network" />
+        <item
+            android:id="@+id/exploit_hub"
+            android:icon="@drawable/exploithub"
+            android:title="@string/exploit_hub" />
+        <item
+            android:id="@+id/hs_storage"
+            android:icon="@drawable/folder"
+            android:title="@string/handshakes" />
+        <item
+            android:id="@+id/nmap_scan"
+            android:icon="@drawable/search"
+            android:title="@string/nmap" />
+        <item
+            android:id="@+id/core_manager"
+            android:icon="@drawable/chroot_manager"
+            android:title="@string/core_manager" />
+        <item
+            android:id="@+id/modules_repo"
+            android:icon="@drawable/module_repo"
+            android:title="@string/modules_repo" />
+        <item
+            android:id="@+id/searchsploit"
+            android:icon="@drawable/admin_panel"
+            android:title="Searchsploit" />
+        <item
+            android:id="@+id/geomac"
+            android:icon="@drawable/geo"
+            android:title="Geomac" />
         <item
             android:id="@+id/router"
             android:icon="@drawable/router"
-            android:title="Router Scan" />
+            android:title="@string/router_scan" />
+        <item
+            android:id="@+id/three_wifi"
+            android:icon="@drawable/wifi3"
+            android:title="@string/integration" />
         <item
             android:id="@+id/settings"
             android:icon="@drawable/settings"
-            android:title="Settings" />
+            android:title="@string/app_setting" />
         <item
             android:id="@+id/about"
             android:icon="@drawable/about"
-            android:title="About" />
+            android:title="@string/about_app" />
     </group>
 </menu>

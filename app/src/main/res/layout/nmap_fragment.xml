@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_marginTop="5dp"
+    android:layout_height="wrap_content">
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editsearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_weight="2"
+        android:layout_marginRight="5dp"
+        android:hint="@string/target_ip_mask"
+        app:hintEnabled="true"
+        app:hintTextColor="#FF676262">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/getsearch"
+            android:layout_width="match_parent"
+            android:layout_height="60dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+    <ImageButton
+        android:id="@+id/search"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/search"
+        android:layout_weight="6"
+        android:tint="@color/blue2"/>
+        <ImageButton
+            android:id="@+id/save"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/save"
+            android:layout_weight="6"
+            android:tint="@color/blue2"/>
+</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <net.cachapa.expandablelayout.ExpandableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+       app:el_expanded="true"
+        app:el_parallax="0.5"
+        android:id="@+id/extra_expand">
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:orientation="vertical">
+   <com.google.android.material.checkbox.MaterialCheckBox
+       android:id="@+id/detect_os"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:text="@string/detect_os"/>
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/detect_services"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/detect_services"/>
+</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/fast_scan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/fast_scan_less_ports"/>
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/mark_online"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/mark_host_s_as_online"/>
+        </LinearLayout>
+</LinearLayout>
+    </net.cachapa.expandablelayout.ExpandableLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="25dp"
+    android:id="@+id/extra_toggle"
+    >
+    <ImageView
+        android:id="@+id/router_toggle_img"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:src="@drawable/arrow_down"
+        android:layout_gravity="center"
+        android:tint="#606060"
+        />
+</LinearLayout>
+        <TextView
+            android:id="@+id/nmap_output"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+            android:gravity="bottom"
+            android:textIsSelectable="true"
+            android:textColor="@color/white"
+            android:padding="5dp"
+            android:textSize="12dp"
+            android:scrollbars="vertical|horizontal"
+            android:background="#222222"/>
+    </LinearLayout>
+
+</LinearLayout>

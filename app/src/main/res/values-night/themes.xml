@@ -11,16 +11,28 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="windowActionBar">false</item>
+        <item name="android:navigationBarColor">#121212</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:textViewStyle">@style/MonsText</item>
+        <item name="android:buttonStyle">@style/MonsButton</item>
         <item name="navigationViewStyle">@style/Widget.App.NavigationView</item>
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+    </style>
+    <style name="MonsButton" parent="android:TextAppearance.Material.Button">
+        <item name="android:fontFamily">@font/montserrat</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+    <style name="Theme.Stryker.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
     <style name="Widget.App.NavigationView" parent="Widget.MaterialComponents.NavigationView">
         <item name="materialThemeOverlay">@style/ThemeOverlay.App.NavigationView</item>
         <item name="itemIconTint">#FFFFFF</item>
         <item name="background">@color/main</item>
         <item name="itemTextColor">@color/white</item>
+        <item name="fontFamily">@font/montserrat</item>
         <item name="itemShapeFillColor">@color/selected</item>
     </style>
 

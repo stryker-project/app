@@ -13,7 +13,299 @@
     android:isScrollContainer="true"
     android:nestedScrollingEnabled="true"
     android:layout_height="match_parent">
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:text="@string/wifi"
+    android:textSize="20dp"/>
 
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    >
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_margin="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_weight="1"
+        android:clickable="true"
+        app:checkedIconSize="20dp"
+
+        app:checkedIconTint="#4A006064"
+        android:id="@+id/settings_scan"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="6dp"
+        app:rippleColor="#4A006064">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/interface_scan"
+            android:tint="#006064" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+
+            android:gravity="right"
+            android:paddingRight="10dp"
+            android:text="@string/set_scan_ninterface"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+
+            android:padding="10dp"
+            android:id="@+id/scan_text"
+            android:text="Set custom scan interface.\nCurrent: wlan0"
+            android:textSize="16dp"
+            />
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_margin="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_weight="1"
+        android:clickable="true"
+        android:id="@+id/settings_deauth"
+        app:cardCornerRadius="15dp"
+
+        app:checkedIconSize="20dp"
+        app:checkedIconTint="#4FE65100"
+        app:cardElevation="6dp"
+        app:rippleColor="#4FE65100">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/interface_deauth"
+            android:tint="#C54500" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+
+            android:gravity="right"
+            android:paddingRight="10dp"
+            android:text="@string/set_deauth_ninterface"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+
+            android:padding="10dp"
+            android:id="@+id/deauth_text"
+            android:text="Set custom deauth interface.\nCurrent: wlan1"
+            android:textSize="16dp"
+            />
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_weight="1"
+        app:cardElevation="6dp"
+        app:checkedIconSize="20dp"
+        android:id="@+id/pixie_off"
+        android:checkable="true"
+        android:clickable="true"
+        android:focusable="true"
+        app:checkedIconTint="#311B92"
+        app:rippleColor="#A3311B92"
+        android:layout_margin="10dp"
+        app:cardCornerRadius="15dp">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="44dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/noof"
+            android:tint="#311B92" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+
+            android:gravity="right"
+            android:paddingRight="10dp"
+            android:text="@string/not_nturn_off"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+
+            android:paddingLeft="10dp"
+            android:padding="10dp"
+            android:text="@string/do_not_turn_off_the_wifi_for_pixie_dust"
+            android:textSize="16dp"
+            />
+    </com.google.android.material.card.MaterialCardView>
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_weight="1"
+        app:cardElevation="6dp"
+        app:checkedIconSize="20dp"
+        android:id="@+id/auto_update"
+        android:checkable="true"
+        android:clickable="true"
+        android:focusable="true"
+        app:checkedIconTint="#1B5E20"
+        app:rippleColor="#33691E"
+        android:layout_margin="10dp"
+        app:cardCornerRadius="15dp">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="44dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/update"
+            android:tint="#1B5E20" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+
+            android:gravity="right"
+            android:paddingRight="10dp"
+            android:text="@string/auto_nupdate"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+
+            android:paddingLeft="10dp"
+            android:padding="10dp"
+            android:text="@string/automatically_check_for_updates"
+            android:textSize="16dp"
+            />
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_weight="1"
+        app:cardElevation="6dp"
+        app:checkedIconSize="20dp"
+        android:id="@+id/three_wifi_scan"
+        android:checkable="true"
+        android:clickable="true"
+        android:focusable="true"
+        app:checkedIconTint="#33691E"
+        app:rippleColor="#A133691E"
+        android:layout_margin="10dp"
+        app:cardCornerRadius="15dp">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="44dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/wifi3"
+            android:tint="#33691E" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+
+            android:gravity="right"
+            android:paddingRight="10dp"
+            android:text="@string/check_n3wifi"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+
+            android:paddingLeft="10dp"
+            android:padding="10dp"
+            android:text="@string/check_3wifi_database_for_nearest_wifi"
+            android:textSize="16dp"
+            />
+    </com.google.android.material.card.MaterialCardView>
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_weight="1"
+        app:cardElevation="6dp"
+        app:checkedIconSize="20dp"
+        android:id="@+id/store_scan"
+        android:checkable="true"
+        android:clickable="true"
+        android:focusable="true"
+        app:checkedIconTint="#BFBC0C"
+        app:rippleColor="#A1D3BE37"
+        android:layout_margin="10dp"
+        app:cardCornerRadius="15dp">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="44dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/store"
+            android:tint="#B19A23" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+
+            android:gravity="right"
+            android:paddingRight="10dp"
+            android:text="@string/store_n_aps"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+
+            android:paddingLeft="10dp"
+            android:padding="10dp"
+            android:text="@string/store_successful_pentested_aps"
+            android:textSize="16dp"
+            />
+    </com.google.android.material.card.MaterialCardView>
+</LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="@string/general_set"
+        android:textSize="20dp"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,8 +316,7 @@
             android:layout_weight="1"
             app:cardElevation="6dp"
             app:checkedIconSize="20dp"
-            android:id="@+id/settings_speed"
-            android:checkable="true"
+            android:id="@+id/nightmode"
             android:clickable="true"
             android:focusable="true"
             app:checkedIconTint="#01579B"
@@ -36,7 +327,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_margin="10dp"
-                android:src="@drawable/speed"
+                android:src="@drawable/night_mode"
                 android:tint="#01579B"
                 />
 
@@ -44,20 +335,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:fontFamily="@font/ubuntu"
+
                 android:gravity="right"
                 android:paddingRight="10dp"
-                android:text="Speed scan"
-                android:textSize="18dp"
+                android:text="@string/dark_theme"
+                android:textSize="15dp"
                 android:textStyle="bold" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="70dp"
-                android:fontFamily="@font/ubuntu"
+                android:id="@+id/night_text"
                 android:paddingLeft="10dp"
                 android:padding="10dp"
-                android:text="Less ports - more speed"
+                android:text="@string/now1"
                 android:textSize="16dp"
                 />
         </com.google.android.material.card.MaterialCardView>
@@ -86,123 +377,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:fontFamily="@font/ubuntu"
+
                 android:gravity="right"
                 android:paddingRight="10dp"
-                android:text="Hide macs"
-                android:textSize="18dp"
+                android:text="@string/hide_macs"
+                android:textSize="15dp"
                 android:textStyle="bold" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="70dp"
-                android:fontFamily="@font/ubuntu"
+
                 android:padding="10dp"
 
-                android:text="Hide macs in all application parts"
+                android:text="@string/hide_macs_in_all_application_parts"
                 android:textSize="16dp"
                  />
         </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
 
-        >
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_margin="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_weight="1"
-            android:clickable="true"
-            app:checkedIconSize="20dp"
-
-            app:checkedIconTint="#4A006064"
-            android:id="@+id/settings_scan"
-            app:cardCornerRadius="15dp"
-            app:cardElevation="6dp"
-            app:rippleColor="#4A006064">
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_margin="10dp"
-                android:src="@drawable/interface_scan"
-                android:tint="#006064" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:fontFamily="@font/ubuntu"
-                android:gravity="right"
-                android:paddingRight="10dp"
-                android:text="Set scan \ninterface"
-                android:textSize="18dp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="70dp"
-                android:fontFamily="@font/ubuntu"
-                android:padding="10dp"
-                android:id="@+id/scan_text"
-                android:text="Set custom scan interface.\nCurrent: wlan0"
-                android:textSize="16dp"
-                />
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_margin="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:id="@+id/settings_deauth"
-            app:cardCornerRadius="15dp"
-
-            app:checkedIconSize="20dp"
-            app:checkedIconTint="#4FE65100"
-            app:cardElevation="6dp"
-            app:rippleColor="#4FE65100">
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_margin="10dp"
-                android:src="@drawable/interface_deauth"
-                android:tint="#C54500" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:fontFamily="@font/ubuntu"
-                android:gravity="right"
-                android:paddingRight="10dp"
-                android:text="Set deauth\ninterface"
-                android:textSize="18dp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="70dp"
-                android:fontFamily="@font/ubuntu"
-                android:padding="10dp"
-                android:id="@+id/deauth_text"
-                android:text="Set custom deauth interface.\nCurrent: wlan1"
-                android:textSize="16dp"
-                 />
-        </com.google.android.material.card.MaterialCardView>
-
-    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -233,20 +428,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:fontFamily="@font/ubuntu"
+
                 android:gravity="right"
                 android:paddingRight="10dp"
-                android:text="Debug\nmode"
-                android:textSize="18dp"
+                android:text="@string/debug_mode_title"
+                android:textSize="15dp"
                 android:textStyle="bold" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="70dp"
-                android:fontFamily="@font/ubuntu"
+
                 android:paddingLeft="10dp"
                 android:padding="10dp"
-                android:text="Catch all commands output and errors"
+                android:text="@string/catch_all_commands_output_and_errors"
                 android:textSize="16dp"
                 />
         </com.google.android.material.card.MaterialCardView>
@@ -273,19 +468,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:fontFamily="@font/ubuntu"
+
                 android:gravity="right"
                 android:paddingRight="10dp"
-                android:text="Install\nmodule"
-                android:textSize="18dp"
+                android:text="@string/install_nfix"
+                android:textSize="15dp"
                 android:textStyle="bold" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="70dp"
-                android:fontFamily="@font/ubuntu"
+
                 android:padding="10dp"
-                android:text="Easy chroot modifications and fixes"
+                android:text="@string/install_stm_files"
                 android:textSize="16dp"
                 />
         </com.google.android.material.card.MaterialCardView>
@@ -323,21 +518,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:fontFamily="@font/ubuntu"
+
                 android:gravity="right"
                 android:paddingRight="10dp"
-                android:text="Unmount\nChroot"
-                android:textSize="18dp"
+                android:text="@string/unmount_nchroot"
+                android:textSize="15dp"
                 android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="70dp"
-                android:fontFamily="@font/ubuntu"
+
                 android:padding="10dp"
 
-                android:text="Safe modification. Data lose prevent"
+                android:text="@string/safe_modification_data_lose_prevent"
                 android:textSize="16dp"
                 />
         </com.google.android.material.card.MaterialCardView>
@@ -368,116 +563,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:fontFamily="@font/ubuntu"
+
                 android:gravity="right"
                 android:paddingRight="10dp"
-                android:text="Delete\nStryker"
-                android:textSize="18dp"
+                android:text="@string/delete_nstryker"
+                android:textSize="15dp"
                 android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="70dp"
-                android:fontFamily="@font/ubuntu"
+
                 android:padding="10dp"
-                android:text="Delete Stryker and chroot."
+                android:text="@string/delete_stryker_and_chroot"
                 android:textSize="16dp"
                 />
         </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_weight="1"
-            app:cardElevation="6dp"
-            app:checkedIconSize="20dp"
-            android:id="@+id/pixie_off"
-            android:checkable="true"
-            android:clickable="true"
-            android:focusable="true"
-            app:checkedIconTint="#311B92"
-            app:rippleColor="#A3311B92"
-            android:layout_margin="10dp"
-            app:cardCornerRadius="15dp">
 
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="44dp"
-                android:layout_margin="10dp"
-                android:src="@drawable/noof"
-                android:tint="#311B92" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:fontFamily="@font/ubuntu"
-                android:gravity="right"
-                android:paddingRight="10dp"
-                android:text="Not\nTurn off"
-                android:textSize="18dp"
-                android:textStyle="bold" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="70dp"
-                android:fontFamily="@font/ubuntu"
-                android:paddingLeft="10dp"
-                android:padding="10dp"
-                android:text="Do not turn off the wifi for pixie dust"
-                android:textSize="16dp"
-                />
-        </com.google.android.material.card.MaterialCardView>
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_weight="1"
-            app:cardElevation="6dp"
-            app:checkedIconSize="20dp"
-            android:id="@+id/auto_update"
-            android:checkable="true"
-            android:clickable="true"
-            android:focusable="true"
-            app:checkedIconTint="#1B5E20"
-            app:rippleColor="#33691E"
-            android:layout_margin="10dp"
-            app:cardCornerRadius="15dp">
 
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="44dp"
-                android:layout_margin="10dp"
-                android:src="@drawable/update"
-                android:tint="#1B5E20" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:fontFamily="@font/ubuntu"
-                android:gravity="right"
-                android:paddingRight="10dp"
-                android:text="Auto\nUpdate"
-                android:textSize="18dp"
-                android:textStyle="bold" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="70dp"
-                android:fontFamily="@font/ubuntu"
-                android:paddingLeft="10dp"
-                android:padding="10dp"
-                android:text="Automatically check for updates"
-                android:textSize="16dp"
-                />
-        </com.google.android.material.card.MaterialCardView>
-
-    </LinearLayout>
 </LinearLayout>
 </ScrollView>

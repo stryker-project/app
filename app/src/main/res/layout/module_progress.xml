@@ -11,7 +11,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:fontFamily="@font/ubuntu"
+
         android:lineSpacingExtra="5dp"
         android:text="Module title and author"
         android:textSize="18dp"
@@ -56,15 +56,15 @@
     android:textIsSelectable="true"
     android:layout_marginBottom="10dp"
     android:layout_marginLeft="10dp"
-    android:text="Installing module..."
-    android:fontFamily="@font/ubuntu"
+    android:text="@string/installing_module"
+
     android:lineSpacingExtra="5dp"/>
     </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/ubuntu"
+
         android:text="Cancel"
         android:id="@+id/module_cancel"
         android:textAlignment="textEnd"

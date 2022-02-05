@@ -13,4 +13,7 @@
     <color name="yellow">#F9A825</color>
     <color name="red">#C62828</color>
     <color name="green">#2E7D32</color>
+    <color name="nightwhite">#FFFFFF</color>
+    <color name="nightrec">#EDECEC</color>
+    <color name="textcolor">#757575</color>
 </resources>

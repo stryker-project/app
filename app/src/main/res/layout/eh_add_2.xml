@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:layout_height="match_parent">
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+
+        android:progress="50"/>
+<com.airbnb.lottie.LottieAnimationView
+    android:layout_width="200dp"
+    android:layout_height="200dp"
+    android:layout_gravity="center"
+    android:layout_marginTop="10dp"
+    app:lottie_rawRes="@raw/atom2"
+    app:lottie_speed="0.2"
+    app:lottie_autoPlay="true"
+    app:lottie_loop="true"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="22dp"
+        android:text="@string/exploit_wizard_step_1_of_2"
+        android:gravity="center"
+
+
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        android:textStyle="bold"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_margin="10dp"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/folder"
+                android:tint="#606060"/>
+            <TextView
+                android:id="@+id/ew_exploit_path"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:layout_marginLeft="10dp"
+                android:text="@string/select"
+
+
+                />
+
+        </LinearLayout>
+        <TextView
+            android:id="@+id/ew_path_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16dp"
+            android:layout_marginLeft="10dp"
+            android:text="@string/ew_path"
+
+
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/ew_exploit_prefix"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14dp"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
+                android:visibility="gone"
+                android:text="test.py "
+
+
+                />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/editlogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:hint="@string/arguments"
+            app:hintEnabled="true"
+            app:hintTextColor="#FF676262">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/getargs"
+            android:layout_width="match_parent"
+            android:maxLines="1"
+            android:layout_height="55dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+        <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="12dp"
+        android:text="@string/allowed_shortcuts_n_ip_ip_address_n_port_port_n_gw_gateway_n_mask_subnet_mask_n_mac_mac_address_n_ncustom_shortcuts_n_customtext_app_will_ask_you_to_enter_variable_manually"
+
+
+        android:layout_margin="10dp"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="12dp"
+        android:text="@string/example_n_myexploit_t_ip_p_port_threads_n_n_n_n_works_as_customtext_and_you_will_be_able_to_enter_it_before_scan_starts"
+
+
+        android:layout_margin="10dp"
+        />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/ew_next"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/next"
+        android:tint="@color/white"
+        android:layout_marginBottom="25dp"
+        android:layout_gravity="right"
+        android:background="@drawable/circle"
+        android:backgroundTint="@color/blue2"
+        android:layout_marginRight="15dp"/>
+</LinearLayout>
+</ScrollView>

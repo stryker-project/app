@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+<com.google.android.material.card.MaterialCardView
+    android:layout_width="match_parent"
+    app:cardCornerRadius="8dp"
+    android:id="@+id/item"
+    android:clickable="true"
+    android:focusable="true"
+    android:layout_margin="5dp"
+    android:background="?attr/selectableItemBackground"
+    android:elevation="18dp"
+    app:strokeWidth="1px"
+    app:strokeColor="#DA515151"
+    android:layout_height="85dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        android:baselineAligned="false">
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:layout_marginTop="5dp"
+    android:layout_marginLeft="8dp"
+
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/wifi_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:layout_toEndOf="@id/iconl"
+        android:layout_toRightOf="@id/iconl"
+         />
+
+    <TextView
+        android:id="@+id/wifi_bssid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:textSize="12dp"
+        />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/wifi_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10dp"
+            android:text="LonLunDate "
+            />
+    </LinearLayout>
+
+
+</LinearLayout>
+
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/wpspin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="WPS"
+                    android:textIsSelectable="true"
+                    android:textSize="30px"
+                    android:textColor="@color/green"
+                    android:layout_marginBottom="15dp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/psk"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Psk"
+                    android:textIsSelectable="true"
+                    android:textColor="@color/green"
+                    android:textSize="30px"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
+
+</RelativeLayout>

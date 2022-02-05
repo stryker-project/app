@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:layout_height="0dp">
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+
+        android:progress="10"/>
+<com.airbnb.lottie.LottieAnimationView
+    android:layout_width="200dp"
+    android:layout_height="200dp"
+    android:layout_gravity="center"
+    android:layout_marginTop="10dp"
+    app:lottie_rawRes="@raw/atom2"
+    app:lottie_speed="0.2"
+    app:lottie_autoPlay="true"
+    app:lottie_loop="true"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="22dp"
+        android:text="@string/exploit_wizard"
+        android:gravity="center"
+
+
+        android:layout_marginTop="5dp"
+        android:textStyle="bold"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:text="@string/ew_welcome"
+
+
+        android:layout_margin="10dp"
+        />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/next_screen"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/next"
+        android:tint="@color/white"
+        android:layout_marginBottom="25dp"
+        android:layout_gravity="right"
+        android:background="@drawable/circle"
+        android:backgroundTint="@color/blue2"
+        android:layout_marginRight="15dp"/>
+</LinearLayout>
+</ScrollView>

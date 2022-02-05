@@ -5,72 +5,67 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-
-
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-
-        android:text="Waiting..."
-        android:textSize="30dp" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/usbinfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="invisible"
-        android:text="Information"
-        android:textSize="20dp" />
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/detected"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="invisible"
-        android:text="Detected: "
-        android:textSize="16dp" />
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="150dp"
+        android:layout_height="8dp"
+        android:background="@drawable/rectangle"
+        android:layout_gravity="center"
+
+        android:layout_marginTop="8dp"/>
+<com.airbnb.lottie.LottieAnimationView
+    android:layout_width="180dp"
+    android:layout_height="180dp"
+    android:layout_gravity="center"
+    app:lottie_autoPlay="true"
+    app:lottie_speed="0.4"
+    app:lottie_rawRes="@raw/wifi_dongle"
+    android:layout_marginTop="10dp"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_marginTop="5dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="10dp"
-        android:orientation="horizontal">
+        android:layout_gravity="center"
+
+        android:text="@string/usb"
+        android:textSize="22dp" />
+
+
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Checking drivers..."
-
+            android:text="Usbinfo"
             android:layout_gravity="center"
-            android:visibility="invisible"
-            android:id="@+id/drivercheck"
-            android:layout_marginLeft="15dp"
-            android:textSize="20dp"/>
+            android:id="@+id/usb_info"
+            android:layout_margin="15dp"
+            android:gravity="center"
 
-    </LinearLayout>
-<Button
-    android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:layout_marginLeft="20dp"
-    android:layout_marginRight="20dp"
-    android:drawableLeft="@drawable/wifi"
-    android:drawableTint="@color/white"
-    android:text="Start monitor mode"
-    android:enabled="false"
-    android:onClick="mon1"
-    android:id="@+id/monbutton"/>
-    <Button
+            android:textIsSelectable="true"
+            android:textSize="16dp"/>
+
+
+
+    <com.google.android.material.button.MaterialButton
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:text="Cancel"
+        android:drawableTint="@color/white"
+        android:text="Change scan interface"
+        android:backgroundTint="@color/blue2"
+        app:cornerRadius="5dp"
+        android:id="@+id/change_listen"/>
+<com.google.android.material.button.MaterialButton
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:drawableTint="@color/white"
+    android:text="Change deauth interface"
+    android:backgroundTint="@color/blue2"
+    android:layout_marginBottom="10dp"
+    app:cornerRadius="5dp"
+    android:id="@+id/change_deauth"/>
 
-        android:id="@+id/dismiss"/>
 </LinearLayout>

@@ -20,6 +20,7 @@ public class CheckFile extends AsyncTask<Void, String, Boolean> {
     public CheckFile(String path1) {
         path = path1;
     }
+
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
@@ -29,39 +30,39 @@ public class CheckFile extends AsyncTask<Void, String, Boolean> {
     @SuppressLint("WrongThread")
     @Override
     protected Boolean doInBackground(Void... command) {
-            String line;
-            boolean result = false;
+        String line;
+        boolean result = false;
 
 
-            try {
+        try {
 
-                Process process = Runtime.getRuntime().exec("su -mm");
-                OutputStream stdin = process.getOutputStream();
-                InputStream stderr = process.getErrorStream();
-                InputStream stdout = process.getInputStream();
-                stdin.write(("[ -f "+path+" ] && echo true || echo false"+ '\n').getBytes());
-                stdin.write(("exit\n").getBytes());
-                stdin.flush();
-                stdin.close();
-                BufferedReader br = new BufferedReader(new InputStreamReader(stdout));
-                while ((line = br.readLine()) != null) {
-                    if (line.contains("true")){
-                        result = true;
-                    }
+            Process process = Runtime.getRuntime().exec("su -mm");
+            OutputStream stdin = process.getOutputStream();
+            InputStream stderr = process.getErrorStream();
+            InputStream stdout = process.getInputStream();
+            stdin.write(("[ -f " + path + " ] && echo true || echo false" + '\n').getBytes());
+            stdin.write(("exit\n").getBytes());
+            stdin.flush();
+            stdin.close();
+            BufferedReader br = new BufferedReader(new InputStreamReader(stdout));
+            while ((line = br.readLine()) != null) {
+                if (line.contains("true")) {
+                    result = true;
                 }
-                br.close();
-                br = new BufferedReader(new InputStreamReader(stderr));
-                while ((line = br.readLine()) != null) {
-                    onProgressUpdate(line);
-                }
-                br.close();
-                process.waitFor();
-                process.destroy();
-            } catch (IOException e) {
-                Log.d(TAG, "An IOException was caught: " + e.getMessage());
-            } catch (InterruptedException ex) {
-                Log.d(TAG, "An InterruptedException was caught: " + ex.getMessage());
             }
+            br.close();
+            br = new BufferedReader(new InputStreamReader(stderr));
+            while ((line = br.readLine()) != null) {
+                onProgressUpdate(line);
+            }
+            br.close();
+            process.waitFor();
+            process.destroy();
+        } catch (IOException e) {
+            Log.d(TAG, "An IOException was caught: " + e.getMessage());
+        } catch (InterruptedException ex) {
+            Log.d(TAG, "An InterruptedException was caught: " + ex.getMessage());
+        }
 
         return result;
     }

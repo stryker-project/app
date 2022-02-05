@@ -13,17 +13,19 @@
 
       android:orientation="vertical">
 
-      <ImageView
+      <com.airbnb.lottie.LottieAnimationView
           android:id="@+id/scan_img"
           android:layout_width="250dp"
           android:layout_height="250dp"
-          android:src="@drawable/wifi"
-          app:tint="#606060" />
+          app:lottie_rawRes="@raw/scan_wifi"
+          app:lottie_autoPlay="true"
+          app:lottie_loop="true"
+          />
 
       <TextView
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="Scanning networks..."
+          android:text="@string/scanning_wifi"
           android:textSize="15dp"
           android:gravity="center"
           android:id="@+id/scan_text"

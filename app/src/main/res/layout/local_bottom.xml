@@ -9,37 +9,50 @@
 
 <LinearLayout
     android:layout_width="150dp"
-    android:layout_height="8dp"
+    android:layout_height="5dp"
     android:background="@drawable/rectangle"
     android:layout_gravity="center"
-
+    android:gravity="bottom"
     android:layout_marginTop="8dp"/>
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
     <RelativeLayout
         android:layout_width="150dp"
-        android:layout_gravity="center"
+
+
         android:layout_height="150dp">
 
         <ImageView
             android:id="@+id/device_img"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:src="@drawable/devices_other"
             app:tint="#606060" />
+
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/port_count"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="5dp"
-            android:id="@+id/port_count"
-            android:layout_marginBottom="15dp"
+
             android:background="@drawable/circle"
-            android:fontFamily="@font/ubuntu"
+
             android:gravity="center"
             android:text="5"
             android:textColor="#606060"
-            android:textSize="30dp" />
+            android:textSize="30dp"
+            android:textStyle="bold" />
 
     </RelativeLayout>
 
@@ -50,37 +63,25 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="5dp"
-        android:fontFamily="@font/ubuntu"
+
         android:text="192.168.1.1"
         android:textSize="30dp"
         android:textStyle="bold" />
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center"
-    android:orientation="horizontal">
+
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/device_mac"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:fontFamily="@font/ubuntu"
-        android:text="MAC adress"
+        android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:text="MAC address"
         android:layout_marginTop="5dp"
         android:textIsSelectable="true"
         android:textSize="15dp" />
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/device_os"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:fontFamily="@font/ubuntu"
-        android:text="OS: Unknown"
-        android:layout_marginTop="5dp"
-        android:textIsSelectable="true"
-        android:textSize="15dp" />
-</LinearLayout>
+
+    </LinearLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
     <net.cachapa.expandablelayout.ExpandableLayout
         android:layout_width="match_parent"
         app:el_duration="50"
@@ -94,34 +95,6 @@
             android:orientation="vertical"
             android:layout_marginBottom="5dp"
             android:layout_height="wrap_content">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:background="?attr/selectableItemBackground"
-        android:orientation="horizontal">
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_gravity="center"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
-            android:src="@drawable/gues_os"
-            android:layout_height="30dp"/>
-
-        <TextView
-            android:id="@+id/guess_os"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="@font/ubuntu"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:text="Try to guess OS"
-            android:textSize="20dp" />
-
-    </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -129,6 +102,7 @@
                 android:layout_marginTop="5dp"
                 android:clickable="true"
                 android:focusable="true"
+                android:id="@+id/check_smb"
                 android:background="?attr/selectableItemBackground"
                 android:orientation="horizontal">
                 <ImageView
@@ -140,14 +114,14 @@
                     android:layout_height="30dp"/>
 
                 <TextView
-                    android:id="@+id/check_smb"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:fontFamily="@font/ubuntu"
+
                     android:paddingTop="5dp"
                     android:paddingBottom="5dp"
-                    android:text="Check SMB for vulnerabilities"
+                    android:text="@string/check_smb"
                     android:textSize="20dp" />
 
             </LinearLayout>
@@ -157,6 +131,7 @@
         android:layout_marginTop="5dp"
         android:clickable="true"
         android:focusable="true"
+        android:id="@+id/check_rdp"
         android:background="?attr/selectableItemBackground"
         android:orientation="horizontal">
         <ImageView
@@ -168,14 +143,14 @@
             android:layout_height="30dp"/>
 
         <TextView
-            android:id="@+id/check_rdp"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/ubuntu"
+
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
-            android:text="Check RPD for vulnerabilities"
+            android:text="@string/check_rdp"
             android:textSize="20dp" />
 
     </LinearLayout>
@@ -185,6 +160,8 @@
         android:layout_marginTop="5dp"
         android:clickable="true"
         android:focusable="true"
+        android:visibility="gone"
+        android:id="@+id/check_camera"
         android:background="?attr/selectableItemBackground"
         android:orientation="horizontal">
         <ImageView
@@ -196,18 +173,48 @@
             android:layout_height="30dp"/>
 
         <TextView
-            android:id="@+id/check_camera"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/ubuntu"
+
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
-            android:text="Check camera vulnerabilities"
+            android:text="@string/check_camera"
             android:textSize="20dp" />
 
     </LinearLayout>
             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:id="@+id/check_admin_panel"
+                android:background="?attr/selectableItemBackground"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/admin_panel"
+                    android:layout_height="30dp"/>
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:text="@string/check_admin"
+                    android:textSize="20dp" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/run_exploit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -220,18 +227,18 @@
                     android:layout_gravity="center"
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp"
-                    android:src="@drawable/admin_panel"
+                    android:src="@drawable/run"
                     android:layout_height="30dp"/>
 
                 <TextView
-                    android:id="@+id/check_admin_panel"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:fontFamily="@font/ubuntu"
+
                     android:paddingTop="5dp"
                     android:paddingBottom="5dp"
-                    android:text="Check admin panel vulnerabilities"
+                    android:text="@string/run_custom"
                     android:textSize="20dp" />
 
             </LinearLayout>

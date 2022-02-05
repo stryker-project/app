@@ -27,18 +27,16 @@
         android:gravity="center"
         android:layout_marginTop="10dp"
         android:id="@+id/update_status"
-        android:fontFamily="@font/ubuntu"
+
         android:text="Starting..."/>
 
-    <TextView
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/welcome"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:fontFamily="@font/ubuntu"
         android:gravity="center"
-        android:visibility="invisible"
-        android:text="Welcome to Stryker ⚡"
-        android:textSize="23dp"
+        android:visibility="gone"
+        android:text="@string/tryagain"
         android:textStyle="bold" />
 </LinearLayout>

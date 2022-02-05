@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:gravity="center"
+    android:id="@+id/slide_layout"
+    android:background="#3F51B5"
+    android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/slide_img"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/download"
+        android:padding="30dp"
+        android:tint="@color/white"
+        android:background="@drawable/circle"
+        android:backgroundTint="#2196F3"
+        android:layout_gravity="center_horizontal"
+        />
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="35dp"
+        android:text="@string/install_core"
+        android:layout_margin="10dp"
+        android:textColor="@color/white"
+        android:id="@+id/slide_title"
+        android:gravity="center"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/slide_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        android:text="@string/install_core_desc"
+        android:textAllCaps="false"
+        android:textSize="20dp"
+        android:typeface="normal" />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/slide_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/install"
+        app:icon="@drawable/bolt"
+        android:backgroundTint="#2196F3"
+        app:cornerRadius="10dp"/>
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/slide_install_progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="5dp"
+        android:visibility="gone"
+        app:indicatorColor="@color/white"
+        app:trackCornerRadius="5dp"
+        />
+
+    <TextView
+        android:id="@+id/slide_progress_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:gravity="right"
+        android:text="0/100"
+        android:visibility="gone"
+        android:textColor="@color/white"
+        android:layout_marginBottom="20dp"
+        android:textSize="12dp" />
+</LinearLayout>

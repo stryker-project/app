@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#3F51B5"
+    tools:context=".appintro.AppIntroActivity">
+<androidx.viewpager.widget.ViewPager
+    android:id="@+id/intro_pager"
+    android:layout_marginTop="5dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#3F51B5"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/slider_prog"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:max="60"
+            android:layout_gravity="center"
+            app:trackColor="#00FFFFFF"
+            app:indicatorColor="@color/white"
+            app:trackCornerRadius="5dp" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,7 +1,6 @@
 package com.zalexdev.stryker.utils;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.os.AsyncTask;
 
 import org.jsoup.Jsoup;
@@ -12,6 +11,7 @@ import java.io.IOException;
 public class CheckMsg extends AsyncTask<Void, String, String> {
     public CheckMsg() {
     }
+
     @Override
     protected void onPreExecute() {
         super.onPreExecute();

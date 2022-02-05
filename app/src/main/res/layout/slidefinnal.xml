@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:gravity="center"
+    android:background="#3F51B5"
+    android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/slide_img"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/ok"
+        android:padding="30dp"
+        android:tint="@color/white"
+        android:background="@drawable/circle"
+        android:backgroundTint="#2196F3"
+        android:layout_gravity="center_horizontal"
+        />
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/slide_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="35dp"
+        android:text="@string/finished_inst"
+        android:layout_margin="10dp"
+        android:textColor="@color/white"
+        android:gravity="center"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/slide_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
+        android:autoLink="all"
+        android:fontFamily="@font/montserrat"
+        android:padding="10dp"
+        android:text="@string/inst_final_desc"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textColorLink="@color/white"
+        android:textSize="20dp"
+        android:typeface="normal" />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/slide_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/laucnh"
+        app:icon="@drawable/bolt"
+        android:backgroundTint="#2196F3"
+        app:cornerRadius="10dp"/>
+
+</LinearLayout>

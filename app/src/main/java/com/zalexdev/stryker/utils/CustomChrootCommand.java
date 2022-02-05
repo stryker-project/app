@@ -17,10 +17,12 @@ public class CustomChrootCommand extends AsyncTask<Void, String, Boolean> {
 
     public String cmd;
     public Core core;
+
     public CustomChrootCommand(String command, Core c) {
         cmd = command;
         core = c;
     }
+
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
@@ -30,45 +32,45 @@ public class CustomChrootCommand extends AsyncTask<Void, String, Boolean> {
     @SuppressLint("WrongThread")
     @Override
     protected Boolean doInBackground(Void... command) {
-            String line;
-            boolean result = false;
+        String line;
+        boolean result = false;
 
 
-            try {
-
-                Process process = Runtime.getRuntime().exec("su -mm");
-                OutputStream stdin = process.getOutputStream();
-                InputStream stderr = process.getErrorStream();
-                InputStream stdout = process.getInputStream();
-                stdin.write((Core.EXECUTE+" '"+cmd+"'"+'\n').getBytes());
-                stdin.write(("exit\n").getBytes());
-                stdin.flush();
-                stdin.close();
-                ArrayList<String> out = new ArrayList<>();
-                ArrayList<String> outerror = new ArrayList<>();
-                BufferedReader br = new BufferedReader(new InputStreamReader(stdout));
-                while ((line = br.readLine()) != null) {
-                    out.add(line);
-                }
-                br.close();
-                br = new BufferedReader(new InputStreamReader(stderr));
-                while ((line = br.readLine()) != null) {
-                    outerror.add(line);
-                    onProgressUpdate(line);
-                }
-                br.close();
-                core.writetolog(out,false);
-                core.writetolog(outerror,true);
-                process.waitFor();
-                process.destroy();
-                if (process.exitValue() == 0){
-                    result = true;
-                }
-            } catch (IOException e) {
-                Log.d(TAG, "An IOException was caught: " + e.getMessage());
-            } catch (InterruptedException ex) {
-                Log.d(TAG, "An InterruptedException was caught: " + ex.getMessage());
+        try {
+            core.writelinetolog(cmd);
+            Process process = Runtime.getRuntime().exec("su -mm");
+            OutputStream stdin = process.getOutputStream();
+            InputStream stderr = process.getErrorStream();
+            InputStream stdout = process.getInputStream();
+            stdin.write((Core.EXECUTE + " '" + cmd + "'" + '\n').getBytes());
+            stdin.write(("exit\n").getBytes());
+            stdin.flush();
+            stdin.close();
+            ArrayList<String> out = new ArrayList<>();
+            ArrayList<String> outerror = new ArrayList<>();
+            BufferedReader br = new BufferedReader(new InputStreamReader(stdout));
+            while ((line = br.readLine()) != null) {
+                out.add(line);
             }
+            br.close();
+            br = new BufferedReader(new InputStreamReader(stderr));
+            while ((line = br.readLine()) != null) {
+                outerror.add(line);
+                onProgressUpdate(line);
+            }
+            br.close();
+            core.writetolog(out, false);
+            core.writetolog(outerror, true);
+            process.waitFor();
+            process.destroy();
+            if (process.exitValue() == 0) {
+                result = true;
+            }
+        } catch (IOException e) {
+            Log.d(TAG, "An IOException was caught: " + e.getMessage());
+        } catch (InterruptedException ex) {
+            Log.d(TAG, "An InterruptedException was caught: " + ex.getMessage());
+        }
 
         return result;
     }

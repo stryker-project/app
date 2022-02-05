@@ -1,6 +1,7 @@
 package com.zalexdev.stryker;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -16,102 +17,164 @@ import androidx.fragment.app.FragmentManager;
 import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.zalexdev.stryker.local.LocalMain;
-import com.zalexdev.stryker.utils.CheckMsg;
-import com.zalexdev.stryker.utils.CheckUpdates;
+import com.google.android.material.navigation.NavigationView;
+import com.zalexdev.stryker.coremanger.CoreManager;
+import com.zalexdev.stryker.exploit_hub.ExploitScreen;
+import com.zalexdev.stryker.handshakes.HandshakeStorage;
+import com.zalexdev.stryker.local_network.LocalMain;
+import com.zalexdev.stryker.modules.ModulesFragment;
 import com.zalexdev.stryker.utils.Core;
 import com.zalexdev.stryker.wifi.Wifi;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.concurrent.ExecutionException;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class Dashboard extends Fragment {
 
 
     public Core core;
     public Context context;
-    public  String versionName = BuildConfig.VERSION_NAME;
-    public  int versionInt = BuildConfig.VERSION_CODE;
+    public Activity activity;
+    public String versionName = BuildConfig.VERSION_NAME;
+    public NavigationView menu;
+    public int versionInt = BuildConfig.VERSION_CODE;
+    public Dashboard(NavigationView d){
+        menu = d;
+    }
+    public Dashboard(){
+
+    }
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View viewroot = inflater.inflate(R.layout.dashboard, container, false);
         context = getContext();
+        activity = getActivity();
         core = new Core(context);
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentManager fragmentManager = getFragmentManager();
         MaterialCardView wifi = viewroot.findViewById(R.id.dashboard_wifi);
         LottieAnimationView anim = viewroot.findViewById(R.id.load_progress);
         MaterialCardView local = viewroot.findViewById(R.id.dashboard_local);
         MaterialCardView settings = viewroot.findViewById(R.id.dashboard_settings);
-        MaterialCardView folder = viewroot.findViewById(R.id.dashboard_folder);
-        wifi.setOnClickListener(view -> fragmentManager.beginTransaction().replace(R.id.flContent, new Wifi()).commit());
-        local.setOnClickListener(view -> fragmentManager.beginTransaction().replace(R.id.flContent, new LocalMain()).commit());
-        settings.setOnClickListener(view -> fragmentManager.beginTransaction().replace(R.id.flContent, new Settings()).commit());
-        folder.setOnClickListener(view -> fragmentManager.beginTransaction().replace(R.id.flContent, new About()).commit());
+        MaterialCardView about = viewroot.findViewById(R.id.dashboard_about);
+        MaterialCardView hs_folder = viewroot.findViewById(R.id.dashboard_hs);
+        MaterialCardView mod = viewroot.findViewById(R.id.dashboard_modules_repo);
+        MaterialCardView manager = viewroot.findViewById(R.id.dashboard_core_manager);
+        MaterialCardView exploit = viewroot.findViewById(R.id.dashboard_exploit);
+        mod.setOnClickListener(view -> {
+            fragmentManager.beginTransaction().replace(R.id.flContent, new ModulesFragment()).commit();
+            setchecked(7);
+        });
+        wifi.setOnClickListener(view -> {
+            fragmentManager.beginTransaction().replace(R.id.flContent, new Wifi()).commit();
+            setchecked(1);
+        });
+        local.setOnClickListener(view -> {
+            fragmentManager.beginTransaction().replace(R.id.flContent, new LocalMain()).commit();
+            setchecked(2);
+        });
+        settings.setOnClickListener(view -> {
+            fragmentManager.beginTransaction().replace(R.id.flContent, new Settings()).commit();
+            setchecked(12);
+        });
+        about.setOnClickListener(view -> {
+            fragmentManager.beginTransaction().replace(R.id.flContent, new About()).commit();
+            setchecked(13);
+        });
+        manager.setOnClickListener(view -> {
+            fragmentManager.beginTransaction().replace(R.id.flContent, new CoreManager()).commit();
+            setchecked(6);
+        });
+        hs_folder.setOnClickListener(view -> {
+            fragmentManager.beginTransaction().replace(R.id.flContent, new HandshakeStorage()).commit();
+            setchecked(4);
+        });
+        exploit.setOnClickListener(view -> {
+            fragmentManager.beginTransaction().replace(R.id.flContent, new ExploitScreen()).commit();
+            setchecked(3);
+        });
+
         if (core.getBoolean("auto_update")){
         new Thread(() -> {
+            JSONObject update = core.getjsonbyurl("https://raw.githubusercontent.com/stryker-project/updater/main/update");
             try {
-                List<String> update = Arrays.asList(new CheckUpdates(getContext()).execute().get().split(","));
-
-                if (update.size()>3){
-                    if (Integer.parseInt(update.get(1))>versionInt){
-                        getActivity().runOnUiThread(() -> updatedialog(update.get(0),update.get(2),update.get(3)));
-
-                    }else if (Integer.parseInt(update.get(1))==versionInt && !update.get(0).equals(versionName)){
-                        getActivity().runOnUiThread(() -> updatefix(update.get(2)));
+            int version = BuildConfig.VERSION_CODE;
+            int newversion = update.getInt("version");
+            if (newversion>version){
+                activity.runOnUiThread(() -> {
+                    try {
+                        if (!update.getBoolean("isfix")){
+                        updatedialog(update.getString("name"),update.getString("srcapk"),update.getString("chroot32"),update.getString("chroot64"));}
+                        else{
+                            updatefix(update.getString("srcapk"));
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                }
-
-            } catch (ExecutionException | InterruptedException e) {
-                e.printStackTrace();
+                });
             }
-        }).start();}
-        new Thread(() -> {
-            try {
-                List<String> msg = Arrays.asList(new CheckMsg().execute().get().split(";"));
-
-                if (msg.size()>3){
-                    if (core.getInt("msgid")<Integer.parseInt(msg.get(0))){
-                        getActivity().runOnUiThread(() -> newmsg(msg.get(1),msg.get(2),msg.get(3),msg.get(4)));
-                        core.putInt("msgid",Integer.parseInt(msg.get(0)));
-                    }
-                }
-
-            } catch (ExecutionException | InterruptedException e) {
+                } catch (JSONException e) {
                 e.printStackTrace();
             }
         }).start();
+        new Thread(() -> {
+            JSONObject msg = core.getjsonbyurl("https://raw.githubusercontent.com/stryker-project/updater/main/msg");
+            try {
+                if (msg.has("msg") && !core.getListString("msgs").contains(msg.getString("title"))){
+                    ArrayList<String> msgs = core.getListString("msgs");
+                    msgs.add(msg.getString("title"));
+                    core.putListString("msgs",msgs);
+                    activity.runOnUiThread(() -> {
+                        try {
+                            newmsg(msg.getString("title"),msg.getString("msg"),msg.getBoolean("enabled"),msg.getString("buttontext"), msg.getString("url"));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    });
+                     }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }).start();
+
+            }
+
+
+
         return viewroot;
     }
-    public void updatedialog(String name,String urlapk,String urlchroot){
-        new MaterialAlertDialogBuilder(getContext())
-                .setTitle("New update available!")
-                .setMessage("Do you want to upgrade your application from version "+versionName+" to "+name+"? This includes the automatic download of the app, chroot and their installation! ")
-                .setPositiveButton("Yes", (dialogInterface, i) -> {
-                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                    fragmentManager.beginTransaction().replace(R.id.flContent, new Updater()).commit();
+
+    public void updatedialog(String name, String urlapk, String urlchroot32,String urlchroot64) {
+        new MaterialAlertDialogBuilder(context)
+                .setTitle(R.string.new_update)
+                .setMessage(getString(R.string.want_update) + versionName + getString(R.string.doo) + name + getString(R.string.rvregre))
+                .setPositiveButton(R.string.yes, (dialogInterface, i) -> {
+                    FragmentManager fragmentManager = getFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.flContent, new Updater(urlapk,urlchroot32,urlchroot64)).commit();
                 })
-                .setNegativeButton("No", (dialogInterface, i) -> {
+                .setNegativeButton(R.string.no, (dialogInterface, i) -> dialogInterface.dismiss()).show();
+
+    }
+
+    public void updatefix(String urlapk) {
+        new MaterialAlertDialogBuilder(context)
+                .setTitle(R.string.new_fix)
+                .setMessage(R.string.recom)
+                .setPositiveButton(R.string.yes, (dialogInterface, i) -> {
+                    FragmentManager fragmentManager = getFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.flContent, new Fixer(urlapk)).commit();
+                })
+                .setNegativeButton(R.string.no, (dialogInterface, i) -> {
                     dialogInterface.dismiss();
                 }).show();
 
     }
-    public void updatefix(String urlapk){
-        new MaterialAlertDialogBuilder(getContext())
-                .setTitle("New fix available!")
-                .setMessage("The developer has released a bug fix version, do you want to install it?")
-                .setPositiveButton("Yes", (dialogInterface, i) -> {
-                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                    fragmentManager.beginTransaction().replace(R.id.flContent, new Fixer()).commit();
-                })
-                .setNegativeButton("No", (dialogInterface, i) -> {
-                    dialogInterface.dismiss();
-                }).show();
 
-    }
-    public void newmsg(String title,String msg,String action,String url){
-        new MaterialAlertDialogBuilder(getContext())
+    public void newmsg(String title, String msg,Boolean a, String action, String url) {
+        new MaterialAlertDialogBuilder(context)
                 .setTitle(title)
                 .setMessage(msg)
                 .setPositiveButton("OK", (dialogInterface, i) -> {
@@ -119,18 +182,19 @@ public class Dashboard extends Fragment {
                 })
                 .setNeutralButton(action, (dialogInterface, i) -> {
                     dialogInterface.dismiss();
-                    if (action.equals("Donate!")){
-                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                        fragmentManager.beginTransaction().replace(R.id.flContent, new About()).commit();
-                    }else if (url.equals("None")){
-                        dialogInterface.dismiss();
-                    }else{
+                    if (a){
                         openlink(url);
                     }
-                }).show();
+                }
+
+                ).show();
 
     }
-    public void  openlink(String url){
+    public void setchecked(int i){
+        if (menu !=null){
+         menu.getMenu().getItem(i).setChecked(true);}
+    }
+    public void openlink(String url) {
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         startActivity(browserIntent);
     }

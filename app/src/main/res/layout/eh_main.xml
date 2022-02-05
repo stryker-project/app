@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+    <com.airbnb.lottie.LottieAnimationView
+    android:layout_width="200dp"
+    android:layout_height="200dp"
+    android:layout_gravity="center"
+    android:layout_marginTop="10dp"
+    app:lottie_rawRes="@raw/atom2"
+    app:lottie_speed="0.2"
+    app:lottie_autoPlay="true"
+    app:lottie_loop="true"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:text="Exploit hub"
+        android:gravity="center"
+
+        android:layout_marginBottom="5dp"
+
+        android:layout_marginTop="5dp"
+        android:textStyle="bold"/>
+ <LinearLayout
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+
+     android:orientation="horizontal">
+     <com.google.android.material.card.MaterialCardView
+         android:layout_width="0dp"
+         android:layout_height="wrap_content"
+         android:layout_weight="1"
+         app:cardElevation="6dp"
+         android:id="@+id/exploits_card"
+         app:rippleColor="#371976D2"
+         android:layout_margin="10dp"
+         app:cardCornerRadius="15dp">
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:orientation="vertical">
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal">
+                 <ImageView
+             android:layout_width="50dp"
+             android:layout_height="50dp"
+             android:layout_margin="10dp"
+             android:src="@drawable/admin_panel"
+             android:tint="#0288D1"
+             />
+         <TextView
+             android:id="@+id/exploitcount"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_gravity="center"
+
+             android:paddingRight="10dp"
+             android:text="@string/exploits_title"
+             android:textSize="18dp"
+             android:textStyle="bold" />
+             </LinearLayout>
+     <TextView
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+
+             android:padding="15dp"
+             android:text="@string/exploits"
+             android:textSize="16dp"
+             android:layout_marginBottom="5dp"
+             />
+         </LinearLayout>
+     </com.google.android.material.card.MaterialCardView>
+
+ </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:cardElevation="6dp"
+            android:id="@+id/scanner_hub"
+            app:rippleColor="#5BFF6F00"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="15dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_margin="10dp"
+                        android:src="@drawable/scanner"
+                        android:tint="#BF7730"
+                        />
+                    <TextView
+                        android:id="@+id/scannerscount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+
+                        android:paddingRight="10dp"
+                        android:text="@string/scanners_title"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:padding="15dp"
+                    android:text="@string/scanners"
+                    android:textSize="16dp"
+                    android:layout_marginBottom="5dp"
+                    />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:cardElevation="6dp"
+                android:id="@+id/tutorials"
+                app:rippleColor="#22004D40"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="15dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_margin="10dp"
+                            android:src="@drawable/tutorials"
+                            android:tint="#004D40"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+
+                            android:paddingRight="10dp"
+                            android:text="@string/tutorials"
+                            android:textSize="18dp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+    </LinearLayout>
+    </ScrollView>

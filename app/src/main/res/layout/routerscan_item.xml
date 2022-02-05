@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+<com.google.android.material.card.MaterialCardView
+    android:layout_width="match_parent"
+    android:elevation="5dp"
+    android:layout_height="wrap_content">
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:scrollbars="none"
+        android:layout_height="match_parent">
+        <LinearLayout
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:gravity="center_vertical"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="5dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="5dp"
+            android:tint="#C5C5C5"
+            android:src="@drawable/rectangle"
+            android:id="@+id/routerscan_prog"
+            />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/router_ip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ip address"
+                android:textIsSelectable="true"
+                android:textSize="18dp"
+                android:textStyle="bold"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/router_progress"
+                android:text="@string/initializing"
+                android:textSize="12dp"
+                />
+        </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/router_model"
+                android:text="Model"
+                android:visibility="gone"
+                android:layout_marginStart="15dp"
+                android:textSize="15dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/router_ssid"
+            android:text="Ssid"
+            android:visibility="gone"
+            android:layout_marginStart="15dp"
+            android:textSize="15dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/router_mac"
+                android:text="Mac"
+                android:visibility="gone"
+                android:layout_marginStart="15dp"
+                android:textSize="15dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/router_auth"
+            android:text="Auth"
+            android:visibility="gone"
+            android:layout_marginStart="15dp"
+            android:textSize="15dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Password"
+            android:visibility="gone"
+            android:id="@+id/router_password"
+            android:layout_marginStart="15dp"
+            android:textSize="15dp" />
+    </LinearLayout>
+    </HorizontalScrollView>
+</com.google.android.material.card.MaterialCardView>
+</LinearLayout>

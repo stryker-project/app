@@ -11,9 +11,9 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:fontFamily="@font/ubuntu"
+        android:id="@+id/title"
         android:lineSpacingExtra="5dp"
-        android:text="Set ranges"
+        android:text="@string/set_ranges"
         android:textSize="18dp"
         android:textStyle="bold" />
 
@@ -23,10 +23,10 @@
             android:layout_gravity="center"
             android:layout_margin="10dp"
             android:layout_height="wrap_content"
-            android:hint="Ranges and ips">
+            android:hint="@string/ranges_and_ips">
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="wrap_content"
                 />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -38,8 +38,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/ubuntu"
-        android:text="Cancel"
+
+        android:text="@string/cancel"
         android:id="@+id/rs_cancel"
         android:layout_weight="1"
         android:textAlignment="textEnd"
@@ -51,7 +51,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/ubuntu"
+
         android:text="OK"
         android:id="@+id/rs_ok"
         android:textAlignment="textEnd"

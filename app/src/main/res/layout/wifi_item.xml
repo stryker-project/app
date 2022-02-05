@@ -21,6 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
         android:orientation="horizontal"
         android:baselineAligned="false">
 
@@ -28,14 +29,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/iconl"
+            android:gravity="center"
             android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/wifiicon"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
+
                 android:src="@drawable/wifi"
                 app:tint="#0277BD" />
 
@@ -43,13 +44,9 @@
                 android:id="@+id/wifi_power"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="4dp"
-                android:text="power"
-
-
-                android:textSize="30px"
-
+                android:text="50%"
+                android:textSize="12dp"
+                android:layout_marginRight="2dp"
                 android:textStyle="bold" />
         </LinearLayout>
 <LinearLayout
@@ -57,29 +54,44 @@
     android:layout_height="match_parent"
     android:layout_weight="1"
     android:layout_marginTop="5dp"
-    android:layout_marginLeft="8dp"
+    android:layout_marginStart="8dp"
 
     android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        >
     <TextView
         android:id="@+id/wifi_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="4dp"
-        android:layout_toEndOf="@id/iconl"
-        android:layout_toRightOf="@id/iconl"
          />
-
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/store"
+            android:tint="#606060"
+         android:visibility="gone"
+            android:id="@+id/icon_wifi"
+            />
+</LinearLayout>
     <TextView
         android:id="@+id/wifi_bssid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:textSize="12dp"
+
         />
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginLeft="4dp"
+        android:gravity="bottom"
         android:orientation="horizontal">
 
         <TextView
@@ -97,7 +109,7 @@
 </LinearLayout>
 
             <LinearLayout
-                android:layout_width="50dp"
+                android:layout_width="60dp"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
@@ -107,7 +119,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="WPS"
-                    android:textSize="30px"
+                    android:textSize="11dp"
                     android:textStyle="bold" />
 
 

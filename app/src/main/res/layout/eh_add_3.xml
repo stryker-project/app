@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:layout_height="0dp">
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:progress="100"/>
+<com.airbnb.lottie.LottieAnimationView
+    android:layout_width="200dp"
+    android:layout_height="200dp"
+    android:layout_gravity="center"
+    android:layout_marginTop="10dp"
+    app:lottie_rawRes="@raw/atom2"
+    app:lottie_speed="0.2"
+    app:lottie_autoPlay="true"
+    app:lottie_loop="true"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="22dp"
+        android:text="@string/exploit_wizard_step_2_of_2"
+        android:gravity="center"
+
+
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        android:textStyle="bold"/>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:hint="@string/title"
+            app:hintEnabled="true"
+            app:hintTextColor="#FF676262">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/getname"
+                android:layout_width="match_parent"
+                android:maxLines="1"
+                android:layout_height="55dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:hint="@string/successful_pattern"
+            app:hintEnabled="true"
+            app:hintTextColor="#FF676262">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/getsuccess"
+            android:layout_width="match_parent"
+            android:maxLines="1"
+            android:layout_height="55dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="12dp"
+        android:text="@string/how_it_works_nenter_message_or_part_of_it_which_script_displays_on_success_result_if_no_msg_found_result_marked_as_failed"
+
+
+        android:layout_margin="10dp"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="12dp"
+        android:text="@string/example_n_exploit_successful_marked_as_good_result_nif_no_such_msg_failed"
+
+
+        android:layout_margin="10dp"
+        />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/ew_next"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/next"
+        android:tint="@color/white"
+        android:layout_marginBottom="25dp"
+        android:layout_gravity="right"
+        android:background="@drawable/circle"
+        android:backgroundTint="@color/blue2"
+        android:layout_marginRight="15dp"/>
+</LinearLayout>
+</ScrollView>

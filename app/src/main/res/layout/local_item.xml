@@ -27,7 +27,12 @@
         android:layout_marginTop="5dp"
         android:orientation="horizontal"
         android:baselineAligned="false">
-
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmerFrameLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -40,6 +45,7 @@
                 android:layout_height="50dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
+                android:tint="#606060"
                 android:src="@drawable/devices_local"
                 />
 
@@ -50,11 +56,12 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="4dp"
                 android:text="Ports: "
-                android:fontFamily="@font/ubuntu"
+
                 android:layout_marginTop="3dp"
-                android:textSize="30px"
+                android:textSize="12dp"
                 android:textStyle="bold" />
-        </LinearLayout>
+
+        </LinearLayout></com.facebook.shimmer.ShimmerFrameLayout>
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -63,16 +70,57 @@
     android:layout_marginLeft="8dp"
     android:layout_marginStart="10dp"
     android:orientation="vertical">
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    >
     <TextView
         android:id="@+id/local_ip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/ubuntu"
+
         android:text="Local ip"
         android:textSize="15dp"
+        android:gravity="center"
         android:textStyle="bold" />
-
+    <ImageView
+        android:id="@+id/img_1"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:visibility="gone"
+        android:tint="#606060"
+        android:layout_marginStart="10dp"/>
+    <ImageView
+        android:id="@+id/img_2"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:visibility="gone"
+        android:tint="#606060"
+        android:layout_marginStart="5dp"/>
+    <ImageView
+        android:id="@+id/img_3"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:visibility="gone"
+        android:tint="#606060"
+        android:layout_marginStart="5dp"/>
+    <ImageView
+        android:id="@+id/img_4"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:visibility="gone"
+        android:tint="#606060"
+        android:layout_marginStart="5dp"/>
+    <ImageView
+        android:id="@+id/img_5"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:visibility="gone"
+        android:tint="#606060"
+        android:layout_marginStart="5dp"/>
+</LinearLayout>
     <TextView
         android:id="@+id/local_mac"
         android:layout_width="wrap_content"
@@ -80,7 +128,7 @@
         android:layout_marginEnd="5dp"
         android:gravity="center"
         android:layout_marginTop="3dp"
-        android:fontFamily="@font/ubuntu"
+
         android:textSize="10dp"
         android:text="Mac address: "
         />
@@ -91,7 +139,7 @@
             android:layout_marginEnd="5dp"
             android:gravity="center"
             android:layout_marginTop="3dp"
-            android:fontFamily="@font/ubuntu"
+
             android:textSize="12dp"
             android:text="Manufacrute: "
             />
@@ -105,17 +153,7 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/local_cutted"
-                    android:layout_width="25dp"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:visibility="invisible"
-                    android:clickable="false"
-                    android:src="@drawable/cut_network"
-                    android:textSize="30px"
-                    android:textStyle="bold"
-                    app:tint="#303030" />
+
 
 
 
@@ -125,7 +163,6 @@
 
 
     </LinearLayout>
-
 </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>

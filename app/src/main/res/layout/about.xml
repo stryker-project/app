@@ -26,7 +26,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/ubuntu"
+
         android:text="Stryker"
         android:layout_marginTop="35dp"
         android:gravity="right"
@@ -36,8 +36,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/ubuntu"
-        android:text="Version 1.2 BETA"
+
+        android:text="Version 2.0 Release"
         android:layout_marginTop="80dp"
         android:gravity="right"
         android:layout_marginRight="20dp"
@@ -46,7 +46,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/ubuntu"
+
         android:autoLink="all"
         android:layout_marginBottom="20dp"
         android:textColorLink="@color/blue"
@@ -59,7 +59,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/ubuntu"
+
         android:autoLink="all"
         android:id="@+id/device_info"
         android:layout_marginBottom="20dp"
@@ -71,13 +71,56 @@
         android:textSize="15dp"
         android:textStyle="bold" />
 </com.google.android.material.card.MaterialCardView>
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        app:cardElevation="6dp"
+        app:checkedIconSize="20dp"
+        android:id="@+id/about_site"
+        android:clickable="true"
+        android:focusable="true"
+        app:checkedIconTint="#9C27B0"
+        app:rippleColor="#459C27B0"
+        android:layout_margin="10dp"
+        app:cardCornerRadius="15dp">
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/web"
+            android:tint="#9C27B0"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+
+            android:gravity="right"
+            android:paddingRight="10dp"
+            android:text="@string/website"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+
+            android:paddingStart="10dp"
+            android:padding="10dp"
+            android:text="@string/last_site"
+            android:textSize="16dp"
+            />
+    </com.google.android.material.card.MaterialCardView>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="130dp"
+            android:layout_height="160dp"
             android:layout_weight="1"
             app:cardElevation="6dp"
             app:checkedIconSize="20dp"
@@ -99,7 +142,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:fontFamily="@font/ubuntu"
+
                 android:gravity="right"
                 android:paddingRight="10dp"
                 android:text="Telegram"
@@ -109,16 +152,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
-                android:fontFamily="@font/ubuntu"
+
                 android:paddingLeft="10dp"
                 android:padding="10dp"
-                android:text="Our telegram chat, news, problem solving and blog are here!"
+                android:text="@string/our_telegram_chat_news_problem_solving_and_blog_are_here"
                 android:textSize="16dp"
                 />
         </com.google.android.material.card.MaterialCardView>
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="130dp"
+            android:layout_height="160dp"
             android:layout_weight="1"
             app:cardElevation="6dp"
             android:clickable="true"
@@ -139,7 +182,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:fontFamily="@font/ubuntu"
+
                 android:gravity="right"
                 android:paddingRight="10dp"
                 android:text="4PDA"
@@ -149,10 +192,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
-                android:fontFamily="@font/ubuntu"
+
                 android:padding="10dp"
 
-                android:text="Application page, modules, updates here!"
+                android:text="@string/application_page_modules_updates_here"
                 android:textSize="16dp"
                 />
         </com.google.android.material.card.MaterialCardView>
@@ -163,28 +206,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Donation"
+            android:text="@string/donation"
             android:textSize="30dp"
-            android:fontFamily="@font/ubuntu"/>
+            />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="If you can, support the author with a coin or tell your friends about the application!"
+        android:text="@string/if_you_can_support_the_author_with_a_coin_or_tell_your_friends_about_the_application"
         android:textSize="15dp"
         android:layout_margin="10dp"
-        android:fontFamily="@font/ubuntu"/>
+        />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             app:cardElevation="6dp"
             app:checkedIconSize="20dp"
-            android:id="@+id/about_btc"
+            android:id="@+id/about_donate"
             android:clickable="true"
             android:focusable="true"
             app:checkedIconTint="#F57F17"
@@ -195,67 +238,28 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_margin="10dp"
-                android:src="@drawable/bitcoin"
+                android:src="@drawable/coins"
+                android:tint="@color/yellow"
                 />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:fontFamily="@font/ubuntu"
+
                 android:gravity="right"
                 android:paddingRight="10dp"
-                android:text="Bitcoin (BTC)"
+                android:text="@string/donate"
                 android:textSize="18dp"
                 android:textStyle="bold" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
-                android:fontFamily="@font/ubuntu"
+
                 android:paddingLeft="10dp"
                 android:padding="10dp"
-                android:text="Click to copy!"
-                android:textSize="16dp"
-                />
-        </com.google.android.material.card.MaterialCardView>
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_weight="1"
-            app:cardElevation="6dp"
-            android:clickable="true"
-            app:checkedIconSize="20dp"
-            app:checkedIconTint="#1A237E"
-            android:id="@+id/about_card"
-            app:rippleColor="#0D47A1"
-            android:layout_margin="10dp"
-            app:cardCornerRadius="15dp">
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_margin="10dp"
-                android:src="@drawable/creditcard"
-                />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:fontFamily="@font/ubuntu"
-                android:gravity="right"
-                android:paddingRight="10dp"
-                android:text="Card (UAH🇺🇦)"
-                android:textSize="18dp"
-                android:textStyle="bold" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:fontFamily="@font/ubuntu"
-                android:padding="10dp"
-
-                android:text="Click to copy!"
-
+                android:text="@string/donate_desc"
                 android:textSize="16dp"
                 />
         </com.google.android.material.card.MaterialCardView>

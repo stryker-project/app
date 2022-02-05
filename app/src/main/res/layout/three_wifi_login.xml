@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@color/blue2"
+    android:layout_height="match_parent">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:lottie_rawRes="@raw/three_wifi"
+        app:lottie_autoPlay="true"
+        android:id="@+id/logo"
+        app:lottie_scale="10"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/animmain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/magic_rect"
+        android:orientation="vertical"
+        android:padding="25dp"
+        android:layout_margin="10dp"
+        android:layout_gravity="bottom"
+        android:gravity="bottom"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+
+            android:gravity="center"
+            android:text="3WiFi"
+            android:textSize="40dp" />
+
+        <TextView
+            android:id="@+id/error_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+
+            android:gravity="center"
+            android:visibility="gone"
+            android:textColor="@color/red"
+            android:textSize="15dp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/editlogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="20dp"
+            android:hint="@string/login"
+
+            app:hintEnabled="true"
+            app:hintTextColor="#FF676262">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/getlogin"
+                android:layout_width="match_parent"
+                android:layout_height="60dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/editpassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="20dp"
+            android:hint="@string/password"
+            android:textColorHint="#676262"
+            app:passwordToggleEnabled="true"
+
+            app:errorEnabled="true"
+            app:hintEnabled="true"
+            app:hintTextColor="@color/black">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/getpassword"
+                android:inputType="textPassword"
+                android:layout_width="match_parent"
+                android:layout_height="60dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/login"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
+            android:text="@string/log_in"
+            android:textColor="@color/white" />
+    </LinearLayout>
+</LinearLayout>

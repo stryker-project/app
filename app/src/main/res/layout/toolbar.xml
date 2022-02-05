@@ -15,6 +15,7 @@
         android:layout_marginRight="5dp"
         android:id="@+id/disablemobn"
         android:clickable="true"
+        android:visibility="gone"
         android:focusable="true"
         android:background="?attr/selectableItemBackground"
         android:tint="@color/white"

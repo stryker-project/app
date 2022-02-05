@@ -4,15 +4,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
     android:layout_width="match_parent">
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
     android:layout_width="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:isScrollContainer="true"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
     <RelativeLayout
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
         android:layout_marginTop="20dp"
         android:gravity="center"
         android:layout_gravity="center">
@@ -24,9 +23,7 @@
             android:layout_gravity="center"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
-            app:lottie_rawRes="@raw/back"
-
-            />
+            app:lottie_rawRes="@raw/back" />
 
         <ImageView
             android:layout_width="220dp"
@@ -39,8 +36,7 @@
             android:layout_marginTop="30dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="30dp"
-            android:padding="30dp"
-            android:src="@drawable/icon_main" />
+            android:src="@drawable/icon" />
 
 
     </RelativeLayout>
@@ -49,7 +45,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/ubuntu"
+
         android:gravity="center"
         android:text="Stryker"
         android:textSize="30dp"
@@ -57,23 +53,25 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/ubuntu"
+
         android:gravity="center"
-        android:text="Version: 1.2B"
-        android:textSize="15dp"
+        android:text="Version: 2.0 Release"
+        android:textSize="14dp"
         android:textStyle="bold" />
 <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_marginTop="15dp"
+
     android:orientation="horizontal">
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
-        app:cardElevation="6dp"
+        app:cardElevation="3dp"
         android:id="@+id/dashboard_wifi"
         android:clickable="true"
-        app:rippleColor="#651E88E5"
+        app:rippleColor="#543F51B5"
         android:layout_margin="10dp"
         app:cardCornerRadius="15dp">
         <ImageView
@@ -81,37 +79,27 @@
             android:layout_height="50dp"
             android:layout_margin="10dp"
             android:src="@drawable/wifi"
-            android:tint="#01579B"
+            android:tint="#3F51B5"
             />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
-            android:fontFamily="@font/ubuntu"
             android:gravity="right"
             android:paddingRight="10dp"
-            android:text="Wifi Networks "
-            android:textSize="15dp"
-            android:textStyle="bold" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="67dp"
-            android:fontFamily="@font/ubuntu"
-            android:paddingLeft="10dp"
-            android:text="- Handshake\n- PixieDust\n- Deauth"
-            android:textSize="16dp"
+            android:text="@string/wifi_networks"
+            android:textSize="14dp"
             android:textStyle="bold" />
     </com.google.android.material.card.MaterialCardView>
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
-        app:cardElevation="6dp"
+        app:cardElevation="3dp"
         android:clickable="true"
         android:id="@+id/dashboard_local"
-        app:rippleColor="#4A5E35B1"
+        app:rippleColor="#59673AB7"
         android:layout_margin="10dp"
         app:cardCornerRadius="15dp">
         <ImageView
@@ -119,32 +107,153 @@
             android:layout_height="50dp"
             android:layout_margin="10dp"
             android:src="@drawable/local_network"
-            android:tint="#4A148C"
+            android:tint="#673AB7"
             />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
-            android:fontFamily="@font/ubuntu"
+
             android:gravity="right"
             android:paddingRight="10dp"
-            android:text="Local Network "
-            android:textSize="15dp"
+            android:text="@string/local_network"
+            android:textSize="14dp"
             android:textStyle="bold" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="67dp"
-            android:fontFamily="@font/ubuntu"
-            android:paddingLeft="10dp"
-            android:text="- Gathering info\n- Exploits\n- Netcut"
-            android:textSize="16dp"
-            android:textStyle="bold" />
+
     </com.google.android.material.card.MaterialCardView>
 
 </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:cardElevation="3dp"
+            android:id="@+id/dashboard_hs"
+            android:clickable="true"
+            app:rippleColor="#8FFF9800"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="15dp">
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/hs_folder"
+                android:tint="#FF9800"
+                />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+
+                android:gravity="right"
+                android:paddingRight="10dp"
+                android:text="@string/handshakes"
+                android:textSize="14dp"
+                android:textStyle="bold" />
+        </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:cardElevation="3dp"
+            android:clickable="true"
+            android:id="@+id/dashboard_exploit"
+            app:rippleColor="#74009688"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="15dp">
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/exploithub"
+                android:tint="#009688"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+
+                android:gravity="right"
+                android:paddingRight="10dp"
+                android:text="@string/exploit_hub"
+                android:textSize="14dp"
+                android:textStyle="bold" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:cardElevation="3dp"
+            android:id="@+id/dashboard_core_manager"
+            android:clickable="true"
+            app:rippleColor="#809C27B0"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="15dp">
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/chroot_manager"
+                android:tint="#9C27B0"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+
+                android:gravity="right"
+                android:paddingRight="10dp"
+                android:text="@string/core_manager"
+                android:textSize="14dp"
+                android:textStyle="bold" />
+        </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:cardElevation="3dp"
+            android:clickable="true"
+            android:id="@+id/dashboard_modules_repo"
+            app:rippleColor="#5E03A9F4"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="15dp">
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/module_repo"
+                android:tint="#03A9F4"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+
+                android:gravity="right"
+                android:paddingRight="10dp"
+                android:text="@string/modules_repo"
+                android:textSize="14dp"
+                android:textStyle="bold" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -153,84 +262,66 @@
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_marginBottom="10dp"
             android:layout_weight="1"
             android:clickable="true"
             android:id="@+id/dashboard_settings"
             app:cardCornerRadius="15dp"
-            app:cardElevation="6dp"
-            app:rippleColor="#4A006064">
+            app:cardElevation="3dp"
+            app:rippleColor="#6B4CAF50">
 
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_margin="10dp"
                 android:src="@drawable/settings"
-                android:tint="#006064" />
+                android:tint="#4CAF50" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
-                android:fontFamily="@font/ubuntu"
+
                 android:gravity="right"
                 android:paddingRight="10dp"
-                android:text="App Setting "
-                android:textSize="15dp"
+                android:text="@string/app_setting"
+                android:textSize="14dp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="67dp"
-                android:fontFamily="@font/ubuntu"
-                android:paddingLeft="10dp"
-                android:text="- Setup interfaces\n- Debug mode\n- Mac Hidding"
-                android:textSize="16dp"
-                android:textStyle="bold" />
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_marginBottom="10dp"
             android:layout_weight="1"
             android:clickable="true"
-            android:id="@+id/dashboard_folder"
+            android:id="@+id/dashboard_about"
             app:cardCornerRadius="15dp"
-            app:cardElevation="6dp"
-            app:rippleColor="#4FE65100">
+            app:cardElevation="3dp"
+            app:rippleColor="#77E91E63">
 
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_margin="10dp"
                 android:src="@drawable/about"
-                android:tint="#C54500" />
+                android:tint="#E91E63" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
-                android:fontFamily="@font/ubuntu"
+
                 android:gravity="right"
                 android:paddingRight="10dp"
-                android:text="About"
-                android:textSize="15dp"
+                android:text="@string/about_app"
+                android:textSize="14dp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="67dp"
-                android:fontFamily="@font/ubuntu"
-                android:paddingLeft="10dp"
-                android:text="- About app\n- Links\n- Donation"
-                android:textSize="16dp"
-                android:textStyle="bold" />
         </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>

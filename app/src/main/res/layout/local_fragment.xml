@@ -12,20 +12,32 @@
        android:id="@+id/local_scan"
 
       android:orientation="vertical">
-      <ImageView
+      <com.airbnb.lottie.LottieAnimationView
           android:layout_width="250dp"
           android:id="@+id/local_img"
-          android:src="@drawable/local_network"
+          app:lottie_rawRes="@raw/ok"
+          app:lottie_autoPlay="true"
           android:layout_height="250dp"/>
 
       <TextView
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="Scanning local network, it can take a while, but\nresult will be 💣"
+          android:text="@string/local_scan"
+          android:layout_marginLeft="15dp"
+          android:layout_marginRight="15dp"
           android:textSize="15dp"
           android:gravity="center"
           android:id="@+id/local_text"
           android:textStyle="bold" />
+      <com.google.android.material.progressindicator.LinearProgressIndicator
+          android:id="@+id/nmap_progressbar"
+          android:layout_width="match_parent"
+          android:layout_height="20dp"
+          app:indicatorColor="@color/blue"
+          android:layout_marginStart="15dp"
+          android:layout_marginEnd="15dp"
+          android:layout_marginTop="5dp"
+          app:trackCornerRadius="5dp" />
 
    </LinearLayout>
 

@@ -8,7 +8,6 @@ import android.util.Log;
 
 import com.zalexdev.stryker.utils.Core;
 
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,12 +22,13 @@ public class LaunchAirodump extends AsyncTask<Void, String, ArrayList<String>> {
     public Process air;
 
 
-    public LaunchAirodump(String bssid1,String wlan1,Core c) {
+    public LaunchAirodump(String bssid1, String wlan1, Core c) {
 
         bssid = bssid1;
         wlan = wlan1;
 
     }
+
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
@@ -47,18 +47,19 @@ public class LaunchAirodump extends AsyncTask<Void, String, ArrayList<String>> {
             InputStream stderr = air.getErrorStream();
             InputStream stdout = air.getInputStream();
             String cmd;
-            if (wlan.equals("wlan0")){
+            if (wlan.equals("wlan0")) {
                 cmd = "airodump-ng " + wlan + " -w /sdcard/Stryker/hs/handshake --ignore-negative-one --output-format pcap --bssid " + bssid;
 
-            }else {
+            } else {
                 cmd = "airodump-ng " + wlan + "mon -w /sdcard/Stryker/hs/handshake --ignore-negative-one --output-format pcap --bssid " + bssid;
-            }stdin.write((exec+"'"+cmd+"'"+ '\n').getBytes());
+            }
+            stdin.write((exec + "'" + cmd + "'" + '\n').getBytes());
             stdin.write(("exit\n").getBytes());
             stdin.flush();
             stdin.close();
             BufferedReader br = new BufferedReader(new InputStreamReader(stdout));
             while ((line = br.readLine()) != null) {
-                Log.e("e",line);
+                Log.e("e", line);
 
             }
             br.close();
@@ -68,7 +69,7 @@ public class LaunchAirodump extends AsyncTask<Void, String, ArrayList<String>> {
             air.waitFor();
             air.destroy();
 
-            if (air.exitValue() != 0){
+            if (air.exitValue() != 0) {
                 issuccess = new ArrayList<>();
                 issuccess.add("error");
             }
@@ -77,7 +78,7 @@ public class LaunchAirodump extends AsyncTask<Void, String, ArrayList<String>> {
         } catch (InterruptedException ex) {
             Log.d(TAG, "An InterruptedException was caught: " + ex.getMessage());
         }
-        if (issuccess.size() == 0){
+        if (issuccess.size() == 0) {
             issuccess.add("false");
         }
         return issuccess;
@@ -85,7 +86,7 @@ public class LaunchAirodump extends AsyncTask<Void, String, ArrayList<String>> {
 
     @Override
     protected void onPostExecute(ArrayList<String> result) {
-        if (result.size() == 0){
+        if (result.size() == 0) {
             result.add("false");
         }
         super.onPostExecute(result);
@@ -96,11 +97,10 @@ public class LaunchAirodump extends AsyncTask<Void, String, ArrayList<String>> {
         super.onProgressUpdate(values);
 
     }
-    public void kill(){
+
+    public void kill() {
         air.destroy();
     }
-
-
 
 
 }
