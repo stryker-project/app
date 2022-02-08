@@ -387,6 +387,7 @@ public class WiFI_Adapter extends RecyclerView.Adapter<WiFI_Adapter.ViewHolder> 
                                     exp_attack.collapse();
                                     exp_result.expand();
                                     if (result.getLon() != null) {
+
                                         res1.setText(R.string.ooops_sh);
                                         res2.setText(R.string.error_interface + wlan_listen + R.string.dev_issue);
                                     } else {
