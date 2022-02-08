@@ -40,6 +40,8 @@
 <com.google.android.material.textview.MaterialTextView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:textSize="10dp"
+    android:scrollbars="vertical"
    android:id="@+id/msfoutput"/>
 
 

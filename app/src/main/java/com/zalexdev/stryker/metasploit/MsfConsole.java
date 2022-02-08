@@ -3,6 +3,7 @@ package com.zalexdev.stryker.metasploit;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.util.Objects;
 
 public class MsfConsole extends Fragment {
     public ImageButton run;
@@ -52,11 +54,12 @@ public class MsfConsole extends Fragment {
 
 
         //Initalizing
-        View view = inflater.inflate(R.layout.searchsploit_fragment, container, false);
+        View view = inflater.inflate(R.layout.msfconsole_fragment, container, false);
         context = getContext();
         activity = getActivity();
         run = view.findViewById(R.id.search);
         MaterialTextView console = view.findViewById(R.id.msfoutput);
+        console.setMovementMethod(new LinkMovementMethod());
         core = new Core(context);
         TextInputEditText getquery = view.findViewById(R.id.getsearch);
         try {
@@ -70,31 +73,25 @@ public class MsfConsole extends Fragment {
                 BufferedReader br = new BufferedReader(new InputStreamReader(output));
                 while (true) {
                     try {
-                        if ((line = br.readLine()) == null) break;
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    appendText(console,line+"\n");
-                }
-            }).start();
-            new Thread(() -> {
-                String line = "";
-                BufferedReader br = new BufferedReader(new InputStreamReader(output));
-                while (true) {
-                    try {
-                        if ((line = br.readLine()) == null) break;
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    appendText(console,"[Error]"+line+"\n");
-                }
-            }).start();
+                        line = br.readLine();
+                        if (line != null){
+                            appendText(console,line+"\n");
 
+                        }else {
+                            appendText(console,"waiting...");
+                            Thread.sleep(100);
+                        }
+                    } catch (IOException | InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
         } catch (IOException e) {
             e.printStackTrace();
         }
         run.setOnClickListener(view1 -> {
             String q = String.valueOf(getquery.getText());
+            appendText(console,"[Q]"+q+"\n");
             try {
                 input.write((q + '\n').getBytes());
             } catch (IOException e) {
@@ -111,6 +108,7 @@ public class MsfConsole extends Fragment {
         new Thread(() -> {
             try {
                 input.write((cmd + '\n').getBytes());
+                input.flush();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -120,6 +118,7 @@ public class MsfConsole extends Fragment {
         new Thread(() -> {
             try {
                 input.write((Core.EXECUTE + " '" + "./metasploit-framework/msfconsole" + "'" + '\n').getBytes());
+                input.flush();
             } catch (IOException e) {
                 e.printStackTrace();
             }

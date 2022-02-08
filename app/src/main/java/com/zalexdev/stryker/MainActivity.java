@@ -254,8 +254,7 @@ public class MainActivity extends AppCompatActivity {
             fragment = new Settings();
         } else if (menuItem.getItemId() == R.id.local) {
             fragment = new LocalMain();
-      //  } else if (menuItem.getItemId() == R.id.about) {
-         //   fragment = new About();
+      } else if (menuItem.getItemId() == R.id.about) {fragment = new About();
         } else if (menuItem.getItemId() == R.id.core_manager) {
             fragment = new CoreManager();
         }  else if (menuItem.getItemId() == R.id.hs_storage) {
@@ -264,8 +263,8 @@ public class MainActivity extends AppCompatActivity {
             fragment = new SearchSploit();
         } else if (menuItem.getItemId() == R.id.exploit_hub) {
             fragment = new ExploitScreen();
-        } else if (menuItem.getItemId() == R.id.msf) {
-            fragment = new MsfConsole();
+       // } else if (menuItem.getItemId() == R.id.msf) {
+       //     fragment = new MsfConsole();
         }
         else if (menuItem.getItemId() == R.id.modules_repo) {
             fragment = new ModulesFragment();

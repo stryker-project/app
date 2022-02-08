@@ -58,7 +58,7 @@
             android:icon="@drawable/settings"
             android:title="@string/app_setting" />
         <item
-            android:id="@+id/msf"
+            android:id="@+id/about"
             android:icon="@drawable/about"
             android:title="@string/about_app" />
 
