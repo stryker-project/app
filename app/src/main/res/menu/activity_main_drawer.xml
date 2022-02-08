@@ -52,13 +52,15 @@
             android:id="@+id/three_wifi"
             android:icon="@drawable/wifi3"
             android:title="@string/integration" />
+
         <item
             android:id="@+id/settings"
             android:icon="@drawable/settings"
             android:title="@string/app_setting" />
         <item
-            android:id="@+id/about"
+            android:id="@+id/msf"
             android:icon="@drawable/about"
             android:title="@string/about_app" />
+
     </group>
 </menu>

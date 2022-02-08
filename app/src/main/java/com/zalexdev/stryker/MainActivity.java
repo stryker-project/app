@@ -44,6 +44,7 @@ import com.zalexdev.stryker.exploit_hub.ExploitScreen;
 import com.zalexdev.stryker.geomac.GeoMac;
 import com.zalexdev.stryker.handshakes.HandshakeStorage;
 import com.zalexdev.stryker.local_network.LocalMain;
+import com.zalexdev.stryker.metasploit.MsfConsole;
 import com.zalexdev.stryker.modules.ModulesFragment;
 import com.zalexdev.stryker.nmap.NmapScanner;
 
@@ -253,8 +254,8 @@ public class MainActivity extends AppCompatActivity {
             fragment = new Settings();
         } else if (menuItem.getItemId() == R.id.local) {
             fragment = new LocalMain();
-        } else if (menuItem.getItemId() == R.id.about) {
-            fragment = new About();
+      //  } else if (menuItem.getItemId() == R.id.about) {
+         //   fragment = new About();
         } else if (menuItem.getItemId() == R.id.core_manager) {
             fragment = new CoreManager();
         }  else if (menuItem.getItemId() == R.id.hs_storage) {
@@ -263,7 +264,10 @@ public class MainActivity extends AppCompatActivity {
             fragment = new SearchSploit();
         } else if (menuItem.getItemId() == R.id.exploit_hub) {
             fragment = new ExploitScreen();
-        } else if (menuItem.getItemId() == R.id.modules_repo) {
+        } else if (menuItem.getItemId() == R.id.msf) {
+            fragment = new MsfConsole();
+        }
+        else if (menuItem.getItemId() == R.id.modules_repo) {
             fragment = new ModulesFragment();
         } else if (menuItem.getItemId() == R.id.three_wifi) {
             fragment = new LoginPage();
