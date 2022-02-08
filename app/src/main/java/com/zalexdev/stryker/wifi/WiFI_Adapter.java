@@ -426,7 +426,7 @@ public class WiFI_Adapter extends RecyclerView.Adapter<WiFI_Adapter.ViewHolder> 
                 exp_attack.collapse();
                 exp_result.collapse();
                 if (deauth != null) {
-                    deauth.cancel();
+                    if (deauth!=null){deauth.cancel();}
                 }
                 new DisableMonitor(wlan_listen, core).execute();
                 if (!wlan_listen.equals(wlan_deauth[0])) {
@@ -469,7 +469,8 @@ public class WiFI_Adapter extends RecyclerView.Adapter<WiFI_Adapter.ViewHolder> 
                                                     settext(core.str("hs_captured"), output);
                                                 }
                                             } else {
-                                                deauth.cancel();
+                                                
+                                                if (deauth!=null){deauth.cancel();}
                                                 MoveFile moveFile = new MoveFile("/storage/emulated/0/Stryker/hs/handshake-01.cap", "/storage/emulated/0/Stryker/hs/" + name + "(" + mac + ").cap");
                                                 try {
                                                     Boolean moved = moveFile.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).get();
@@ -482,8 +483,10 @@ public class WiFI_Adapter extends RecyclerView.Adapter<WiFI_Adapter.ViewHolder> 
                                                 } catch (ExecutionException | InterruptedException e) {
                                                     e.printStackTrace();
                                                 }
+                                              
                                                 airodump.kill();
-                                                cowpatty.cancel();
+                                 
+                                                if (cowpatty!=null){cowpatty.cancel();}
                                                 new DisableMonitor(wlan_listen, new Core(context)).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                                             }
                                         } else {
@@ -536,7 +539,7 @@ public class WiFI_Adapter extends RecyclerView.Adapter<WiFI_Adapter.ViewHolder> 
                                                     } else {
                                                         settext(core.str("hs_captured"), output);
                                                         if (deauth != null) {
-                                                            deauth.cancel();
+                                                            if (deauth!=null){deauth.cancel();}
                                                         }
                                                     }
                                                 } else {
@@ -555,7 +558,7 @@ public class WiFI_Adapter extends RecyclerView.Adapter<WiFI_Adapter.ViewHolder> 
                                                         e.printStackTrace();
                                                     }
                                                     airodump.kill();
-                                                    cowpatty.cancel();
+                                                    if (cowpatty!=null){cowpatty.cancel();}
 
                                                         DisableMonitor disableMonitor = new DisableMonitor(wlan_listen, new Core(context));
                                                         disableMonitor.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -566,7 +569,8 @@ public class WiFI_Adapter extends RecyclerView.Adapter<WiFI_Adapter.ViewHolder> 
                                                 }
                                             } else {
                                                 settext(core.str("cant_airodump"), output);
-                                                cowpatty.cancel();
+                                         
+                                                if (cowpatty!=null){cowpatty.cancel();}
                                             }
                                         } catch (ExecutionException | InterruptedException e) {
                                             e.printStackTrace();
@@ -584,7 +588,9 @@ public class WiFI_Adapter extends RecyclerView.Adapter<WiFI_Adapter.ViewHolder> 
                                                 settext(core.str("deauthing"), output);
                                             } else {
                                                 settext(core.str("went_wrog_play"), output);
-                                                deauth.cancel();
+                                               
+                                                
+                                                if (deauth!=null){deauth.cancel();}
                                             }
                                         } catch (ExecutionException | InterruptedException e) {
                                             e.printStackTrace();
