@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,12 +25,15 @@ import com.zalexdev.stryker.handshakes.HandshakeStorage;
 import com.zalexdev.stryker.local_network.LocalMain;
 import com.zalexdev.stryker.modules.ModulesFragment;
 import com.zalexdev.stryker.utils.Core;
+import com.zalexdev.stryker.utils.CustomCommand;
 import com.zalexdev.stryker.wifi.Wifi;
+import com.zalexdev.stryker.wifi.utils.GetInterfaces;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 public class Dashboard extends Fragment {
 
@@ -63,6 +67,28 @@ public class Dashboard extends Fragment {
         MaterialCardView mod = viewroot.findViewById(R.id.dashboard_modules_repo);
         MaterialCardView manager = viewroot.findViewById(R.id.dashboard_core_manager);
         MaterialCardView exploit = viewroot.findViewById(R.id.dashboard_exploit);
+        if (!core.getBoolean("first_open")) {
+            try {
+                ArrayList<String> interfaces = new GetInterfaces(core).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).get();
+                if (interfaces.contains("swlan0")){
+                    core.putString("wlan_scan", "swlan0");
+                    core.putString("wlan_deauth", "swlan0");
+                }else{
+                    core.putString("wlan_scan", "wlan0");
+                    core.putString("wlan_deauth", "wlan0");
+                }
+            } catch (ExecutionException | InterruptedException e) {
+                e.printStackTrace();
+                core.putString("wlan_scan", "wlan0");
+                core.putString("wlan_deauth", "wlan0");
+
+            }
+            core.putBoolean("first_open", true);
+            core.putBoolean("store_scan", true);
+            core.putBoolean("auto_update", true);
+            core.putInt("threads", 100);
+            new CustomCommand("dumpsys deviceidle whitelist +com.zalexdev.stryker", core).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        }
         mod.setOnClickListener(view -> {
             fragmentManager.beginTransaction().replace(R.id.flContent, new ModulesFragment()).commit();
             setchecked(7);

@@ -43,7 +43,7 @@ public class GetNetworkMask extends AsyncTask<Void, String, String> {
             OutputStream stdin = process.getOutputStream();
             InputStream stderr = process.getErrorStream();
             InputStream stdout = process.getInputStream();
-            stdin.write(("ip route show | grep wlan0" + '\n').getBytes());
+            stdin.write(("ip route show | grep "+core.getString("wlan_scan") + '\n').getBytes());
             stdin.write(("exit\n").getBytes());
             stdin.flush();
             stdin.close();

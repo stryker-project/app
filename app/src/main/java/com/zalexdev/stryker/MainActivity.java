@@ -130,16 +130,7 @@ public class MainActivity extends AppCompatActivity {
         if (!core.is64Bit() ||!core.checkmod("GeoMac")){nvDrawer.getMenu().getItem(9).setVisible(false); }
         if (!core.is64Bit() || !core.checkmod("Router Scan")){nvDrawer.getMenu().getItem(10).setVisible(false);}
         if (!core.checkmod("Router Scan")){nvDrawer.getMenu().getItem(11).setVisible(false);}
-        if (!core.getBoolean("first_open")) {
-            core.putString("wlan_scan", "wlan0");
-            core.putString("wlan_deauth", "wlan0");
-            core.putBoolean("first_open", true);
-            core.putBoolean("store_scan", true);
-            core.putBoolean("auto_update", true);
-            core.putInt("threads", 100);
-            core.putInt("night", 2);
-           new CustomCommand("dumpsys deviceidle whitelist +com.zalexdev.stryker", core).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-        }
+
         if (night==0){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         }else if (night==1){
