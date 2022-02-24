@@ -6,7 +6,7 @@ import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.zalexdev.stryker.custom.WiFiNetwork;
+import com.zalexdev.stryker.custom.WiFINetwork;
 import com.zalexdev.stryker.utils.Core;
 
 import java.io.BufferedReader;
@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ScanWifi extends AsyncTask<Void, String, ArrayList<WiFiNetwork>> {
+public class ScanWifi extends AsyncTask<Void, String, ArrayList<WiFINetwork>> {
     public String exec = Core.EXECUTE;
     public String wlan;
     public int count = 0;
@@ -39,9 +39,9 @@ public class ScanWifi extends AsyncTask<Void, String, ArrayList<WiFiNetwork>> {
 
     @SuppressLint("WrongThread")
     @Override
-    protected ArrayList<WiFiNetwork> doInBackground(Void... command) {
+    protected ArrayList<WiFINetwork> doInBackground(Void... command) {
         String line;
-        ArrayList<WiFiNetwork> result = new ArrayList<>();
+        ArrayList<WiFINetwork> result = new ArrayList<>();
         try {
             Process process = Runtime.getRuntime().exec("su");
             OutputStream stdin = process.getOutputStream();
@@ -77,7 +77,7 @@ public class ScanWifi extends AsyncTask<Void, String, ArrayList<WiFiNetwork>> {
     }
 
     @Override
-    protected void onPostExecute(ArrayList<WiFiNetwork> result) {
+    protected void onPostExecute(ArrayList<WiFINetwork> result) {
         super.onPostExecute(result);
 
     }
@@ -88,9 +88,9 @@ public class ScanWifi extends AsyncTask<Void, String, ArrayList<WiFiNetwork>> {
 
     }
 
-    public ArrayList<WiFiNetwork> parsewifi(ArrayList<String> output) {
-        WiFiNetwork wifi = new WiFiNetwork();
-        ArrayList<WiFiNetwork> networks = new ArrayList<>();
+    public ArrayList<WiFINetwork> parsewifi(ArrayList<String> output) {
+        WiFINetwork wifi = new WiFINetwork();
+        ArrayList<WiFINetwork> networks = new ArrayList<>();
         count = 0;
         count2 = 0;
         for (int i = 0; i < output.size(); i++) {
@@ -131,7 +131,7 @@ public class ScanWifi extends AsyncTask<Void, String, ArrayList<WiFiNetwork>> {
             if (count == 4) {
                 networks.add(wifi);
                 count = 0;
-                wifi = new WiFiNetwork();
+                wifi = new WiFINetwork();
 
             }
             if (temp.contains("WPS:Version")) {

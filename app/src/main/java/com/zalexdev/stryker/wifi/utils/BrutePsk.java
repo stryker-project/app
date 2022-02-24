@@ -20,20 +20,17 @@ import androidx.core.app.NotificationCompat;
 
 import com.zalexdev.stryker.MainActivity;
 import com.zalexdev.stryker.R;
-import com.zalexdev.stryker.custom.WiFiNetwork;
+import com.zalexdev.stryker.custom.WiFINetwork;
 import com.zalexdev.stryker.utils.Core;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.util.ArrayList;
 
-public class BrutePsk extends AsyncTask<Void, String, WiFiNetwork> {
+public class BrutePsk extends AsyncTask<Void, String, WiFINetwork> {
     public Activity mActivity;
     public TextView prog;
     public String ssid;
@@ -61,8 +58,8 @@ public class BrutePsk extends AsyncTask<Void, String, WiFiNetwork> {
 
     @SuppressLint("WrongThread")
     @Override
-    protected WiFiNetwork doInBackground(Void... command) {
-        WiFiNetwork result = new WiFiNetwork();
+    protected WiFINetwork doInBackground(Void... command) {
+        WiFINetwork result = new WiFINetwork();
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String psk;
             while ((psk = br.readLine()) != null) {
@@ -99,7 +96,7 @@ public class BrutePsk extends AsyncTask<Void, String, WiFiNetwork> {
     }
 
     @Override
-    protected void onPostExecute(WiFiNetwork result) {
+    protected void onPostExecute(WiFINetwork result) {
         super.onPostExecute(result);
     }
 

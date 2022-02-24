@@ -68,8 +68,7 @@ public class Dashboard extends Fragment {
         MaterialCardView manager = viewroot.findViewById(R.id.dashboard_core_manager);
         MaterialCardView exploit = viewroot.findViewById(R.id.dashboard_exploit);
         if (!core.getBoolean("first_open")) {
-            try {
-                ArrayList<String> interfaces = new GetInterfaces(core).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).get();
+                ArrayList<String> interfaces = core.getInterfacesList();
                 if (interfaces.contains("swlan0")){
                     core.putString("wlan_scan", "swlan0");
                     core.putString("wlan_deauth", "swlan0");
@@ -77,12 +76,6 @@ public class Dashboard extends Fragment {
                     core.putString("wlan_scan", "wlan0");
                     core.putString("wlan_deauth", "wlan0");
                 }
-            } catch (ExecutionException | InterruptedException e) {
-                e.printStackTrace();
-                core.putString("wlan_scan", "wlan0");
-                core.putString("wlan_deauth", "wlan0");
-
-            }
             core.putBoolean("first_open", true);
             core.putBoolean("store_scan", true);
             core.putBoolean("auto_update", true);

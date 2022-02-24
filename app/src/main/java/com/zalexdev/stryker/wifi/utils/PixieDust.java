@@ -11,8 +11,7 @@ import android.text.Spanned;
 import android.util.Log;
 import android.widget.TextView;
 
-import com.zalexdev.stryker.R;
-import com.zalexdev.stryker.custom.WiFiNetwork;
+import com.zalexdev.stryker.custom.WiFINetwork;
 import com.zalexdev.stryker.utils.Core;
 
 import java.io.BufferedReader;
@@ -22,7 +21,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
-public class PixieDust extends AsyncTask<Void, String, WiFiNetwork> {
+public class PixieDust extends AsyncTask<Void, String, WiFINetwork> {
     @SuppressLint("StaticFieldLeak")
     public final TextView output;
     public String exec = Core.EXECUTE;
@@ -53,9 +52,9 @@ public class PixieDust extends AsyncTask<Void, String, WiFiNetwork> {
 
     @SuppressLint("WrongThread")
     @Override
-    protected WiFiNetwork doInBackground(Void... command) {
+    protected WiFINetwork doInBackground(Void... command) {
         String line;
-        WiFiNetwork issuccess = new WiFiNetwork();
+        WiFINetwork issuccess = new WiFINetwork();
         try {
             process = Runtime.getRuntime().exec("su -mm");
             OutputStream stdin = process.getOutputStream();
@@ -119,7 +118,7 @@ public class PixieDust extends AsyncTask<Void, String, WiFiNetwork> {
     }
 
     @Override
-    protected void onPostExecute(WiFiNetwork result) {
+    protected void onPostExecute(WiFINetwork result) {
         super.onPostExecute(result);
     }
 
@@ -157,11 +156,11 @@ public class PixieDust extends AsyncTask<Void, String, WiFiNetwork> {
     }
 
 
-    public WiFiNetwork pixie(ArrayList<String> out) {
+    public WiFINetwork pixie(ArrayList<String> out) {
         String pin;
         String pass;
 
-        WiFiNetwork back = new WiFiNetwork();
+        WiFINetwork back = new WiFINetwork();
         for (int i = 0; i < out.size(); i++) {
             String s = out.get(i);
             if (s.contains("[+] WPS PIN:")) {

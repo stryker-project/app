@@ -68,10 +68,8 @@ public class Slide4 extends Fragment {
         MaterialButton button_no = view.findViewById(R.id.slide_button_no);
 
             button.setOnClickListener(view1 -> {
-                new CustomCommand("mv /data/data/com.zalexdev.stryker/files/motd /data/data/com.termux/files/usr/etc/motd",core).execute();
-                new CustomCommand("chmod 777 /data/data/com.termux/files/usr/etc/motd",core).execute();
-                new CustomCommand("mv /data/data/com.zalexdev.stryker/files/bashrc /data/data/com.termux/files/home/.bashrc",core).execute();
-                new CustomCommand("chmod 777 /data/data/com.termux/files/home/.bashrc",core).execute();
+                new CustomCommand("mv /data/data/com.zalexdev.stryker/files/stryker /data/data/com.termux/files/usr/bin/stryker",core).execute();
+                new CustomCommand("chmod 777 /data/data/com.termux/files/usr/bin/stryker",core).execute();
                 core.MoveNext(mPager);
             });
 

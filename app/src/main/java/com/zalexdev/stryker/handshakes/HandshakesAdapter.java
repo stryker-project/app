@@ -22,7 +22,7 @@ import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
 import com.zalexdev.stryker.R;
-import com.zalexdev.stryker.custom.WiFiNetwork;
+import com.zalexdev.stryker.custom.WiFINetwork;
 import com.zalexdev.stryker.handshakes.utils.BruteHandshake;
 import com.zalexdev.stryker.handshakes.utils.UploadHS;
 import com.zalexdev.stryker.utils.Core;
@@ -93,7 +93,7 @@ public class HandshakesAdapter extends RecyclerView.Adapter<HandshakesAdapter.Vi
                                         adapter.brute.setVisibility(View.VISIBLE);
                                     });
                                 });
-                                WiFiNetwork w = br.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).get();
+                                WiFINetwork w = br.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).get();
                                 activity.runOnUiThread(() -> {
                                     adapter.brute.setVisibility(View.VISIBLE);
                                     adapter.cancel.setVisibility(View.GONE);

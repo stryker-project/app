@@ -16,21 +16,21 @@ import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.zalexdev.stryker.R;
-import com.zalexdev.stryker.custom.WiFiNetwork;
+import com.zalexdev.stryker.custom.WiFINetwork;
 import com.zalexdev.stryker.utils.Core;
 
 import java.util.ArrayList;
 import java.util.Timer;
 
 public class Search_Adapter extends RecyclerView.Adapter<Search_Adapter.ViewHolder> {
-    public ArrayList<WiFiNetwork> wifilist;
+    public ArrayList<WiFINetwork> wifilist;
     public Context context;
     public Activity activity;
     public int tag = 0;
     public Timer deauth;
     public Core core;
 
-    public Search_Adapter(Context context2, Activity mActivity, ArrayList<WiFiNetwork> wifi) {
+    public Search_Adapter(Context context2, Activity mActivity, ArrayList<WiFINetwork> wifi) {
         context = context2;
         wifilist = wifi;
         activity = mActivity;

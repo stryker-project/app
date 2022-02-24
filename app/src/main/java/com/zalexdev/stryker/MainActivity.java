@@ -347,8 +347,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private ArrayList<String> getinterfaces() throws ExecutionException, InterruptedException {
-        GetInterfaces airmon = new GetInterfaces(new Core(this));
-        return airmon.execute().get();
+        return  core.getInterfacesList();
     }
 
 

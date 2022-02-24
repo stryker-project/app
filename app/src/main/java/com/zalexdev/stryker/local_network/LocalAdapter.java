@@ -44,6 +44,7 @@ import com.zalexdev.stryker.local_network.exploits.CheckBlueKeep;
 import com.zalexdev.stryker.local_network.exploits.CheckEternalBlue;
 import com.zalexdev.stryker.local_network.exploits.CheckSmbGhost;
 import com.zalexdev.stryker.local_network.exploits.RouterScan;
+
 import com.zalexdev.stryker.local_network.utils.CutNetwork;
 import com.zalexdev.stryker.utils.Core;
 
@@ -51,6 +52,8 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutionException;
+
+
 
 public class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.ViewHolder> {
     public Context context;
@@ -92,6 +95,7 @@ public class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.ViewHolder> 
         }
         if (devices.get(position).isShim()) {
             adapter.shim.startShimmerAnimation();
+
         }else if (!devices.get(position).isShim() && localdialog!=null&& localdialog.isShowing()&&devices.get(position).getIp().equals(dialogip)){
             localdialog.dismiss();
             LocalDialog(devices.get(position),position);

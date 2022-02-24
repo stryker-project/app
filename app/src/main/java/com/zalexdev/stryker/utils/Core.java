@@ -55,12 +55,15 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
+import java.net.NetworkInterface;
 import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
@@ -700,6 +703,19 @@ public class Core {
             }
 
         return false;
+    }
+    public ArrayList<String> getInterfacesList(){
+         ArrayList<String> ilist = new ArrayList<>();
+        try {
+                List<NetworkInterface> allIface = Collections.list(NetworkInterface.getNetworkInterfaces());
+                for (NetworkInterface iface : allIface) {
+                    if (iface.getName().contains("wlan")){
+                    ilist.add(iface.getName());}
+                }
+            } catch (Exception ignored) {
+            }
+        Collections.reverse(ilist);
+        return ilist;
     }
 
 }

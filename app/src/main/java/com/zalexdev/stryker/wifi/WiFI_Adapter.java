@@ -5,7 +5,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
@@ -29,8 +28,7 @@ import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
 import com.zalexdev.stryker.R;
-import com.zalexdev.stryker.custom.WiFiNetwork;
-import com.zalexdev.stryker.handshakes.utils.BruteHandshake;
+import com.zalexdev.stryker.custom.WiFINetwork;
 import com.zalexdev.stryker.utils.CheckFile;
 import com.zalexdev.stryker.utils.Core;
 import com.zalexdev.stryker.utils.CustomCommand;
@@ -48,11 +46,7 @@ import com.zalexdev.stryker.wifi.utils.StartDeauth;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Locale;
@@ -61,7 +55,7 @@ import java.util.TimerTask;
 import java.util.concurrent.ExecutionException;
 
 public class WiFI_Adapter extends RecyclerView.Adapter<WiFI_Adapter.ViewHolder> {
-    public ArrayList<WiFiNetwork> wifilist;
+    public ArrayList<WiFINetwork> wifilist;
     public Context context;
     public Activity activity;
     public int tag = 0;
@@ -69,11 +63,11 @@ public class WiFI_Adapter extends RecyclerView.Adapter<WiFI_Adapter.ViewHolder> 
     public Core core;
     public boolean three_wifi;
 
-    public WiFI_Adapter(Context context2, Activity mActivity, ArrayList<WiFiNetwork> wifi) {
+    public WiFI_Adapter(Context context2, Activity mActivity, ArrayList<WiFINetwork> wifi) {
         context = context2;
         wifilist = wifi;
         activity = mActivity;
-        try {Collections.sort(wifi, new WiFiNetwork.WiFIComporator());}
+        try {Collections.sort(wifi, new WiFINetwork.WiFIComporator());}
         catch (Exception ignored){}
         core = new Core(context2);
 
@@ -133,7 +127,7 @@ public class WiFI_Adapter extends RecyclerView.Adapter<WiFI_Adapter.ViewHolder> 
 
     }
 
-    private void WifiDialog(WiFiNetwork selected) {
+    private void WifiDialog(WiFINetwork selected) {
         String name = selected.getSsid();
         String mac = selected.getMac();
         String channel = selected.getChannel();
@@ -187,7 +181,7 @@ public class WiFI_Adapter extends RecyclerView.Adapter<WiFI_Adapter.ViewHolder> 
                                 ArrayList<String> temp = new ArrayList<>();
 
                                 brute[0] = new BrutePsk(activity,output,name,core,path);
-                                WiFiNetwork w = brute[0].executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).get();
+                                WiFINetwork w = brute[0].executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).get();
                                 if (w.getOK()){
                                     settext(core.str("suc_pass")+w.getPsk(), output);
                                     core.savenetwork(mac,w.getPsk(),"-");
@@ -228,7 +222,7 @@ public class WiFI_Adapter extends RecyclerView.Adapter<WiFI_Adapter.ViewHolder> 
                 new Thread(() -> {
                     settext(core.str("try_connect"), output);
                     try {
-                        WiFiNetwork w = new CustomPin(value,activity,output,mac,wlan_listen,core).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).get();
+                        WiFINetwork w = new CustomPin(value,activity,output,mac,wlan_listen,core).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).get();
                         if (w.getOK()){
                             activity.runOnUiThread(() -> {
                                 exp_result.expand();
@@ -295,7 +289,7 @@ public class WiFI_Adapter extends RecyclerView.Adapter<WiFI_Adapter.ViewHolder> 
                 Thread t = new Thread(() -> {
                     try {
 
-                        WiFiNetwork result = brute_wps[0].executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).get();
+                        WiFINetwork result = brute_wps[0].executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).get();
 
                         if (!result.isCanceled()) {
                             if (result.getOK()) {
@@ -362,7 +356,7 @@ public class WiFI_Adapter extends RecyclerView.Adapter<WiFI_Adapter.ViewHolder> 
                 Thread t = new Thread(() -> {
                     pixie[0] = new PixieDust(context, activity, output, mac, name, new Core(context));
                     try {
-                        WiFiNetwork result = pixie[0].executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).get();
+                        WiFINetwork result = pixie[0].executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).get();
                         if (!result.isCanceled()) {
                             if (result.getOK()) {
                                 activity.runOnUiThread(() -> {
@@ -502,7 +496,7 @@ public class WiFI_Adapter extends RecyclerView.Adapter<WiFI_Adapter.ViewHolder> 
 
 
                     } else {
-                        if (new GetInterfaces(new Core(context)).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).get().contains(wlan_deauth[0])) {
+                        if (core.getInterfacesList().contains(wlan_deauth[0])) {
                             settext(core.str("trying_put_inter"), output);
                             EnableMonitor monitor = new EnableMonitor(wlan_listen, channel, new Core(context));
                             Boolean listen = monitor.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).get();
@@ -626,11 +620,10 @@ public class WiFI_Adapter extends RecyclerView.Adapter<WiFI_Adapter.ViewHolder> 
             bottomSheetDialog.setOnDismissListener(dialogInterface -> new DisableMonitor(wlan_deauth[0], core).execute());
             exp_attack.expand();
             exp_main.collapse();
-            GetInterfaces getInterfaces = new GetInterfaces(new Core(context));
 
             try {
                 if (!wlan_deauth[0].equals("wlan0")) {
-                    ArrayList<String> wlans = getInterfaces.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).get();
+                    ArrayList<String> wlans = core.getInterfacesList();
                     if (wlans.contains(wlan_deauth[0] +"mon")){
                         wlan_deauth[0] = wlan_deauth[0] +"mon";}
                     if (wlans.contains(wlan_deauth[0])) {
@@ -706,7 +699,7 @@ public class WiFI_Adapter extends RecyclerView.Adapter<WiFI_Adapter.ViewHolder> 
         return position;
     }
 
-    public void changeitem(WiFiNetwork temp, int pos) {
+    public void changeitem(WiFINetwork temp, int pos) {
         activity.runOnUiThread(() -> {
             wifilist.set(pos, temp);
             notifyItemChanged(pos);

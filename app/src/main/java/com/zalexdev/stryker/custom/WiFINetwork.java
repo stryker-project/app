@@ -1,7 +1,7 @@
 package com.zalexdev.stryker.custom;
 import java.util.Comparator;
 
-public class WiFiNetwork {
+public class WiFINetwork {
     public String mac;
     public String ssid;
     public Boolean wps = false;
@@ -19,7 +19,7 @@ public class WiFiNetwork {
     public boolean canceled = false;
     public boolean three = false;
 
-    public WiFiNetwork() {
+    public WiFINetwork() {
     }
 
     public String getMac() {
@@ -134,8 +134,8 @@ public class WiFiNetwork {
         isBlocked = blocked;
     }
 
-    public static class WiFIComporator implements Comparator<WiFiNetwork> {
-        public int compare(WiFiNetwork o1, WiFiNetwork o2) {
+    public static class WiFIComporator implements Comparator<WiFINetwork> {
+        public int compare(WiFINetwork o1, WiFINetwork o2) {
             return o1.getPower() - o2.getPower();
         }
     }
