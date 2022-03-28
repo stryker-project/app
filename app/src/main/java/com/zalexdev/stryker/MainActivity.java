@@ -60,7 +60,6 @@ import com.zalexdev.stryker.three_wifi.LoginPage;
 import com.zalexdev.stryker.utils.CheckDir;
 import com.zalexdev.stryker.utils.Core;
 import com.zalexdev.stryker.utils.CustomCommand;
-import com.zalexdev.stryker.utils.GetPersonalID;
 import com.zalexdev.stryker.utils.OnSwipeListener;
 import com.zalexdev.stryker.wifi.Wifi;
 import com.zalexdev.stryker.wifi.utils.GetInterfaces;
