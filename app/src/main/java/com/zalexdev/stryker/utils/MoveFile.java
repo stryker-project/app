@@ -12,6 +12,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 
+/**
+ * Move a file from one location to another
+ */
 public class MoveFile extends AsyncTask<Void, String, Boolean> {
 
     public String old_dest;

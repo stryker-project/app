@@ -15,5 +15,6 @@
     <color name="green">#2E7D32</color>
     <color name="nightwhite">#FFFFFF</color>
     <color name="nightrec">#EDECEC</color>
+    <color name="grey">#757575</color>
     <color name="textcolor">#757575</color>
 </resources>

@@ -15,6 +15,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
+/**
+ * This class is used to launch the airodump-ng command
+ */
 public class LaunchAirodump extends AsyncTask<Void, String, ArrayList<String>> {
     public String exec = Core.EXECUTE;
     public String bssid;

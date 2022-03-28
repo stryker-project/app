@@ -12,6 +12,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 
+/**
+ * CheckPkg is a class that checks if a package is installed on the device
+ */
 public class CheckPkg extends AsyncTask<Void, String, Boolean> {
 
 

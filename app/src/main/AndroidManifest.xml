@@ -31,7 +31,7 @@
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
-            android:name=".InstalModuleActivity"
+            android:name=".modules.InstalModuleActivity"
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity

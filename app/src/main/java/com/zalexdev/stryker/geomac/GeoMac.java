@@ -1,5 +1,6 @@
 package com.zalexdev.stryker.geomac;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.ClipData;
@@ -24,13 +25,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.google.android.material.textfield.TextInputEditText;
+import com.zalexdev.stryker.PlsInstallModule;
 import com.zalexdev.stryker.R;
 import com.zalexdev.stryker.custom.Sploit;
 import com.zalexdev.stryker.geomac.utils.GetGeoByMac;
 import com.zalexdev.stryker.searchsploit.SploitAdapter;
 import com.zalexdev.stryker.searchsploit.utils.GetSploit;
+import com.zalexdev.stryker.utils.CheckFile;
 import com.zalexdev.stryker.utils.CheckInet;
 import com.zalexdev.stryker.utils.Core;
+import com.zalexdev.stryker.utils.OnSwipeListener;
+
+import net.cachapa.expandablelayout.ExpandableLayout;
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;
@@ -73,12 +79,27 @@ public class GeoMac extends Fragment {
         activity = getActivity();
         search = view.findViewById(R.id.search);
         core = new Core(context);
+        ExpandableLayout menu = activity.findViewById(R.id.menu_expand);
+        view.setOnTouchListener(new OnSwipeListener(context) {
+            public void onSwipeTop() {core.closemenu(menu); }
+            @SuppressLint("ClickableViewAccessibility")
+            public void onSwipeRight() { }
+            public void onSwipeLeft() { }
+            public void onSwipeBottom() { core.openmenu(menu); }
+        });
         Configuration.getInstance().load(context, PreferenceManager.getDefaultSharedPreferences(context));
         map = view.findViewById(R.id.geomap);
         map.setLayerType(View.LAYER_TYPE_HARDWARE, null );
         map.setTileSource(TileSourceFactory.MAPNIK);
         map.setMultiTouchControls(true);
         fixinet();
+        try {
+            if (!new CheckFile("/data/local/stryker/release/modules/GeoMac/geomac").executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).get()){
+                getParentFragmentManager().beginTransaction().replace(R.id.flContent, new PlsInstallModule(true,"GeoMac")).commit();
+            }
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
         mapController = map.getController();
         mapController.setZoom(19f);
         TextInputEditText getquery = view.findViewById(R.id.getsearch);
@@ -86,7 +107,9 @@ public class GeoMac extends Fragment {
             Configuration.getInstance().load(context, PreferenceManager.getDefaultSharedPreferences(context));
             String q = String.valueOf(getquery.getText());
             new Thread(() -> {
+
                 try {
+                    // This is getting the coordinates of the AP
                     String coords = new GetGeoByMac(q,core).execute().get();
                     activity.runOnUiThread(() -> {
                         if (coords.isEmpty()) {
@@ -95,6 +118,7 @@ public class GeoMac extends Fragment {
                             String lat = coords.replace(" ","").split(",")[0];
                             String lon = coords.replace(" ","").split(",")[1];
                             ArrayList<OverlayItem> items = new ArrayList<>();
+                            // This is creating a new OverlayItem object.
                             OverlayItem point = new OverlayItem(q, coords, new GeoPoint(Double.parseDouble(lat),Double.parseDouble(lon)));
                             Drawable wifipoint = context.getDrawable(R.drawable.wifi);
                             wifipoint.setTint(getResources().getColor(R.color.blue));
@@ -126,6 +150,12 @@ public class GeoMac extends Fragment {
 
         return view;
     }
+    /**
+     * It copies the text to the clipboard.
+     *
+     * @param context The context of the activity (this)
+     * @param text The text to be copied to the clipboard.
+     */
     private void setClipboard(Context context, String text) {
         ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newPlainText(getString(R.string.copied), text);

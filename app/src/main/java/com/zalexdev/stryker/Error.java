@@ -26,6 +26,9 @@ import com.zalexdev.stryker.utils.CustomCommand;
 
 import java.io.File;
 
+/**
+ * This class is used to display the error page
+ */
 public class Error extends Fragment {
 
 

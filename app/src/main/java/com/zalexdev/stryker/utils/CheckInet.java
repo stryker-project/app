@@ -13,6 +13,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
+/**
+ * This class checks if the device is connected to the internet from chroot
+ */
 public class CheckInet extends AsyncTask<Void, String, Boolean> {
 
     public CheckInet() {

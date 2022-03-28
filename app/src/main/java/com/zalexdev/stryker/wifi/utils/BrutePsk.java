@@ -33,6 +33,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
+/**
+ * BrutePsk is a class that is used to brute force the PSK of a network
+ */
 public class BrutePsk extends AsyncTask<Void, String, WiFiNetwork> {
     public Activity mActivity;
     public TextView prog;

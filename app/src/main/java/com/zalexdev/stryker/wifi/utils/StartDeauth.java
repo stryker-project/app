@@ -14,6 +14,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 
+/**
+ * This class is used to start the deauth attack
+ */
 public class StartDeauth extends AsyncTask<Void, String, Boolean> {
     public String exec = Core.EXECUTE;
     public boolean limit;

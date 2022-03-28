@@ -1,5 +1,6 @@
 package com.zalexdev.stryker.modules;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -23,6 +24,9 @@ import com.zalexdev.stryker.R;
 import com.zalexdev.stryker.custom.Module;
 import com.zalexdev.stryker.utils.CheckInet;
 import com.zalexdev.stryker.utils.Core;
+import com.zalexdev.stryker.utils.OnSwipeListener;
+
+import net.cachapa.expandablelayout.ExpandableLayout;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -51,6 +55,14 @@ public class ModulesFragment extends Fragment {
         View view = inflater.inflate(R.layout.module_fragment, container, false);
         context = getContext();
         activity = getActivity();
+        ExpandableLayout menu = activity.findViewById(R.id.menu_expand);
+        view.setOnTouchListener(new OnSwipeListener(context) {
+            public void onSwipeTop() {core.closemenu(menu); }
+            @SuppressLint("ClickableViewAccessibility")
+            public void onSwipeRight() { }
+            public void onSwipeLeft() { }
+            public void onSwipeBottom() { core.openmenu(menu); }
+        });
         LinearProgressIndicator progressIndicator = view.findViewById(R.id.loading);
         TextView installed_text = view.findViewById(R.id.installed_text);
         RecyclerView mRecyclerView = view.findViewById(R.id.repo_list);

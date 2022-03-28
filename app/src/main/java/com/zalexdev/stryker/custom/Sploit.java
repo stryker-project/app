@@ -1,5 +1,8 @@
 package com.zalexdev.stryker.custom;
 
+/**
+ * This class is used to store the information of a single exploit
+ */
 public class Sploit {
     public String title;
     public String date;

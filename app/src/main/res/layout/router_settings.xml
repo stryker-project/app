@@ -72,6 +72,6 @@
         android:text="@string/save"
         android:layout_margin="10dp"
         android:drawableLeft="@drawable/save"
-        android:drawableTint="@color/main"/>
+        android:drawableTint="@color/white"/>
 
 </LinearLayout>

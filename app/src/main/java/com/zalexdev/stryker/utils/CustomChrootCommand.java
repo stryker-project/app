@@ -34,10 +34,9 @@ public class CustomChrootCommand extends AsyncTask<Void, String, Boolean> {
     protected Boolean doInBackground(Void... command) {
         String line;
         boolean result = false;
-
-
+        Logger logger = new Logger();
         try {
-            core.writelinetolog(cmd);
+            logger.writeLine("Running chroot command "+cmd,1);
             Process process = Runtime.getRuntime().exec("su -mm");
             OutputStream stdin = process.getOutputStream();
             InputStream stderr = process.getErrorStream();
@@ -51,12 +50,14 @@ public class CustomChrootCommand extends AsyncTask<Void, String, Boolean> {
             BufferedReader br = new BufferedReader(new InputStreamReader(stdout));
             while ((line = br.readLine()) != null) {
                 out.add(line);
+                logger.writeLine(line,2);
             }
             br.close();
             br = new BufferedReader(new InputStreamReader(stderr));
             while ((line = br.readLine()) != null) {
                 outerror.add(line);
                 onProgressUpdate(line);
+                logger.writeLine(line,3);
             }
             br.close();
             core.writetolog(out, false);

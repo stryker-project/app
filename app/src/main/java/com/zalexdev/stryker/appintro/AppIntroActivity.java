@@ -16,6 +16,9 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.zalexdev.stryker.R;
 
+/**
+ * The class is responsible for displaying the slides in the app intro
+ */
 public class AppIntroActivity extends FragmentActivity {
 
     private static final int NUM_PAGES = 10;

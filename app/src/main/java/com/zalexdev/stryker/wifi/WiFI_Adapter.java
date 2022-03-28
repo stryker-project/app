@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
@@ -17,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,9 +26,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.progressindicator.CircularProgressIndicator;
 import com.google.android.material.textfield.TextInputEditText;
 import com.zalexdev.stryker.R;
 import com.zalexdev.stryker.custom.WiFiNetwork;
@@ -89,6 +93,7 @@ public class WiFI_Adapter extends RecyclerView.Adapter<WiFI_Adapter.ViewHolder> 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @SuppressLint("SetTextI18n")
     @Override
+    // The above code is binding the data to the view holder.
     public void onBindViewHolder(@NonNull ViewHolder adapter, @SuppressLint("RecyclerView") final int position) {
         if (!new Core(context).getBoolean("hide")) {
             adapter.wifi_mac.setText(wifilist.get(position).getMac().toUpperCase(Locale.ROOT));
@@ -142,8 +147,9 @@ public class WiFI_Adapter extends RecyclerView.Adapter<WiFI_Adapter.ViewHolder> 
         boolean three_wifi = selected.getOK();
         final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context, R.style.AppBottomSheetDialogTheme);
         bottomSheetDialog.setContentView(R.layout.wifi_bottom);
-
         TextView name1 = bottomSheetDialog.findViewById(R.id.wifi_name_bottom);
+        ImageView wifiimg = bottomSheetDialog.findViewById(R.id.dialog_wifi_img);
+
         TextView mac1 = bottomSheetDialog.findViewById(R.id.wifi_mac_bottom);
         TextView res1 = bottomSheetDialog.findViewById(R.id.getedpass);
         TextView res2 = bottomSheetDialog.findViewById(R.id.getedpin);
@@ -156,12 +162,15 @@ public class WiFI_Adapter extends RecyclerView.Adapter<WiFI_Adapter.ViewHolder> 
         LinearLayout brute_psk = bottomSheetDialog.findViewById(R.id.brute_psk);
         Button back = bottomSheetDialog.findViewById(R.id.back);
         Button main_cancel = bottomSheetDialog.findViewById(R.id.cancel_attack);
-
+        ProgressBar attack_progress = bottomSheetDialog.findViewById(R.id.attacking_progress);
         ExpandableLayout exp_main = bottomSheetDialog.findViewById(R.id.expand);
         ExpandableLayout exp_attack = bottomSheetDialog.findViewById(R.id.expand_console);
         ExpandableLayout exp_result = bottomSheetDialog.findViewById(R.id.expand_result);
 
         brute_psk.setOnClickListener(view -> {
+
+            core.scale(wifiimg,0.65F);
+            core.scale(attack_progress,1.0F);
             output.setText(R.string.start_brute);
             final BrutePsk[] brute = {null};
             main_cancel.setOnClickListener(view1 -> {
@@ -169,6 +178,8 @@ public class WiFI_Adapter extends RecyclerView.Adapter<WiFI_Adapter.ViewHolder> 
                     brute[0].kill();
                     exp_attack.collapse();
                     exp_main.expand();
+                    core.scale(wifiimg,1.0F);
+                    core.scale(attack_progress,0.0F);
                 }
             });
             ArrayList<String> get = core.getListFiles(new File(core.getStorage() + "Stryker/wordlist"));
@@ -185,13 +196,20 @@ public class WiFI_Adapter extends RecyclerView.Adapter<WiFI_Adapter.ViewHolder> 
                         new Thread(() -> {
                             try {
                                 ArrayList<String> temp = new ArrayList<>();
-
                                 brute[0] = new BrutePsk(activity,output,name,core,path);
                                 WiFiNetwork w = brute[0].executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).get();
                                 if (w.getOK()){
+                                    activity.runOnUiThread(() -> {
+                                        core.scale(wifiimg,1.0F);
+                                        core.scale(attack_progress,0.0F);
+                                    });
                                     settext(core.str("suc_pass")+w.getPsk(), output);
                                     core.savenetwork(mac,w.getPsk(),"-");
                                 }else {
+                                    activity.runOnUiThread(() -> {
+                                        core.scale(wifiimg,1.0F);
+                                        core.scale(attack_progress,0.0F);
+                                    });
                                     settext(core.str("br_failed"),output);
                                 }
                             } catch (ExecutionException | InterruptedException e) {
@@ -202,6 +220,8 @@ public class WiFI_Adapter extends RecyclerView.Adapter<WiFI_Adapter.ViewHolder> 
                     .show();exp_attack.expand();
                 exp_main.collapse();}
             else{
+                core.scale(wifiimg,1.0F);
+                core.scale(attack_progress,0.0F);
             exp_attack.expand();
             exp_main.collapse();
             output.setText(R.string.error_no_word);
@@ -212,6 +232,8 @@ public class WiFI_Adapter extends RecyclerView.Adapter<WiFI_Adapter.ViewHolder> 
             }
         });
         custom_pin.setOnClickListener(view -> {
+            core.scale(wifiimg,0.65F);
+            core.scale(attack_progress,1.0F);
             output.setText(R.string.trying_connect);
             final Dialog valuedialog = new Dialog(context);
             valuedialog.setContentView(R.layout.input_dialog);
@@ -231,6 +253,8 @@ public class WiFI_Adapter extends RecyclerView.Adapter<WiFI_Adapter.ViewHolder> 
                         WiFiNetwork w = new CustomPin(value,activity,output,mac,wlan_listen,core).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).get();
                         if (w.getOK()){
                             activity.runOnUiThread(() -> {
+                                core.scale(wifiimg,1.0F);
+                                core.scale(attack_progress,0.0F);
                                 exp_result.expand();
                                 exp_attack.collapse();
                                 res1.setText(core.str("pass")+w.getPsk());
@@ -239,6 +263,8 @@ public class WiFI_Adapter extends RecyclerView.Adapter<WiFI_Adapter.ViewHolder> 
                             });
                         }else{
                             activity.runOnUiThread(() -> {
+                                core.scale(wifiimg,1.0F);
+                                core.scale(attack_progress,0.0F);
                                 exp_result.expand();
                                 exp_attack.collapse();
                                 res1.setText(R.string.error);
@@ -257,6 +283,8 @@ public class WiFI_Adapter extends RecyclerView.Adapter<WiFI_Adapter.ViewHolder> 
             exp_main.expand();
             exp_attack.collapse();
             exp_result.collapse();
+            core.scale(wifiimg,1.0F);
+            core.scale(attack_progress,0.0F);
         });
         if (three_wifi) {
             exp_main.collapse();
@@ -264,12 +292,17 @@ public class WiFI_Adapter extends RecyclerView.Adapter<WiFI_Adapter.ViewHolder> 
             res1.setText(core.str("pass") + selected.getPsk());
             res2.setText(core.str("pin") + selected.getPin());
             back.setEnabled(true);
+
         }
         LinearLayout pixiedust = bottomSheetDialog.findViewById(R.id.pixie);
         LinearLayout brutewps = bottomSheetDialog.findViewById(R.id.brute);
+
+
         if (wps && !blocked) {
             final BruteWps[] brute_wps = {null};
             brutewps.setOnClickListener(view -> {
+                core.scale(wifiimg,0.65F);
+                core.scale(attack_progress,1.0F);
                 output.setText(R.string.start_brute);
                 bottomSheetDialog.setOnDismissListener(dialogInterface -> {
                     new CustomCommand("svc wifi enable", core).execute();
@@ -286,7 +319,8 @@ public class WiFI_Adapter extends RecyclerView.Adapter<WiFI_Adapter.ViewHolder> 
                     if (brute_wps[0] != null) {
                         brute_wps[0].kill();
                     }
-
+                    core.scale(wifiimg,1.0F);
+                    core.scale(attack_progress,0.0F);
                 });
                 exp_main.collapse();
                 exp_attack.expand();
@@ -300,6 +334,8 @@ public class WiFI_Adapter extends RecyclerView.Adapter<WiFI_Adapter.ViewHolder> 
                         if (!result.isCanceled()) {
                             if (result.getOK()) {
                                 activity.runOnUiThread(() -> {
+                                    core.scale(wifiimg,1.0F);
+                                    core.scale(attack_progress,0.0F);
                                     exp_attack.collapse();
                                     exp_result.expand();
                                     back.setEnabled(true);
@@ -316,6 +352,8 @@ public class WiFI_Adapter extends RecyclerView.Adapter<WiFI_Adapter.ViewHolder> 
                                 });
                             } else {
                                 activity.runOnUiThread(() -> {
+                                    core.scale(wifiimg,1.0F);
+                                    core.scale(attack_progress,0.0F);
                                     exp_attack.collapse();
                                     exp_result.expand();
                                     if (result.getLon() != null) {
@@ -344,12 +382,16 @@ public class WiFI_Adapter extends RecyclerView.Adapter<WiFI_Adapter.ViewHolder> 
             });
             final PixieDust[] pixie = {null};
             pixiedust.setOnClickListener(view -> {
+                core.scale(wifiimg,0.65F);
+                core.scale(attack_progress,1.0F);
                 output.setText(R.string.start_pixie);
                 bottomSheetDialog.setOnDismissListener(dialogInterface -> {
                     new CustomCommand("svc wifi enable", core).execute();
                     pixie[0].kill();
                 });
                 main_cancel.setOnClickListener(view2 -> {
+                    core.scale(wifiimg,1.0F);
+                    core.scale(attack_progress,0.0F);
                     exp_main.expand();
                     exp_attack.collapse();
                     exp_result.collapse();
@@ -366,6 +408,8 @@ public class WiFI_Adapter extends RecyclerView.Adapter<WiFI_Adapter.ViewHolder> 
                         if (!result.isCanceled()) {
                             if (result.getOK()) {
                                 activity.runOnUiThread(() -> {
+                                    core.scale(wifiimg,1.0F);
+                                    core.scale(attack_progress,0.0F);
                                     exp_attack.collapse();
                                     exp_result.expand();
                                     back.setEnabled(true);
@@ -384,6 +428,8 @@ public class WiFI_Adapter extends RecyclerView.Adapter<WiFI_Adapter.ViewHolder> 
                                 });
                             } else {
                                 activity.runOnUiThread(() -> {
+                                    core.scale(wifiimg,1.0F);
+                                    core.scale(attack_progress,0.0F);
                                     exp_attack.collapse();
                                     exp_result.expand();
                                     if (result.getLon() != null) {
@@ -402,6 +448,8 @@ public class WiFI_Adapter extends RecyclerView.Adapter<WiFI_Adapter.ViewHolder> 
                                 exp_attack.collapse();
                                 exp_result.collapse();
                                 exp_main.expand();
+                                core.scale(wifiimg,1.0F);
+                                core.scale(attack_progress,0.0F);
                             });
                         }
 
@@ -418,6 +466,8 @@ public class WiFI_Adapter extends RecyclerView.Adapter<WiFI_Adapter.ViewHolder> 
             custom_pin.setVisibility(View.GONE);
         }
         try_handshake.setOnClickListener(view -> {
+            core.scale(wifiimg,0.65F);
+            core.scale(attack_progress,1.0F);
             output.setText(R.string.start_airdump);
             exp_main.collapse();
             exp_attack.expand();
@@ -429,6 +479,8 @@ public class WiFI_Adapter extends RecyclerView.Adapter<WiFI_Adapter.ViewHolder> 
                 if (deauth != null) {
                     if (deauth!=null){deauth.cancel();}
                 }
+                core.scale(wifiimg,1.0F);
+                core.scale(attack_progress,0.0F);
                 new DisableMonitor(wlan_listen, core).execute();
                 if (!wlan_listen.equals(wlan_deauth[0])) {
                     new DisableMonitor(wlan_deauth[0], core).execute();
@@ -470,7 +522,10 @@ public class WiFI_Adapter extends RecyclerView.Adapter<WiFI_Adapter.ViewHolder> 
                                                     settext(core.str("hs_captured"), output);
                                                 }
                                             } else {
-                                                
+                                                activity.runOnUiThread(() -> {
+                                                    core.scale(wifiimg,1.0F);
+                                                    core.scale(attack_progress,0.0F);
+                                                });
                                                 if (deauth!=null){deauth.cancel();}
                                                 MoveFile moveFile = new MoveFile("/storage/emulated/0/Stryker/hs/handshake-01.cap", "/storage/emulated/0/Stryker/hs/" + name + "(" + mac + ").cap");
                                                 try {
@@ -545,7 +600,10 @@ public class WiFI_Adapter extends RecyclerView.Adapter<WiFI_Adapter.ViewHolder> 
                                                     }
                                                 } else {
 
-
+                                                    activity.runOnUiThread(() -> {
+                                                        core.scale(wifiimg,1.0F);
+                                                        core.scale(attack_progress,0.0F);
+                                                    });
                                                     MoveFile moveFile = new MoveFile("/storage/emulated/0/Stryker/hs/handshake-01.cap", "/storage/emulated/0/Stryker/captured/" + name.replaceAll("\\s+", "") + "_" + mac + ".cap");
                                                     try {
                                                         Boolean moved = moveFile.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).get();
@@ -570,7 +628,8 @@ public class WiFI_Adapter extends RecyclerView.Adapter<WiFI_Adapter.ViewHolder> 
                                                 }
                                             } else {
                                                 settext(core.str("cant_airodump"), output);
-                                         
+                                                core.scale(wifiimg,1.0F);
+                                                core.scale(attack_progress,0.0F);
                                                 if (cowpatty!=null){cowpatty.cancel();}
                                             }
                                         } catch (ExecutionException | InterruptedException e) {
@@ -603,6 +662,7 @@ public class WiFI_Adapter extends RecyclerView.Adapter<WiFI_Adapter.ViewHolder> 
                             }
                         } else {
                             activity.runOnUiThread(() -> {
+
                                 exp_attack.collapse();
                                 res1.setText(R.string.error);
                                 res2.setText(R.string.no_deauth_int);
@@ -622,6 +682,8 @@ public class WiFI_Adapter extends RecyclerView.Adapter<WiFI_Adapter.ViewHolder> 
             t.start();
         });
         deauther.setOnClickListener(view -> {
+            core.scale(wifiimg,0.65F);
+            core.scale(attack_progress,1.0F);
             output.setText(R.string.deauth);
             bottomSheetDialog.setOnDismissListener(dialogInterface -> new DisableMonitor(wlan_deauth[0], core).execute());
             exp_attack.expand();
@@ -647,6 +709,8 @@ public class WiFI_Adapter extends RecyclerView.Adapter<WiFI_Adapter.ViewHolder> 
                             settext(core.str("deauthing"), output);
                             startDeauth.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                         } else {
+                            core.scale(wifiimg,1.0F);
+                            core.scale(attack_progress,0.0F);
                             back.setEnabled(true);
                             exp_attack.collapse();
                             exp_result.expand();
@@ -654,6 +718,8 @@ public class WiFI_Adapter extends RecyclerView.Adapter<WiFI_Adapter.ViewHolder> 
                             res2.setText(R.string.error_monit);
                         }
                     } else {
+                        core.scale(wifiimg,1.0F);
+                        core.scale(attack_progress,0.0F);
                         back.setEnabled(true);
                         exp_attack.collapse();
                         exp_result.expand();
@@ -662,6 +728,8 @@ public class WiFI_Adapter extends RecyclerView.Adapter<WiFI_Adapter.ViewHolder> 
 
                     }
                 } else {
+                    core.scale(wifiimg,1.0F);
+                    core.scale(attack_progress,0.0F);
                     back.setEnabled(true);
                     exp_attack.collapse();
                     exp_result.expand();

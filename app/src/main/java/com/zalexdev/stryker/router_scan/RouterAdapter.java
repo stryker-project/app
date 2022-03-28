@@ -75,41 +75,30 @@ public class RouterAdapter extends RecyclerView.Adapter<RouterAdapter.ViewHolder
         if (!r.isScanned()){
             r.setScanned(true);
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Router res = new RsV2(activity,context,adapter.status,r.getIp()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).get();
-                    minus();
-                    scanned++;
-                    if (res.getSuccess()){
-                        good.add(res);
-                        r.setType(1);
-                        activity.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                success++;
-                                adapter.progress.setColorFilter(ContextCompat.getColor(context, R.color.green));
-                                adapter.ssid.setText(res.getSsid());
-                                adapter.psk.setText(res.getPsk());
-                                adapter.auth.setText(res.getAuth());
-                                adapter.ssid.setVisibility(View.VISIBLE);
-                                adapter.psk.setVisibility(View.VISIBLE);
-                                adapter.auth.setVisibility(View.VISIBLE);
-                            }
-                        });
-                    }else{
-                        r.setType(2);
-                        activity.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                adapter.progress.setColorFilter(ContextCompat.getColor(context, R.color.red));
-                            }
-                        });
-                    }
-                } catch (ExecutionException | InterruptedException e) {
-                    e.printStackTrace();
+        new Thread(() -> {
+            try {
+                Router res = new RsV2(activity,context,adapter.status,r.getIp()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).get();
+                minus();
+                scanned++;
+                if (res.getSuccess()){
+                    good.add(res);
+                    r.setType(1);
+                    activity.runOnUiThread(() -> {
+                        success++;
+                        adapter.progress.setColorFilter(ContextCompat.getColor(context, R.color.green));
+                        adapter.ssid.setText(res.getSsid());
+                        adapter.psk.setText(res.getPsk());
+                        adapter.auth.setText(res.getAuth());
+                        adapter.ssid.setVisibility(View.VISIBLE);
+                        adapter.psk.setVisibility(View.VISIBLE);
+                        adapter.auth.setVisibility(View.VISIBLE);
+                    });
+                }else{
+                    r.setType(2);
+                    activity.runOnUiThread(() -> adapter.progress.setColorFilter(ContextCompat.getColor(context, R.color.red)));
                 }
+            } catch (ExecutionException | InterruptedException e) {
+                e.printStackTrace();
             }
         }).start();}
     }

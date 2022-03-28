@@ -2,6 +2,7 @@ package com.zalexdev.stryker.coremanger;
 
 import static com.zalexdev.stryker.R.string.*;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -34,6 +35,9 @@ import com.zalexdev.stryker.searchsploit.SploitAdapter;
 import com.zalexdev.stryker.searchsploit.utils.GetSploit;
 import com.zalexdev.stryker.utils.CheckInet;
 import com.zalexdev.stryker.utils.Core;
+import com.zalexdev.stryker.utils.OnSwipeListener;
+
+import net.cachapa.expandablelayout.ExpandableLayout;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -70,6 +74,14 @@ public class CoreManager extends Fragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(activity));
         core = new Core(context);
         mRecyclerView.setItemViewCacheSize(255);
+        ExpandableLayout menu = activity.findViewById(R.id.menu_expand);
+        view.setOnTouchListener(new OnSwipeListener(context) {
+            public void onSwipeTop() {core.closemenu(menu); }
+            @SuppressLint("ClickableViewAccessibility")
+            public void onSwipeRight() { }
+            public void onSwipeLeft() { }
+            public void onSwipeBottom() { core.openmenu(menu); }
+        });
         fixinet();
         TextInputEditText getquery = view.findViewById(R.id.getsearch);
         MaterialRadioButton apk = view.findViewById(R.id.apktoogle);

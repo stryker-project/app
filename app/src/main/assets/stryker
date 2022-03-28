@@ -1,0 +1,1 @@
+su -c "/data/data/com.zalexdev.stryker/files/chroot_exec ash"

@@ -3,37 +3,38 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:background="@color/blue2"
+    android:gravity="center"
     android:layout_height="match_parent">
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        app:lottie_rawRes="@raw/three_wifi"
-        app:lottie_autoPlay="true"
-        android:id="@+id/logo"
-        app:lottie_scale="10"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        app:layout_constraintTop_toTopOf="parent" />
+
 
     <LinearLayout
         android:id="@+id/animmain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/magic_rect"
+        android:backgroundTint="@color/blue2"
         android:orientation="vertical"
         android:padding="25dp"
         android:layout_margin="10dp"
         android:layout_gravity="bottom"
         android:gravity="bottom"
         app:layout_constraintBottom_toBottomOf="parent">
-
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:lottie_rawRes="@raw/three_wifi"
+            app:lottie_autoPlay="true"
+            android:id="@+id/logo"
+            app:lottie_scale="10"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toTopOf="parent" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-
+            android:textColor="@color/white"
             android:gravity="center"
             android:text="3WiFi"
             android:textSize="40dp" />
@@ -100,6 +101,6 @@
             android:layout_marginRight="20dp"
             android:layout_marginBottom="10dp"
             android:text="@string/log_in"
-            android:textColor="@color/white" />
+           />
     </LinearLayout>
 </LinearLayout>

@@ -28,7 +28,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
-import com.zalexdev.stryker.InstalModuleActivity;
 import com.zalexdev.stryker.R;
 import com.zalexdev.stryker.coremanger.utils.InstallPackage;
 import com.zalexdev.stryker.custom.Module;
@@ -77,6 +76,7 @@ public class ModulesAdapter extends RecyclerView.Adapter<ModulesAdapter.ViewHold
        adapter.install.setOnClickListener(view -> {
            adapter.install.setVisibility(View.GONE);
            adapter.prog.setVisibility(View.VISIBLE);
+           // This code is downloading the module and installing it.
            new Thread(() -> {
                boolean d = download(m.getSrcinstall(),formated_name+".zip",adapter.prog);
                if (d){
@@ -90,10 +90,11 @@ public class ModulesAdapter extends RecyclerView.Adapter<ModulesAdapter.ViewHold
                        Boolean o = new CustomCommand("mkdir /storage/emulated/0/Stryker/modules/"+formated_name,core).execute().get();
                        core.unzip(new File("/storage/emulated/0/Stryker/modules/"+formated_name+".zip"), new File("/storage/emulated/0/Stryker/modules/" + formated_name));
                        Boolean move = new CustomCommand("mv /storage/emulated/0/Stryker/modules/"+formated_name+" /data/local/stryker/release/modules/"+formated_name,core).execute().get();
-                        core.installmod(m.getName());
+
                        Intent mouduleinst = new Intent(activity, InstalModuleActivity.class);
                        mouduleinst.putExtra("path",formated_name);
                        mouduleinst.putExtra("install",true);
+                       mouduleinst.putExtra("name",m.getName());
                        activity.startActivity(mouduleinst);
                    } catch (ExecutionException | InterruptedException e) {
                        e.printStackTrace();
@@ -109,13 +110,14 @@ public class ModulesAdapter extends RecyclerView.Adapter<ModulesAdapter.ViewHold
            }else{
            adapter.install.setImageDrawable(context.getDrawable(R.drawable.delete));
            adapter.install.setOnClickListener(view -> {
-               core.deletemod(m.getName());
+
                new CustomCommand("rm -rf /storage/emulated/0/Stryker/modules/"+formated_name,core).execute();
                new CustomCommand("rm /storage/emulated/0/Stryker/modules/"+formated_name+".zip",core).execute();
                //moduler(m.getName(),"/storage/emulated/0/Stryker/modules/"+formated_name+"/delete.sh",false);
                Intent moduledel = new Intent(activity, InstalModuleActivity.class);
                moduledel.putExtra("path",formated_name);
                moduledel.putExtra("install",false);
+               moduledel.putExtra("name",m.getName());
                activity.startActivity(moduledel);
            });
        }

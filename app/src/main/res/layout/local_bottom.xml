@@ -45,9 +45,7 @@
             android:layout_height="50dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-
             android:background="@drawable/circle"
-
             android:gravity="center"
             android:text="5"
             android:textColor="#606060"
@@ -228,6 +226,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp"
                     android:src="@drawable/run"
+                    android:tint="@color/grey"
                     android:layout_height="30dp"/>
 
                 <TextView

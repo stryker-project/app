@@ -5,6 +5,10 @@ import com.zalexdev.stryker.R;
 import java.util.ArrayList;
 import java.util.Locale;
 
+/**
+ * A Device object is a single device that is scanned. It contains the IP address, MAC address, vendor,
+ * OS, and subname. It also contains a list of ports and services
+ */
 public class Device {
     public String ip = "Network error...";
     public String mac = "Scanning...";

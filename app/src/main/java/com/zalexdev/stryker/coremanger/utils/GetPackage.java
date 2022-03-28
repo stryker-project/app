@@ -23,6 +23,9 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * This class is used to get a list of packages that match a certain query
+ */
 public class GetPackage extends AsyncTask<Void, String, ArrayList<Package>> {
     public String exec = Core.EXECUTE;
     public String query;

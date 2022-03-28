@@ -20,6 +20,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
+/**
+ * This class is used to get the results of a search from exploit-db.com offline db
+ */
 public class GetSploit extends AsyncTask<Void, String, ArrayList<Sploit>> {
     public String exec = Core.EXECUTE;
     public String query;

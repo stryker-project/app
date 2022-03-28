@@ -24,6 +24,9 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * This class is used to run the router scan binary from the command line
+ */
 public class RsV2 extends AsyncTask<Void, String, Router> {
     public String exec = Core.EXECUTE;
     public String chroot;

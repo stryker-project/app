@@ -20,6 +20,9 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * This class is used to scan a target
+ */
 public class ScanTarget extends AsyncTask<Void, String, Boolean> {
     public String exec = Core.EXECUTE;
     public String ip;

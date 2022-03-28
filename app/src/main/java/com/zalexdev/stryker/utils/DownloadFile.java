@@ -32,6 +32,8 @@ public class DownloadFile extends AsyncTask<Void, String, Boolean> {
     @SuppressLint({"WrongThread", "Range"})
     @Override
     protected Boolean doInBackground(Void... command) {
+        Logger logger = new Logger();
+        logger.writeLine("Downloading file.."+urlDownload,1);
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(urlDownload));
         request.setDescription("Please, wait...");
         request.setTitle("Downloading files...");

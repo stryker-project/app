@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<com.airbnb.lottie.LottieAnimationView
+    android:layout_width="250dp"
+    android:layout_height="250dp"
+    app:lottie_loop="true"
+    app:lottie_autoPlay="true"
+    app:lottie_rawRes="@raw/install_module"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:gravity="center"
+        android:id="@+id/install_text"
+        android:text="Oops. You need to install 'modulename' to open this page!"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/gorepo"
+        android:clickable="true"
+        android:focusable="true"
+        android:drawableTint="@color/blue2"
+        android:gravity="center"
+        android:text="@string/go_to_repository"
+        android:textColor="@color/blue2"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:drawablePadding="5dp"
+        app:drawableLeftCompat="@drawable/cloud" />
+</LinearLayout>

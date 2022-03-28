@@ -8,6 +8,9 @@ import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 
+/**
+ * This class is used to check for messages
+ */
 public class CheckMsg extends AsyncTask<Void, String, String> {
     public CheckMsg() {
     }

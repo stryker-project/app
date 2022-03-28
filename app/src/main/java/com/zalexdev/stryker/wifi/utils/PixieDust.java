@@ -22,6 +22,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
+/**
+ * This class is used to run the pixie-dust attack
+ */
 public class PixieDust extends AsyncTask<Void, String, WiFiNetwork> {
     @SuppressLint("StaticFieldLeak")
     public final TextView output;

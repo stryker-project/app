@@ -191,7 +191,7 @@
     <string name="donation">Donation </string>
     <string name="click_to_copy">Click to copy! </string>
     <string name="starting_installing_module_n">Starting module installation…\n </string>
-    <string name="relaunch_app">Restart application </string>
+    <string name="relaunch_app">Restart </string>
     <string name="enter_package_name">Enter package name </string>
     <string name="exploit_wizard">Exploit Wizard </string>
     <string name="exploit_wizard_step_1_of_2">Exploit Wizard (Step 1 of 2) </string>
@@ -303,4 +303,19 @@
     <string name="pcik_mode">Pick mode </string>
     <string name="sdcard_error">Sorry, but this app can\'t be installed on a sdcard! Please install it to internal storage!</string>
     <string name="only64">Sorry, this module is only for 64 bit devices!</string>
+    <string name="try_again">Try again</string>
+    <string name="userhello">"👋 Hello, "</string>
+    <string name="sup_project">Support Project</string>
+    <string name="news">💻 Latest news</string>
+    <string name="no_news">No news - this a good news?.. Right?</string>
+    <string name="no_thx">No, thx</string>
+    <string name="pls_install">Please, instal {mn} in repository to use this feature!</string>
+    <string name="magisk_stryker">Want to turn off notifications from Magisk for the Stryker app? Since this program uses root quite often, this can get in the way. Click to disable</string>
+    <string name="oops_this_page_is_under_development_see_you_after_update_s">Oops. This page is under development! See you after update(s)!</string>
+    <string name="go_to_repository">Go to repository</string>
+    <string name="ip_ranges">IP ranges</string>
+    <string name="ports">Ports</string>
+    <string name="fill_rs">Please, fill all fields!</string>
+    <string name="invalid_module">Sorry, but the {mn} module did not install correctly! Perhaps you did not wait for the download to finish or there was an unstable Internet connection! You should reinstall it...</string>
+    <string name="module_invalid">The module {mn} was not installed correctly. It has been removed from the installed list. You should install it again!</string>
 </resources>

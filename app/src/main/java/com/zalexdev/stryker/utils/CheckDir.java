@@ -12,6 +12,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 
+/**
+ * Checks if a directory exists on the device
+ */
 public class CheckDir extends AsyncTask<Void, String, Boolean> {
 
 
@@ -32,7 +35,7 @@ public class CheckDir extends AsyncTask<Void, String, Boolean> {
     protected Boolean doInBackground(Void... command) {
         String line;
         boolean result = false;
-
+        Logger logger = new Logger();
 
         try {
 
@@ -41,11 +44,13 @@ public class CheckDir extends AsyncTask<Void, String, Boolean> {
             InputStream stderr = process.getErrorStream();
             InputStream stdout = process.getInputStream();
             stdin.write(("[ -d " + path + " ] && echo true || echo false" + '\n').getBytes());
+            logger.writeLine("Checking dir "+path,1);
             stdin.write(("exit\n").getBytes());
             stdin.flush();
             stdin.close();
             BufferedReader br = new BufferedReader(new InputStreamReader(stdout));
             while ((line = br.readLine()) != null) {
+                logger.writeLine(line,2);
                 if (line.contains("true")) {
                     result = true;
                 }
@@ -53,6 +58,7 @@ public class CheckDir extends AsyncTask<Void, String, Boolean> {
             br.close();
             br = new BufferedReader(new InputStreamReader(stderr));
             while ((line = br.readLine()) != null) {
+                logger.writeLine(line,3);
                 onProgressUpdate(line);
             }
             br.close();

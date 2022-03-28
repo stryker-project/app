@@ -5,13 +5,26 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".wifi.Wifi">
+
+
+   <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:id="@+id/refresh">
+
+<androidx.recyclerview.widget.RecyclerView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/wifilist"/>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
    <LinearLayout
        android:layout_width="match_parent"
        android:layout_height="match_parent"
        android:gravity="center"
        android:id="@+id/scanlayout"
 
-      android:orientation="vertical">
+       android:orientation="vertical">
 
       <com.airbnb.lottie.LottieAnimationView
           android:id="@+id/scan_img"
@@ -30,17 +43,24 @@
           android:gravity="center"
           android:id="@+id/scan_text"
           android:textStyle="bold" />
+
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="10dp"
+          android:id="@+id/try_again"
+          android:visibility="gone"
+          android:clickable="true"
+          android:focusable="true"
+          android:drawableTint="@color/blue2"
+          android:gravity="center"
+          android:drawablePadding="5dp"
+          android:text="@string/try_again"
+          android:textColor="@color/blue2"
+          android:textSize="16dp"
+          android:textStyle="bold"
+          app:drawableLeftCompat="@drawable/refresh" />
+
    </LinearLayout>
-
-   <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:id="@+id/refresh">
-
-<androidx.recyclerview.widget.RecyclerView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/wifilist"/>
-
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </RelativeLayout>

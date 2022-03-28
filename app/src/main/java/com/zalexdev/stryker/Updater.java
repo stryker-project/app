@@ -32,6 +32,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * This class is used to update the application
+ */
 public class Updater extends Fragment {
 
 

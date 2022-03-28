@@ -21,6 +21,9 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * This class is used to run the wps brute attack
+ */
 public class BruteWps extends AsyncTask<Void, String, WiFiNetwork> {
     public String exec = Core.EXECUTE;
     public String chroot;

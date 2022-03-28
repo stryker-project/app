@@ -26,8 +26,11 @@ import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.FileProvider;
 import androidx.viewpager.widget.ViewPager;
 
@@ -36,6 +39,8 @@ import com.zalexdev.stryker.MainActivity;
 import com.zalexdev.stryker.custom.Exploit;
 import com.zalexdev.stryker.custom.Module;
 import com.zalexdev.stryker.custom.Router;
+
+import net.cachapa.expandablelayout.ExpandableLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -68,6 +73,8 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 public class Core {
+    // This code is creating a variable called EXECUTE. This variable is used to execute commands in
+    // the chroot jail.
     public final static String EXECUTE = "/data/data/com.zalexdev.stryker/files/chroot_exec ";
     public final static String BUSYBOX = "/data/data/com.zalexdev.stryker/files/busybox ";
     public final String versionName = BuildConfig.VERSION_NAME;
@@ -85,6 +92,13 @@ public class Core {
         return context;
     }
 
+    /**
+     * Connect to a WiFi network with the given SSID and password
+     *
+     * @param ssid The name of the network you want to connect to.
+     * @param psk The password for the network.
+     * @return The netId of the network that was just connected.
+     */
     public int connectWiFi2(String ssid, String psk){
         WifiConfiguration wifiConfig = new WifiConfiguration();
         wifiConfig.SSID = String.format("\"%s\"", ssid);
@@ -96,38 +110,92 @@ public class Core {
         wifiManager.reconnect();
         return netId;
     }
+    /**
+     * Delete a network from the list of known networks
+     *
+     * @param netid The network id of the network you want to remove.
+     */
     public void delwifi(int netid){
         WifiManager wifiManager = (WifiManager)context.getSystemService(WIFI_SERVICE);
         wifiManager.removeNetwork(netid);
     }
+    /**
+     * It saves the network details in the shared preferences.
+     *
+     * @param bssid The BSSID of the network you want to save.
+     * @param psk The password for the network.
+     * @param pin The pin code for the network.
+     */
     public void savenetwork(String bssid,String psk,String pin){
         ArrayList<String> nw = new ArrayList<>();
         nw.add(psk);
         nw.add(pin);
         putListString(bssid,nw);
     }
+    /**
+     * This function returns a list of strings that contains the SSID of the network that has the same
+     * BSSID as the input parameter
+     *
+     * @param bssid The MAC address of the access point you want to query.
+     * @return A list of strings.
+     */
     public ArrayList<String> getnetwork(String bssid){
         return getListString(bssid);
     }
+    /**
+     * Returns the path to the root of the chroot jail
+     *
+     * @return The value of the chroot_path property.
+     */
     public String chroot() {
         return getString("chroot_path");
     }
 
+    /**
+     * Get an integer value from the preferences
+     *
+     * @param key The key to retrieve.
+     * @return The value of the key, or 0 if the key does not exist.
+     */
     public int getInt(String key) {
         return preferences.getInt(key, 0);
     }
 
+    /**
+     * Get a float value from the preferences
+     *
+     * @param key The key to retrieve.
+     * @return The value of the key, or 0 if the key does not exist.
+     */
     public float getFloat(String key) {
         return preferences.getFloat(key, 0);
     }
 
+    /**
+     * Get a string value from the preferences
+     *
+     * @param key The key to retrieve.
+     * @return The value of the key, or the empty string if the key does not exist.
+     */
     public String getString(String key) {
         return preferences.getString(key, "");
     }
 
+    /**
+     * Returns a List of Strings from the SharedPreferences
+     *
+     * @param key The name of the preference to retrieve.
+     * @return An ArrayList of Strings.
+     */
     public ArrayList<String> getListString(String key) {
         return new ArrayList<String>(Arrays.asList(TextUtils.split(preferences.getString(key, ""), "‚‗‚")));
     }
+    /**
+     * *This function is used to convert a list of integers into a list of integers
+     *
+     * @param key The name of the preference to retrieve.
+     * @return An ArrayList of Integers.
+     */
     public ArrayList<Integer> getListInt(String key) {
         String[] myList = TextUtils.split(preferences.getString(key, ""), "‚‗‚");
         ArrayList<String> arrayToList = new ArrayList<String>(Arrays.asList(myList));
@@ -139,18 +207,30 @@ public class Core {
         return newList;
     }
 
+    /**
+     * Get a boolean value from the preferences
+     *
+     * @param key The key to retrieve.
+     * @return The value of the key, or false if the key does not exist.
+     */
     public boolean getBoolean(String key) {
         return preferences.getBoolean(key, false);
     }
 
+    /**
+     * It puts an int value into the preferences.
+     *
+     * @param key The key to store the value under.
+     * @param value The value to be stored in the preferences.
+     */
     public void putInt(String key, int value) {
         isNull(key);
         preferences.edit().putInt(key, value).apply();
     }
 
+
     public void putString(String key, String value) {
         isNull(key);
-        checkNull(value);
         preferences.edit().putString(key, value).apply();
     }
 
@@ -182,19 +262,24 @@ public class Core {
         }
     }
 
-    private void checkNull(String value) {
-        if (value == null) {
-            throw new NullPointerException();
-        }
-    }
+
+
 
     public void toaster(String msg) {
+        // Creating a Toast object and then showing it.
         Toast toast = Toast.makeText(context,
                 msg, Toast.LENGTH_SHORT);
         toast.show();
     }
 
+
     public void writetolog(ArrayList<String> datas, boolean iserror) {
+        /**
+         * It writes the log to a file.
+         *
+         * @param datas The data to be written to the log file.
+         * @param iserror boolean value that indicates whether the log is an error or not.
+         */
         if (getBoolean("debug")) {
             String path = "/storage/emulated/0/Stryker/";
             File folder = new File(path);
@@ -232,12 +317,14 @@ public class Core {
         }
     }
 
+
+
     public void writelinetolog(String data) {
 
         String path = "/storage/emulated/0/Stryker/";
         File folder = new File(path);
         folder.mkdirs();
-        File file = new File(folder, "ips.txt");
+        File file = new File(folder, "log.txt");
         try {
             boolean newf = file.createNewFile();
 
@@ -264,6 +351,13 @@ public class Core {
 
     }
 
+
+
+    /**
+     * This function is used to save the result of the scan to a csv file
+     *
+     * @param rs The array of routers that were scanned.
+     */
     public void saveresult(ArrayList<Router> rs) {
         String path = "/storage/emulated/0/Stryker/";
         File folder = new File(path);
@@ -335,6 +429,7 @@ public class Core {
 
     }
 
+    // Vibrating the phone for a certain amount of time.
     public void vibrate(int mil) {
         if (Build.VERSION.SDK_INT >= 26) {
             ((Vibrator) context.getSystemService(VIBRATOR_SERVICE)).vibrate(VibrationEffect.createOneShot(mil, VibrationEffect.DEFAULT_AMPLITUDE));
@@ -343,6 +438,12 @@ public class Core {
         }
     }
 
+    /**
+     * Given a directory, return a list of all the files in that directory
+     *
+     * @param parentDir The directory to search for files.
+     * @return An ArrayList of Strings.
+     */
     public ArrayList<String> getListFiles(File parentDir) {
         ArrayList<String> inFiles = new ArrayList<String>();
         File[] files = parentDir.listFiles();
@@ -359,11 +460,25 @@ public class Core {
         }
         return inFiles;
     }
+
+
+    /**
+     * It takes an exploit and adds it to the list of exploits
+     *
+     * @param exploit The exploit to be saved.
+     */
     public void saveExploit(Exploit exploit){
         ArrayList<String> exploits = getListString("exploits");
         exploits.add(parseExploit(exploit));
         putListString("exploits",exploits);
     }
+    /**
+     * This function takes in an exploit object and returns a string that is a JSON representation of
+     * the exploit
+     *
+     * @param exploit The exploit to be parsed.
+     * @return A JSON object.
+     */
     public String parseExploit(Exploit exploit){
         JSONObject exp = new JSONObject();
         try {
@@ -378,11 +493,23 @@ public class Core {
         }
         return exp.toString();
     }
+    /**
+     * This function returns an exploit object from the list of exploits
+     *
+     * @param pos The position of the exploit in the list of exploits.
+     * @return An Exploit object.
+     */
     public Exploit getExploitbyPos(int pos){
         Exploit exploit = new Exploit();
         ArrayList<String> exploits = getListString("exploits");
         return unparseExploit(exploits.get(pos));
     }
+    /**
+     * Given a title, return the exploit with that title
+     *
+     * @param title The title of the exploit.
+     * @return An Exploit object.
+     */
     public Exploit getExploitbyTitle(String title){
         Exploit t = new Exploit();
         ArrayList<Exploit> exploits = getExploits();
@@ -393,21 +520,40 @@ public class Core {
         }
         return t;
     }
+    // Updating the exploits files in case if user edited something
     public void updateexploits(){
         new CustomCommand("rm -rf /data/local/stryker/release/exploits",this).execute();
         new CustomCommand("cp -R /storage/emulated/0/Stryker/exploits /data/local/stryker/release/exploits",this).execute();
         new CustomCommand("chmod 777 -R /data/local/stryker/release/exploits",this).execute();
     }
+    /**
+     * It changes the exploit at the given position to the given exploit.
+     *
+     * @param pos The position of the exploit in the list.
+     * @param exploit The exploit to be added to the list.
+     */
     public void changeExploitbyPos(int pos,Exploit exploit){
         ArrayList<String> exploits = getListString("exploits");
         exploits.set(pos,parseExploit(exploit));
         putListString("exploits",exploits);
     }
+    /**
+     * This function deletes an exploit from the exploits list
+     *
+     * @param id The id of the exploit to delete.
+     */
     public void deleteExploit(int id){
         ArrayList<String> exploits = getListString("exploits");
         exploits.remove(id);
         putListString("exploits",exploits);
     }
+    /**
+     * This function takes a string that represents a JSON object and converts it into an Exploit
+     * object
+     *
+     * @param exploitstring The string that is passed to the unparseExploit method.
+     * @return A JSONObject
+     */
     public Exploit unparseExploit(String exploitstring){
         Exploit exploit = new Exploit();
         try {
@@ -421,6 +567,11 @@ public class Core {
         } catch (JSONException e) {e.printStackTrace();}
         return exploit;
     }
+    /**
+     * It takes a list of strings(json), and returns a list of Exploits
+     *
+     * @return A list of exploits.
+     */
     public ArrayList<Exploit> getExploits(){
         ArrayList<Exploit> list= new ArrayList<>();
         ArrayList<String> exploits = getListString("exploits");
@@ -459,12 +610,37 @@ public class Core {
         }
         return list;
     }
+    /**
+     * It takes a string as an argument, and returns the string resource associated with that string
+     *
+     * @param aString The string resource ID.
+     * @return The string resource with the given name.
+     */
     public String str(String aString) {
         return context.getString(context.getResources().getIdentifier(aString, "string", context.getPackageName()));
     }
+    /**
+     * Returns true if the device is 64 bit, false otherwise
+     *
+     * @return The method returns a boolean value.
+     */
     public boolean is64Bit() {
         return (Build.SUPPORTED_64_BIT_ABIS != null && Build.SUPPORTED_64_BIT_ABIS.length > 0);
     }
+    // Scaling the view by the given factor.
+    public void scale(View v, Float x){
+        v.animate().scaleY(x);
+        v.animate().scaleX(x);
+    }
+    // Opening the menu.
+    public void openmenu(@NonNull ExpandableLayout m){
+        m.expand();
+    }
+    // Closing the menu.
+    public void closemenu(@NonNull ExpandableLayout m){
+        m.collapse();
+    }
+    // Getting the device name by pid from db
     public String getDeviceNameByPid(String pid){
         String JSON = "";
         String result = "";
@@ -494,6 +670,7 @@ public class Core {
             return  result;
 
     }
+    // Checking if the user is root.
     public boolean checkroot() {
         try {
             return new CheckRoot().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).get();
@@ -502,9 +679,11 @@ public class Core {
             return  false;
         }
     }
+    // Returning the value of the storage variable.
     public String getStorage() {
         return getExternalStorageDirectory().getAbsolutePath() + "/";
     }
+    // Checking if the model is in the list of models.
     public boolean checkmodel(String model){
         BufferedReader reader = null;
         boolean result = false;
@@ -521,7 +700,15 @@ public class Core {
         }
         return result;
     }
-    public  void installApplication(Context context, String filePath) {
+
+    /**
+     * It installs the application from apk with user dialog
+     *
+     * @param context The context of the application package.
+     * @param filePath The path of the file to be installed.
+     */
+    public void installApplication(Context context, String filePath) {
+
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setDataAndType(uriFromFile(context, new File(filePath)), "application/vnd.android.package-archive");
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -534,6 +721,14 @@ public class Core {
         }
     }
 
+
+    /**
+     * It creates a Uri object from a File object.
+     *
+     * @param context The context of the calling component.
+     * @param file The file to be shared.
+     * @return Nothing.
+     */
     private static Uri uriFromFile(Context context, File file) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             return FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".provider", file);
@@ -542,6 +737,7 @@ public class Core {
         }
     }
 
+    // Using the getJSONObject method to get the JSONObject from the url.
     public JSONObject getjsonbyurl(String url){
         Document doc = null;
         try {
@@ -561,6 +757,12 @@ public class Core {
             return new JSONObject();
         }
     }
+    /**
+     * It gets the list of modules from the stryker-modules repo and returns them as an ArrayList of
+     * Module objects
+     *
+     * @return An ArrayList of Module objects.
+     */
     public ArrayList<Module> getModules(){
         ArrayList<Module> modules = new ArrayList<>();
         JSONObject getmodules = getjsonbyurl("https://raw.githubusercontent.com/stryker-project/stryker-modules/main/modules.list");
@@ -586,20 +788,33 @@ public class Core {
         }
         return  modules;
     }
+    // Installing a mod.
     public void installmod(String name){
         ArrayList<String> mods = getListString("installed_modules");
         mods.add(name);
         putListString("installed_modules",mods);
     }
+    /**
+     * This function checks if a module is installed
+     *
+     * @param name The name of the module.
+     * @return A boolean value.
+     */
     public boolean checkmod(String name){
         ArrayList<String> mods = getListString("installed_modules");
         return mods.contains(name);
     }
+    /**
+     * This function deletes a module from the list of installed modules
+     *
+     * @param name The name of the module to be deleted.
+     */
     public void deletemod(String name){
         ArrayList<String> mods = getListString("installed_modules");
         mods.remove(name);
         putListString("installed_modules",mods);
     }
+    // Unzipping a file
     public void unzip(File zipFile, File targetDirectory)  {
 
         if(!targetDirectory.exists()) {
@@ -638,6 +853,7 @@ public class Core {
 
         }
     }
+    // Checking if the core is mounted. If it is not, it will mount it.
     public Boolean remountcore(){
         try {unmountcore();
             mountcore();
@@ -649,6 +865,7 @@ public class Core {
         }
 
     }
+    // Checking if the mount command is available on the system.
     public Boolean mountcore(){
         try {
            boolean o2 = new CustomCommand("/data/data/com.zalexdev.stryker/files/bootroot",this).execute().get();
@@ -658,6 +875,7 @@ public class Core {
         }
 
     }
+    // Unmounting the core.
     public Boolean unmountcore(){
         try {
             boolean o2 = new CustomCommand("/data/data/com.zalexdev.stryker/files/killroot",this).execute().get();
@@ -667,6 +885,7 @@ public class Core {
         }
 
     }
+    // Pinging host ip:port
     public boolean ping(String ip, int port,int timeout) {
         try {
             URI uri;
@@ -683,13 +902,21 @@ public class Core {
             return false;
         }
     }
+
+    // Swiping to next slide in installation activity
     public void MoveNext(ViewPager mPager) {
         mPager.setCurrentItem(mPager.getCurrentItem() + 1);
     }
 
+
     public void MovePrevious(ViewPager mPager) {
         mPager.setCurrentItem(mPager.getCurrentItem() - 1);
     }
+    /**
+     * Returns true if the app is installed on the SD card
+     *
+     * @return The method returns true if the app is installed on the SD card.
+     */
     public boolean isInstalledOnSdCard() {
             PackageManager pm = context.getPackageManager();
             try {

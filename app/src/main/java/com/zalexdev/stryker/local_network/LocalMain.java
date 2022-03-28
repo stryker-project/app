@@ -1,5 +1,6 @@
 package com.zalexdev.stryker.local_network;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -26,6 +27,9 @@ import com.zalexdev.stryker.local_network.utils.ScanLocalNetwork;
 import com.zalexdev.stryker.utils.CheckDir;
 import com.zalexdev.stryker.utils.Core;
 import com.zalexdev.stryker.utils.CustomCommand;
+import com.zalexdev.stryker.utils.OnSwipeListener;
+
+import net.cachapa.expandablelayout.ExpandableLayout;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -36,6 +40,9 @@ import inet.ipaddr.AddressStringException;
 import inet.ipaddr.IPAddress;
 import inet.ipaddr.IPAddressString;
 
+/**
+ * It scans the local network for devices and displays them in a list
+ */
 public class LocalMain extends Fragment {
     public SwipeRefreshLayout refresh;
     public LottieAnimationView img;
@@ -65,6 +72,14 @@ public class LocalMain extends Fragment {
         View view = inflater.inflate(R.layout.local_fragment, container, false);
         context = getContext();
         activity = getActivity();
+        ExpandableLayout menu = activity.findViewById(R.id.menu_expand);
+        view.setOnTouchListener(new OnSwipeListener(context) {
+            public void onSwipeTop() {core.closemenu(menu); }
+            @SuppressLint("ClickableViewAccessibility")
+            public void onSwipeRight() { }
+            public void onSwipeLeft() { }
+            public void onSwipeBottom() { core.openmenu(menu); }
+        });
         mRecyclerView = view.findViewById(R.id.local_list);
         refresh = view.findViewById(R.id.local_refresh);
         img = view.findViewById(R.id.local_img);
@@ -92,6 +107,9 @@ public class LocalMain extends Fragment {
     }
 
 
+    /**
+     * It scans the local network for devices and displays them in a list.
+     */
     public void scan() {
         //New thread for scan
         Thread scan = new Thread(() -> {

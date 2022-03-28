@@ -35,7 +35,7 @@
         android:layout_margin="10dp"
         android:layout_marginTop="10dp"
         android:autoLink="all"
-        android:fontFamily="@font/montserrat"
+        android:fontFamily="@font/google_sans"
         android:padding="10dp"
         android:text="@string/inst_final_desc"
         android:textAllCaps="false"

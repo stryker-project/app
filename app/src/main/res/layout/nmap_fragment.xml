@@ -31,15 +31,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/search"
-        android:layout_weight="6"
+        android:layout_weight="12"
         android:tint="@color/blue2"/>
-        <ImageButton
-            android:id="@+id/save"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/save"
-            android:layout_weight="6"
-            android:tint="@color/blue2"/>
+
 </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -49,8 +43,6 @@
     <net.cachapa.expandablelayout.ExpandableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-       app:el_expanded="true"
-        app:el_parallax="0.5"
         android:id="@+id/extra_expand">
     <LinearLayout
     android:layout_width="match_parent"
@@ -96,7 +88,7 @@
     android:id="@+id/extra_toggle"
     >
     <ImageView
-        android:id="@+id/router_toggle_img"
+        android:id="@+id/nmap_toggle_img"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:src="@drawable/arrow_down"

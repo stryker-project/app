@@ -32,6 +32,9 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * This class is used to run the aircrack-ng and brute handshake
+ */
 public class BruteHandshake extends AsyncTask<Void, String, WiFiNetwork> {
     public String exec = Core.EXECUTE;
     public String path;

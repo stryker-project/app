@@ -115,40 +115,38 @@ public class HandshakesAdapter extends RecyclerView.Adapter<HandshakesAdapter.Vi
                     .show();
 
         });
-        adapter.upload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final Dialog valuedialog = new Dialog(context);
-                valuedialog.setContentView(R.layout.input_dialog);
-                valuedialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                TextView title = valuedialog.findViewById(R.id.input_title);
-                TextInputEditText valueedit = valuedialog.findViewById(R.id.getvalue);
-                TextView ok = valuedialog.findViewById(R.id.ok_button);
-                title.setText("Enter email");
-                ok.setOnClickListener(view1 -> {
-                    String email = valueedit.getText().toString();
-                    valuedialog.dismiss();
-                    adapter.upload.setVisibility(View.GONE);
-                    new Thread(() -> {
-                        try {
-                            Integer upload = new UploadHS(hslist.get(position).replace("/storage/emulated/0/","/sdcard/"),email,context).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).get();
-                            activity.runOnUiThread(() -> {
-                                if (upload == 0){
-                                    core.toaster(core.str("error_upload"));
-                                }else if (upload == 1){
-                                    core.toaster(core.str("file_was_uploaded"));
-                                }else if (upload == 2){
-                                    core.toaster(core.str("upload_success"));
-                                }
-                                adapter.upload.setVisibility(View.VISIBLE);
-                            });
-                        } catch (ExecutionException | InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }).start();
-                });
-                valuedialog.show();
-            }
+        adapter.upload.setOnClickListener(view -> {
+            final Dialog valuedialog = new Dialog(context);
+            valuedialog.setContentView(R.layout.input_dialog);
+            valuedialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            TextView title = valuedialog.findViewById(R.id.input_title);
+            TextInputEditText valueedit = valuedialog.findViewById(R.id.getvalue);
+            TextView ok = valuedialog.findViewById(R.id.ok_button);
+            title.setText("Enter email");
+            ok.setOnClickListener(view1 -> {
+                String email = valueedit.getText().toString();
+                valuedialog.dismiss();
+                adapter.upload.setVisibility(View.GONE);
+                new Thread(() -> {
+                    try {
+
+                        Integer upload = new UploadHS(hslist.get(position).replace("/storage/emulated/0/","/sdcard/"),email,context).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).get();
+                        activity.runOnUiThread(() -> {
+                            if (upload == 0){
+                                core.toaster(core.str("error_upload"));
+                            }else if (upload == 1){
+                                core.toaster(core.str("file_was_uploaded"));
+                            }else if (upload == 2){
+                                core.toaster(core.str("upload_success"));
+                            }
+                            adapter.upload.setVisibility(View.VISIBLE);
+                        });
+                    } catch (ExecutionException | InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }).start();
+            });
+            valuedialog.show();
         });
     }
 

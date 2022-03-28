@@ -13,6 +13,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
+/**
+ * This class is used to fix the inet group permissions
+ */
 public class FixInet extends AsyncTask<Void, String, Boolean> {
 
 

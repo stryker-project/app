@@ -131,8 +131,8 @@
         android:checkable="true"
         android:clickable="true"
         android:focusable="true"
-        app:checkedIconTint="#311B92"
-        app:rippleColor="#A3311B92"
+        app:checkedIconTint="#6200EA"
+        app:rippleColor="#776200EA"
         android:layout_margin="10dp"
         app:cardCornerRadius="15dp">
 
@@ -141,7 +141,7 @@
             android:layout_height="44dp"
             android:layout_margin="10dp"
             android:src="@drawable/noof"
-            android:tint="#311B92" />
+            android:tint="#6200EA" />
 
         <TextView
             android:layout_width="match_parent"

@@ -148,6 +148,14 @@ public class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.ViewHolder> 
 
     }
 
+    /**
+     * This function is called when the user longclicks on the device in the device list.
+     * The CutNetwork object is responsible for cutting the network connection between the device and
+     * the gateway.
+     *
+     * @param d the device that was clicked
+     * @param pos The position of the device in the list.
+     */
     public void netcutdialog(Device d, int pos) {
         if (!d.isIscutted()) {
             String[] types = new String[3];
@@ -182,6 +190,13 @@ public class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.ViewHolder> 
         }
     }
 
+    /**
+     * This function creates a dialog box that allows the user to select an exploit from the list of
+     * exploits.
+     *
+     * @param device The device that was scanned.
+     * @param pos 0 for router, 1 for client
+     */
     private void LocalDialog(Device device,int pos) {
         String ip = device.getIp();
         String os = device.getOs();
@@ -228,6 +243,8 @@ public class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.ViewHolder> 
         device_img.setOnClickListener(view -> {
             showPorts(port, services);
         });
+        // This code is creating a listener for the button. When the button is clicked, the code will
+        // run the exploits.
         smb.setOnClickListener(view -> {
             ArrayList<Exploit> smb1 = new ArrayList<>();
             smb1.add(core.getExploitbyTitle("Eternalblue"));
@@ -242,6 +259,8 @@ public class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.ViewHolder> 
             rdp1.get(0).setIp(ip);
             runexploits(rdp1);
         });
+        // This code is creating a dialog box that allows the user to select an exploit from the list
+        // of exploits.
         run_exploit.setOnClickListener(view -> {
             String[] exploit_list = new String[core.getExploits().size()];
             for (int i = 0; i < core.getExploits().size(); i++) {exploit_list[i] = core.getExploits().get(i).getTitle(); }
@@ -335,6 +354,12 @@ public class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.ViewHolder> 
         localdialog.show();
     }
 
+    /**
+     * It creates a dialog box with a list of ports and their services
+     *
+     * @param ports an ArrayList of Strings, each of which is a port number.
+     * @param services A list of services that are available on the port.
+     */
     private void showPorts(ArrayList<String> ports, ArrayList<String> services) {
         final Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.list_of_ports);
@@ -351,6 +376,7 @@ public class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.ViewHolder> 
     }
 
     @SuppressLint("SetTextI18n")
+
     private void runexploits(ArrayList<Exploit> exploits)  {
         final Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.exploit_progress);
@@ -391,6 +417,13 @@ public class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.ViewHolder> 
         }).start();
         dialog.show();
     }
+    /**
+     * It starts the core exploit and then waits for it to finish.
+     *
+     * @param type The type of exploit to run.
+     * @param port The port to connect to.
+     * @param ip The IP address of the router you want to exploit.
+     */
     private void testexploit(String type, String port, String ip) throws ExecutionException, InterruptedException {
         final Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.exploit_progress);
@@ -441,6 +474,9 @@ public class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.ViewHolder> 
 
 
     }
+    /**
+     * It shows a dialog box with a bit error message.
+     */
     public void bitdialog() {
         new MaterialAlertDialogBuilder(context)
                 .setTitle("Your device is 32bit!")
@@ -450,6 +486,13 @@ public class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.ViewHolder> 
                 })
                 .show();
     }
+    /**
+     * This function is used to get the port number from the user
+     *
+     * @param type The type of exploit to run.
+     * @param ports The list of ports to choose from.
+     * @param ip The IP address of the target.
+     */
     public void getPort(String type, ArrayList<String> ports, String ip) {
         port = "";
         if (!ports.isEmpty()) {
@@ -477,6 +520,11 @@ public class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.ViewHolder> 
             });
         }
     }
+    /**
+     * It creates a dialog box that allows the user to select a port.
+     *
+     * @param ports The list of ports to choose from.
+     */
     public void selectPort(ArrayList<String> ports) {
         port = "";
         if (!ports.isEmpty()) {
@@ -523,6 +571,13 @@ public class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.ViewHolder> 
 
     }
 
+    /**
+     * This function is used to set the color of the progress indicator and the animation view
+     *
+     * @param progressIndicator The progress indicator that you want to change the color of.
+     * @param img The LottieAnimationView that you want to show the progress on.
+     * @param color 1 = red, 2 = green, 3 = yellow
+     */
     public void setProgColor(LinearProgressIndicator progressIndicator, LottieAnimationView img, int color) {
         activity.runOnUiThread(() -> {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

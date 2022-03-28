@@ -4,6 +4,9 @@ import android.content.Context;
 
 import com.zalexdev.stryker.utils.Core;
 
+/**
+ * The Cabinet class is used to store the API keys
+ */
 public class Cabinet {
     public Context context;
     public String keyView;

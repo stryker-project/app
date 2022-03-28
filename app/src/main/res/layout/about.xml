@@ -27,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        android:text="Stryker"
+        android:text="Stryker2"
         android:layout_marginTop="35dp"
         android:gravity="right"
         android:layout_marginRight="20dp"

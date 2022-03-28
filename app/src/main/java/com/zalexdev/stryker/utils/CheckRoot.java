@@ -13,6 +13,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
+/**
+ * This class checks if the device is rooted or not
+ */
 public class CheckRoot extends AsyncTask<Void, String, Boolean> {
 
 

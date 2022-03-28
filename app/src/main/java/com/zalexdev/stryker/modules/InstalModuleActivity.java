@@ -1,4 +1,4 @@
-package com.zalexdev.stryker;
+package com.zalexdev.stryker.modules;
 import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Context;
@@ -8,11 +8,15 @@ import android.view.View;
 import android.widget.TextView;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
+import com.zalexdev.stryker.R;
 import com.zalexdev.stryker.modules.utils.RunModule;
 import com.zalexdev.stryker.utils.Core;
 import com.zalexdev.stryker.utils.CustomCommand;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * Installs a module from a given path
+ */
 public class InstalModuleActivity extends AppCompatActivity {
 
     public String path;
@@ -24,20 +28,18 @@ public class InstalModuleActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         path = getIntent().getExtras().getString("path");
+        String name = getIntent().getExtras().getString("name");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instal_module);
         ExtendedFloatingActionButton relaunch = findViewById(R.id.relauch_button);
-        LinearProgressIndicator prog = findViewById(R.id.loading);
         log = findViewById(R.id.logview);
         activity = this;
         context = this;
         relaunch.shrink();
         relaunch.hide();
-        prog.setVisibility(View.VISIBLE);
         new Thread(() -> {
             try {
-                boolean module = new RunModule(path,new Core(context),log,activity,getIntent().getExtras().getBoolean("install")).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).get();
-                runOnUiThread(() -> prog.setVisibility(View.GONE));
+                boolean module = new RunModule(path,new Core(context),log,activity,getIntent().getExtras().getBoolean("install"),name).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).get();
                 runOnUiThread(relaunch::show);
                 runOnUiThread(relaunch::extend);
             } catch (ExecutionException | InterruptedException e) {

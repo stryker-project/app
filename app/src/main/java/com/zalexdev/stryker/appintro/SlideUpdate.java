@@ -22,6 +22,9 @@ import com.zalexdev.stryker.utils.CustomCommand;
 
 import java.util.concurrent.ExecutionException;
 
+/**
+ * This class is used to show the slide update screen.
+ */
 public class SlideUpdate extends Fragment {
 
 

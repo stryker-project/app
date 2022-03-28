@@ -4,23 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InstalModuleActivity">
-    <com.google.android.material.progressindicator.LinearProgressIndicator
-        android:layout_width="match_parent"
+    tools:context=".modules.InstalModuleActivity">
+
+    <ProgressBar
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:indicatorColor="@color/blue2"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
         android:indeterminate="true"
-        android:id="@+id/loading"/>
+        android:indeterminateDuration="2000"
+        app:trackColor="@color/white" />
+
+
     <TextView
         android:id="@+id/logview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#1C1C1C"
         android:padding="10dp"
-        android:textSize="14sp"
+        android:textColor="@color/white"
         android:textIsSelectable="true"
-        android:text="@string/starting_installing_module_n"
-        android:textColor="@color/white" />
+        android:textSize="14sp" />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/relauch_button"

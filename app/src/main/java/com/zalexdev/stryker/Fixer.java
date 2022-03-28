@@ -31,6 +31,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * This class is used to download the latest version of the app from the server and install it
+ */
 public class Fixer extends Fragment {
 
 

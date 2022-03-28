@@ -1,6 +1,9 @@
 package com.zalexdev.stryker.custom;
 import java.util.Comparator;
 
+/**
+ * A WiFiNetwork is a WiFi network that has been detected by the app
+ */
 public class WiFiNetwork {
     public String mac;
     public String ssid;

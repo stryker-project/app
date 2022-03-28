@@ -29,6 +29,9 @@ import com.zalexdev.stryker.utils.CustomCommand;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * This class is used to display the packages in the list
+ */
 public class CoreAdapter extends RecyclerView.Adapter<CoreAdapter.ViewHolder> {
     public ArrayList<Package> pkgs;
     public Context context;
@@ -63,9 +66,9 @@ public class CoreAdapter extends RecyclerView.Adapter<CoreAdapter.ViewHolder> {
                 try {
                     Boolean ok = new InstallPackage(temp.getName(),core).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).get();
                     if (ok){
-                        toaster(temp.getName()+core.str("installed"));
+                        toaster(core.str("installed")+" "+temp.getName());
                     }else{
-                        toaster(core.str("inst_error")+temp.getName());
+                        toaster(core.str("inst_error")+" "+temp.getName());
                         activity.runOnUiThread(() -> adapter.install.setVisibility(View.VISIBLE));
                     }
 

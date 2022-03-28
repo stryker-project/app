@@ -18,6 +18,9 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * This class is used to install a package
+ */
 public class InstallPackage extends AsyncTask<Void, String, Boolean> {
     public String exec = Core.EXECUTE;
     public String pkgname;

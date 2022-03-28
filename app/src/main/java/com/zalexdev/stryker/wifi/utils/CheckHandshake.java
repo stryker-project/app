@@ -15,6 +15,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 
 
+/**
+ * This class is used to check if the handshake in file exists
+ */
 public class CheckHandshake extends AsyncTask<Void, String, Boolean> {
     public String exec = Core.EXECUTE;
     public String chroot;

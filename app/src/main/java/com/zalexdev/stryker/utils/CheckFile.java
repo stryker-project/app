@@ -12,6 +12,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 
+/**
+ * Checks if a file exists on the device
+ */
 public class CheckFile extends AsyncTask<Void, String, Boolean> {
 
 
@@ -32,9 +35,10 @@ public class CheckFile extends AsyncTask<Void, String, Boolean> {
     protected Boolean doInBackground(Void... command) {
         String line;
         boolean result = false;
-
+        Logger logger = new Logger();
 
         try {
+            logger.writeLine("Checking file.. "+path,1);
 
             Process process = Runtime.getRuntime().exec("su -mm");
             OutputStream stdin = process.getOutputStream();
@@ -46,6 +50,7 @@ public class CheckFile extends AsyncTask<Void, String, Boolean> {
             stdin.close();
             BufferedReader br = new BufferedReader(new InputStreamReader(stdout));
             while ((line = br.readLine()) != null) {
+                logger.writeLine(line,2);
                 if (line.contains("true")) {
                     result = true;
                 }
@@ -54,6 +59,7 @@ public class CheckFile extends AsyncTask<Void, String, Boolean> {
             br = new BufferedReader(new InputStreamReader(stderr));
             while ((line = br.readLine()) != null) {
                 onProgressUpdate(line);
+                logger.writeLine(line,3);
             }
             br.close();
             process.waitFor();

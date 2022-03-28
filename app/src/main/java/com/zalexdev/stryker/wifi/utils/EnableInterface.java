@@ -15,6 +15,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
+
 public class EnableInterface extends AsyncTask<Void, String, Boolean> {
     public String exec = Core.EXECUTE;
     public String wlan;
@@ -41,6 +42,8 @@ public class EnableInterface extends AsyncTask<Void, String, Boolean> {
 
         try {
 
+            // The above code is creating a process that will run the command "su -mm" and then run the
+            // command "ip link set wlan0 up" and then exit. It ups adapter interface for scan
             Process process = Runtime.getRuntime().exec("su -mm");
             OutputStream stdin = process.getOutputStream();
             InputStream stderr = process.getErrorStream();

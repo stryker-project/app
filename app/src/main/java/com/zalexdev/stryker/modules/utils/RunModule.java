@@ -19,19 +19,24 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
+/**
+ * This class is used to run the install and delete scripts for the modules
+ */
 public class RunModule extends AsyncTask<Void, String, Boolean> {
 
-    public String cmd;
+    public String formatted_name;
     public Core core;
     public TextView log;
     public Activity activity;
     public boolean install;
-    public RunModule(String command, Core c, TextView l, Activity a,Boolean i) {
-        cmd = command;
+    public String name;
+    public RunModule(String command, Core c, TextView l, Activity a,Boolean i,String n) {
+        formatted_name = command;
         core = c;
         log = l;
         activity = a;
         install = i;
+        name = n;
     }
 
     @Override
@@ -43,7 +48,7 @@ public class RunModule extends AsyncTask<Void, String, Boolean> {
     @SuppressLint("WrongThread")
     @Override
     protected Boolean doInBackground(Void... command) {
-        String line;
+
         boolean result = false;
 
 
@@ -52,30 +57,39 @@ public class RunModule extends AsyncTask<Void, String, Boolean> {
             OutputStream stdin = process.getOutputStream();
             InputStream stderr = process.getErrorStream();
             InputStream stdout = process.getInputStream();
-            stdin.write((Core.EXECUTE+" bash"+"\n").getBytes());
-            stdin.write(("cd /modules/"+cmd+"\n").getBytes());
+            stdin.write((Core.EXECUTE+" ash"+"\n").getBytes());
+            stdin.flush();
+            stdin.write(("cd /modules/"+ formatted_name +"\n").getBytes());
+            stdin.flush();
             stdin.write(("chmod 777 *\n").getBytes());
             if (install){
-            stdin.write(("./install.sh"+"\n").getBytes());
+            stdin.write(("/modules/"+formatted_name+"/install.sh"+"\n").getBytes());
             }
             else{
-                stdin.write(("./delete.sh"+"\n").getBytes());
+                stdin.write(("/modules/"+formatted_name+"/delete.sh"+"\n").getBytes());
             }
             stdin.write(("exit\n").getBytes());
             stdin.flush();
             stdin.close();
             ArrayList<String> out = new ArrayList<>();
             ArrayList<String> outerror = new ArrayList<>();
-            BufferedReader br = new BufferedReader(new InputStreamReader(stdout));
-            while ((line = br.readLine()) != null) {
-                out.add(line);
-                String finalLine = line;
-                activity.runOnUiThread(() -> appendText(finalLine,false));
+            new Thread(() -> {
+                String line;
+                try{
+                BufferedReader br = new BufferedReader(new InputStreamReader(stdout));
+                while ((line = br.readLine()) != null) {
+                    out.add(line);
+                    String finalLine = line;
+                    activity.runOnUiThread(() -> appendText(finalLine,false));
+                }
+                br.close();}
+             catch (IOException e) {
+                Log.d(TAG, "An IOException was caught: " + e.getMessage());
             }
-            br.close();
-
-               BufferedReader br1 = new BufferedReader(new InputStreamReader(stderr));
-               String line1 = null;
+            }).start();
+            new Thread(() -> {
+                BufferedReader br1 = new BufferedReader(new InputStreamReader(stderr));
+                String line1 = null;
                 while (true) {
                     try {
                         if ((line1 = br1.readLine()) == null) break;
@@ -84,7 +98,7 @@ public class RunModule extends AsyncTask<Void, String, Boolean> {
                     }
                     assert line1 != null;
                     if (!line1.contains("%") && line1.contains("exists")){
-                    outerror.add(line1);}
+                        outerror.add(line1);}
                     String finalLine = line1;
                     activity.runOnUiThread(() -> appendText(finalLine,true));
                 }
@@ -93,6 +107,8 @@ public class RunModule extends AsyncTask<Void, String, Boolean> {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }).start();
+
 
             core.writetolog(out, false);
             core.writetolog(outerror, true);
@@ -106,7 +122,7 @@ public class RunModule extends AsyncTask<Void, String, Boolean> {
         } catch (InterruptedException ex) {
             Log.d(TAG, "An InterruptedException was caught: " + ex.getMessage());
         }
-
+        if (install){core.installmod(name);}else{core.deletemod(name);}
         return result;
     }
 

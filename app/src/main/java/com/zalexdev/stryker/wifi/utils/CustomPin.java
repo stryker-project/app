@@ -20,6 +20,9 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * This class is used to run the pixiewps attack
+ */
 public class CustomPin extends AsyncTask<Void, String, WiFiNetwork> {
     public String exec = Core.EXECUTE;
     public String chroot;

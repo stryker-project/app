@@ -15,6 +15,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
+/**
+ * This class is used to get the list of interfaces that are available on the device
+ */
 public class GetInterfaces extends AsyncTask<Void, String, ArrayList<String>> {
     public String exec = Core.EXECUTE;
     public Core core;

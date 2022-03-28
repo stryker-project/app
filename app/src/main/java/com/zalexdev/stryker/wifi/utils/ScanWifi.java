@@ -18,6 +18,9 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * This class is used to scan for wifi networks and parse the output of the scan
+ */
 public class ScanWifi extends AsyncTask<Void, String, ArrayList<WiFiNetwork>> {
     public String exec = Core.EXECUTE;
     public String wlan;

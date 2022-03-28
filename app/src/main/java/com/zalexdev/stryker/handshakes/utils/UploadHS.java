@@ -20,6 +20,9 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * This class uploads the hash to onlinehashcrack.com and returns the result
+ */
 public class UploadHS extends AsyncTask<Void, String, Integer> {
     public String exec = Core.EXECUTE;
     public String path;

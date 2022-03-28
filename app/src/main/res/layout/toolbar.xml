@@ -1,24 +1,325 @@
-<androidx.appcompat.widget.Toolbar
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/toolbar"
-    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="180dp"
     android:layout_width="match_parent"
-    android:fitsSystemWindows="true"
-    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-    android:background="#1565C0"
-   >
-    <ImageButton
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_gravity="right"
-        android:layout_marginRight="5dp"
-        android:id="@+id/disablemobn"
-        android:clickable="true"
-        android:visibility="gone"
-        android:focusable="true"
-        android:background="?attr/selectableItemBackground"
-        android:tint="@color/white"
-        android:src="@drawable/disable_monitore"
-        />
-</androidx.appcompat.widget.Toolbar>
+    android:orientation="vertical">
+<LinearLayout
+   android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="20dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginEnd="20dp"
+    >
+    <ImageView
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:id="@+id/menu_img"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/menu"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="10dp"
+        android:fontFamily="@font/google_sans"
+        android:id="@+id/stryker_main_logo"
+        android:text="Stryker ⚡"
+        android:textSize="30dp"
+        android:textStyle="bold" />
+    <ImageView
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:id="@+id/account"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/account"/>
+</LinearLayout>
+<net.cachapa.expandablelayout.ExpandableLayout
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+app:el_expanded="true"
+android:id="@+id/menu_expand">
+
+
+<HorizontalScrollView
+    android:layout_width="wrap_content"
+    android:scrollbars="none"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="60dp"
+                app:cardCornerRadius="15dp"
+                android:layout_gravity="center"
+                android:elevation="5dp"
+                android:clickable="true"
+                android:layout_margin="5dp"
+                android:layout_height="60dp"
+                android:focusable="true">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/home"
+                    android:layout_margin="8dp"/>
+
+
+            </com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:gravity="center"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:text="Главная"
+                android:textSize="10dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="60dp"
+                app:cardCornerRadius="15dp"
+                android:layout_gravity="center"
+                android:elevation="5dp"
+                android:clickable="true"
+                android:layout_margin="5dp"
+                android:layout_height="60dp"
+                android:focusable="true">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/terminal"
+                    android:layout_margin="8dp"/>
+
+
+            </com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:layout_width="60dp"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:text="Терминал"
+                android:textSize="10dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="60dp"
+                app:cardCornerRadius="15dp"
+                android:layout_gravity="center"
+                android:elevation="5dp"
+                android:clickable="true"
+                android:layout_margin="5dp"
+                android:layout_height="60dp"
+                android:focusable="true">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/wifi"
+                    android:layout_margin="8dp"/>
+
+
+            </com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:layout_width="60dp"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:text="WiFi сети"
+                android:textSize="10dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="60dp"
+                app:cardCornerRadius="15dp"
+                android:layout_gravity="center"
+                android:elevation="5dp"
+                android:clickable="true"
+                android:layout_margin="5dp"
+                android:layout_height="60dp"
+                android:focusable="true">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/local_network"
+                    android:layout_margin="8dp"/>
+
+
+            </com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:layout_width="60dp"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:text="Локальная сеть"
+                android:textSize="10dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="60dp"
+                app:cardCornerRadius="15dp"
+                android:layout_gravity="center"
+                android:elevation="5dp"
+                android:clickable="true"
+                android:layout_margin="5dp"
+                android:layout_height="60dp"
+                android:focusable="true">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/website"
+                    android:layout_margin="8dp"/>
+
+
+            </com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:layout_width="60dp"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:text="Вебсайты"
+                android:textSize="10dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="60dp"
+                app:cardCornerRadius="15dp"
+                android:layout_gravity="center"
+                android:elevation="5dp"
+                android:clickable="true"
+                android:layout_margin="5dp"
+                android:layout_height="60dp"
+                android:focusable="true">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/db"
+                    android:layout_margin="8dp"
+                    />
+
+
+            </com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:layout_width="60dp"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:text="Searchsploit"
+                android:textSize="10dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="60dp"
+                app:cardCornerRadius="15dp"
+                android:layout_gravity="center"
+                android:elevation="5dp"
+                android:clickable="true"
+                android:layout_margin="5dp"
+                android:layout_height="60dp"
+                android:focusable="true">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/cloud"
+                    android:layout_margin="8dp"
+                    />
+
+
+            </com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:layout_width="60dp"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:text="Онлайн репозиторий"
+                android:textSize="10dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="60dp"
+                app:cardCornerRadius="15dp"
+                android:layout_gravity="center"
+                android:elevation="5dp"
+                android:clickable="true"
+                android:layout_margin="5dp"
+                android:layout_height="60dp"
+                android:focusable="true">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/msf"
+                    android:tint="@color/grey"
+                    android:layout_margin="8dp"
+                    />
+
+
+            </com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:layout_width="60dp"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:text="Metasploit"
+                android:textSize="10dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="60dp"
+                app:cardCornerRadius="15dp"
+                android:layout_gravity="center"
+                android:elevation="5dp"
+                android:clickable="true"
+                android:layout_margin="5dp"
+                android:layout_height="60dp"
+                android:focusable="true">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/manager"
+                    android:layout_margin="8dp"
+                    />
+
+
+            </com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:layout_width="60dp"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:text="Менеджер пакетов"
+                android:textSize="10dp"/>
+        </LinearLayout>
+    </LinearLayout>
+</HorizontalScrollView>
+
+</net.cachapa.expandablelayout.ExpandableLayout>
+</LinearLayout>

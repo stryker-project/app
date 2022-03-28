@@ -1,6 +1,8 @@
 package com.zalexdev.stryker;
 
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -18,12 +20,16 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.card.MaterialCardView;
 import com.zalexdev.stryker.utils.Core;
+import com.zalexdev.stryker.utils.OnSwipeListener;
+
+import net.cachapa.expandablelayout.ExpandableLayout;
 
 public class About extends Fragment {
 
 
     public String chroot;
     public Core core;
+    public Activity activity;
     public Context context;
 
     @Nullable
@@ -31,13 +37,21 @@ public class About extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View viewroot = inflater.inflate(R.layout.about, container, false);
         context = getContext();
+        activity = getActivity();
         core = new Core(context);
         TextView info = viewroot.findViewById(R.id.device_info);
         MaterialCardView tg = viewroot.findViewById(R.id.about_tg);
         MaterialCardView pda = viewroot.findViewById(R.id.about_4pda);
         MaterialCardView web = viewroot.findViewById(R.id.about_site);
         MaterialCardView donate = viewroot.findViewById(R.id.about_donate);
-
+        ExpandableLayout menu = activity.findViewById(R.id.menu_expand);
+        viewroot.setOnTouchListener(new OnSwipeListener(context) {
+            public void onSwipeTop() {core.closemenu(menu); }
+            @SuppressLint("ClickableViewAccessibility")
+            public void onSwipeRight() { }
+            public void onSwipeLeft() { }
+            public void onSwipeBottom() { core.openmenu(menu); }
+        });
         web.setOnClickListener(view -> openlink("https://zalex.dev/stryker"));
         donate.setOnClickListener(view -> openlink("https://zalex.dev/stryker/donate"));
         tg.setOnClickListener(view -> openlink("https://t.me/strykerapp"));

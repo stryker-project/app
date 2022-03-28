@@ -15,6 +15,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.ArrayList;
 
+/**
+ * This class is used to enable monitor mode on a given interface
+ */
 public class EnableMonitor extends AsyncTask<Void, String, Boolean> {
     public String exec = Core.EXECUTE;
     public String wlan;

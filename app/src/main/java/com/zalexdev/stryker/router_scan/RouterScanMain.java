@@ -1,6 +1,7 @@
 package com.zalexdev.stryker.router_scan;
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -29,10 +30,14 @@ import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.google.android.material.textfield.TextInputLayout;
+import com.zalexdev.stryker.PlsInstallModule;
 import com.zalexdev.stryker.R;
 import com.zalexdev.stryker.custom.Router;
+import com.zalexdev.stryker.searchsploit.SearchSploit;
+import com.zalexdev.stryker.utils.CheckFile;
 import com.zalexdev.stryker.utils.CheckInet;
 import com.zalexdev.stryker.utils.Core;
+import com.zalexdev.stryker.utils.OnSwipeListener;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
 
@@ -78,6 +83,7 @@ public class RouterScanMain extends Fragment implements ThreadInterface{
 
 
 
+    // The main code for the routerscanner. It is the code that is run when the fragment is created.
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -85,6 +91,21 @@ public class RouterScanMain extends Fragment implements ThreadInterface{
         context = getContext();
         activity = getActivity();
         core = new Core(context);
+        ExpandableLayout menu = activity.findViewById(R.id.menu_expand);
+        viewroot.setOnTouchListener(new OnSwipeListener(context) {
+            public void onSwipeTop() {core.closemenu(menu); }
+            @SuppressLint("ClickableViewAccessibility")
+            public void onSwipeRight() { }
+            public void onSwipeLeft() { }
+            public void onSwipeBottom() { core.openmenu(menu); }
+        });
+        try {
+            if (!new CheckFile("/data/local/stryker/release/usr/bin/rs").executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).get()){
+              getParentFragmentManager().beginTransaction().replace(R.id.flContent, new PlsInstallModule(true,"Router Scan")).commit();
+            }
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
         LinearLayout expand_toggle = viewroot.findViewById(R.id.router_toggle);
         MaterialCardView ranges_card = viewroot.findViewById(R.id.router_ranges_card);
         MaterialCardView ports_card = viewroot.findViewById(R.id.router_port_card);
@@ -125,54 +146,68 @@ public class RouterScanMain extends Fragment implements ThreadInterface{
         ranges_text.setOnClickListener(view -> setranges());
         ports_text.setOnClickListener(view -> setPorts());
         ports_card.setOnClickListener(view -> setPorts());
+        // The above code is a thread that scans the ip addresses and ports and updates the progress
+        // bar.
         startbutton.setOnClickListener(view -> {
-            pingbar.setMax(ipadresses.size()*ports.size());
-            rsbar.setMax(ipadresses.size()*ports.size());
-            scanactive = !scanactive;
-            totalping = 0;
-            totalrs = 0;
-            if (scanactive){
-                adapter = new RouterAdapter(context,activity,new ArrayList<>(),this);
-                mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
-                mRecyclerView.setAdapter(adapter);
-                updatebar();
-                startbutton.setText(R.string.stop);
-                startbutton.setIcon(context.getDrawable(R.drawable.stop));
-                new Thread(() -> {
-                    for (String ip: ipadresses){
-                        for (String port: ports){
-                            boolean scanned = false;
-                            while (scanactive && !scanned){
-                                if (now<maximum){
-                                    scanned = scan(ip,port);}
-                                else {
-                                    try {
-                                        Thread.sleep(500);
-                                    } catch (InterruptedException e) {
-                                        e.printStackTrace();
+            if (ports_text.getText().toString().length()>0&&ranges_text.getText().toString().length()>0) {
+                pingbar.setMax(ipadresses.size() * ports.size());
+                rsbar.setMax(ipadresses.size() * ports.size());
+                scanactive = !scanactive;
+                totalping = 0;
+                totalrs = 0;
+                if (scanactive) {
+                    adapter = new RouterAdapter(context, activity, new ArrayList<>(), this);
+                    mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+                    mRecyclerView.setAdapter(adapter);
+                    updatebar();
+                    startbutton.setText(R.string.stop);
+                    startbutton.setIcon(context.getDrawable(R.drawable.stop));
+                    // The above code is a thread that scans the ipadresses and ports in the ipadresses and
+                    // ports arrays.
+                    new Thread(() -> {
+                        for (String ip : ipadresses) {
+                            for (String port : ports) {
+
+                                boolean scanned = false;
+                                while (scanactive && !scanned) {
+                                    if (now < maximum) {
+                                        scanned = scan(ip, port);
+                                    } else {
+                                        try {
+                                            Thread.sleep(500);
+                                        } catch (InterruptedException e) {
+                                            e.printStackTrace();
+                                        }
                                     }
                                 }
                             }
                         }
-                    }
-                    updatebar();
-                    scanactive = false;
-                    activity.runOnUiThread(() -> {
-                        startbutton.setText(R.string.start);
-                        startbutton.setIcon(context.getDrawable(R.drawable.run));
-                    });
+                        updatebar();
+                        scanactive = false;
+                        activity.runOnUiThread(() -> {
+                            startbutton.setText(R.string.start);
+                            startbutton.setIcon(context.getDrawable(R.drawable.run));
+                        });
 
                         activity.runOnUiThread(this::rsfinish);
-                }).start();
+                    }).start();
+                } else {
+                    startbutton.setText(R.string.start);
+                    startbutton.setIcon(context.getDrawable(R.drawable.run));
+                }
             }else{
-                startbutton.setText(R.string.start);
-                startbutton.setIcon(context.getDrawable(R.drawable.run));
+                core.toaster(core.str("fill_rs"));
             }
-
-
         });
         return viewroot;
     }
+/**
+ * This function is used to scan the ip+port combo
+ *
+ * @param ip The IP address of the router you want to ping.
+ * @param port The port to ping.
+ * @return Nothing.
+ */
 public boolean scan(String ip, String port){
     new Thread(() -> {
         if (core.ping(ip, Integer.parseInt(port),timeout)){
@@ -181,6 +216,7 @@ public boolean scan(String ip, String port){
                 Router temp = new Router();
                 temp.setIp(ip+":"+port);
                 adapter.additem(temp);
+                // Scrolling to the bottom of the list.
                 mRecyclerView.smoothScrollToPosition(adapter.getItemCount()-1);
             });}else{
             now--;
@@ -193,6 +229,12 @@ public boolean scan(String ip, String port){
     updatebar();
     return true;
 }
+    /**
+     * Given a lower and upper bound, return a list of all IP addresses in that range
+     *
+     * @param lowerStr The lower bound of the range.
+     * @param upperStr The upper bound of the range.
+     */
     public void getipsbyrange(String lowerStr, String upperStr) {
         try {
             IPAddress lower = new IPAddressString(lowerStr).toAddress();
@@ -206,6 +248,16 @@ public boolean scan(String ip, String port){
         }
     }
 
+    /**
+     * The function takes a string of IP addresses and/or subnets and splits them into a list of
+     * strings.
+     * It then iterates through the list and checks if the IP address is valid. If it is, it adds it to
+     * the ipadresses list.
+     * If it is a range, it splits the range into two strings and checks if both are valid. If they
+     * are, it adds the range to the ranges_text and ipadresses lists.
+     * If it is a subnet, it adds the subnet to the ipadresses list and the subnet to the ranges_text
+     * list
+     */
     private void setranges() {
         final Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.router_setrange);
@@ -246,6 +298,9 @@ public boolean scan(String ip, String port){
         });
         dialog.show();
     }
+    /**
+     * This function is used to set the ports that can be restored
+     */
     private void setPorts() {
         final Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.router_setrange);
@@ -270,6 +325,10 @@ public boolean scan(String ip, String port){
         });
         dialog.show();
     }
+    /**
+     * This function is used to set the maximum number of threads and the maximum time to wait for a
+     * response from the router
+     */
     private void settings() {
         final Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.router_settings);
@@ -290,12 +349,20 @@ public boolean scan(String ip, String port){
 
     }
 
+    /**
+     * Given a subnet, return all the IP addresses in that subnet
+     *
+     * @param ipOrCidr The IP address or CIDR range to be parsed.
+     */
     public void getipbysubnet(String ipOrCidr) {
         SubnetUtils utils = new SubnetUtils(ipOrCidr.replaceAll("\\s+",""));
         String[] allIps = utils.getInfo().getAllAddresses();
         Collections.addAll(ipadresses, allIps);
     }
 
+    /**
+     * It reads the values from the config file and restores them in the variables
+     */
     public void restore() {ipadresses = core.getListString("restore_ips");
         ArrayList<String> ip = core.getListString("restore_ranges");
         ports = core.getListString("restore_ports");
@@ -327,6 +394,13 @@ public boolean scan(String ip, String port){
 
     }
 
+    /**
+     * It sets the progress indicator to be invisible, sets the progress indicator to be indeterminate,
+     * and sets the progress indicator to be visible.
+     *
+     * @param progressIndicator The progress indicator to be updated.
+     * @param prog The progress indicator to be updated.
+     */
     public void setProg(LinearProgressIndicator progressIndicator, int prog) {
         activity.runOnUiThread(() -> {
             progressIndicator.setVisibility(View.INVISIBLE);
@@ -337,12 +411,19 @@ public boolean scan(String ip, String port){
 
 
 
+    /**
+     * Given an IP address, return true if it is a valid IP address, false otherwise
+     *
+     * @param ip The IP address to validate.
+     * @return The method returns a boolean value.
+     */
     public boolean validate(final String ip) {
         String PATTERN = "^((0|1\\d?\\d?|2[0-4]?\\d?|25[0-5]?|[3-9]\\d?)\\.){3}(0|1\\d?\\d?|2[0-4]?\\d?|25[0-5]?|[3-9]\\d?)$";
         return ip.matches(PATTERN);
     }
 
     @Override
+
     public void minusthread() {
         now--;
         totalrs++;
@@ -351,6 +432,9 @@ public boolean scan(String ip, String port){
         activity.runOnUiThread(() -> textView.setText(text));
     }
 
+    /**
+     * It updates the text of the labels and the progress bars.
+     */
     public void updatebar(){
         new Thread(() -> {
             setText(threads_text,now+"/"+maximum+" ("+totalping/ports.size()+"/"+ipadresses.size()+")");
@@ -361,6 +445,9 @@ public boolean scan(String ip, String port){
         }).start();
     }
 
+    /**
+     * This function is called when the scan is finished. It shows a dialog box with the scan results
+     */
     public void rsfinish() {
         new MaterialAlertDialogBuilder(context)
                 .setTitle(R.string.scan_finised)
@@ -372,6 +459,12 @@ public boolean scan(String ip, String port){
                 })
                 .show();
     }
+    /**
+     * This function checks if the device is connected to the internet. If it is, it returns true. If
+     * it isn't, it attempts to remount the system partition and check again. If it still isn't
+     * connected, it shows a dialog that says "No internet connection. Please connect to the internet
+     * and try again."
+     */
     public void fixinet(){
         final Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.exploit_progress);

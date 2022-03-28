@@ -20,6 +20,9 @@ import com.zalexdev.stryker.R;
 import com.zalexdev.stryker.utils.Core;
 import com.zalexdev.stryker.utils.CustomCommand;
 
+/**
+ * This class is used to display the slide finnal screen
+ */
 public class SlideFinnal extends Fragment {
 
 

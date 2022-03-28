@@ -1,329 +1,214 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:isScrollContainer="true"
-    android:layout_height="wrap_content">
-    <RelativeLayout
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:layout_gravity="center">
-
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/load_progress"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
-            android:layout_gravity="center"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:lottie_rawRes="@raw/back" />
-
-        <ImageView
-            android:layout_width="220dp"
-            android:layout_height="220dp"
-            android:layout_alignStart="@+id/load_progress"
-            android:layout_alignTop="@+id/load_progress"
-            android:layout_alignEnd="@+id/load_progress"
-            android:layout_alignBottom="@+id/load_progress"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginBottom="30dp"
-            android:src="@drawable/icon" />
-
-
-    </RelativeLayout>
-
-
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".MainActivity">
+       <net.cachapa.expandablelayout.ExpandableLayout
+            android:layout_width="match_parent"
+            app:el_expanded="false"
+            android:id="@+id/expand_download"
+            android:layout_height="150dp">
 
-        android:gravity="center"
-        android:text="Stryker"
-        android:textSize="30dp"
-        android:textStyle="bold" />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
 
-        android:gravity="center"
-        android:text="Version: 2.0 Release"
-        android:textSize="14dp"
-        android:textStyle="bold" />
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginTop="15dp"
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="115dp"
+                app:cardCornerRadius="15dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:id="@+id/download_card"
+                android:layout_margin="20dp">
 
-    android:orientation="horizontal">
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        app:cardElevation="3dp"
-        android:id="@+id/dashboard_wifi"
-        android:clickable="true"
-        app:rippleColor="#543F51B5"
-        android:layout_margin="10dp"
-        app:cardCornerRadius="15dp">
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_margin="10dp"
-            android:src="@drawable/wifi"
-            android:tint="#3F51B5"
-            />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
 
+                    android:layout_margin="20dp"
+                    >
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:id="@+id/img_download"
+                        android:src="@drawable/start_download"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/title_download"
+                            android:text="Приложению нужны дополнительные файлы для работы! Нажмите что бы начать загрузку!"
+                            android:layout_margin="10dp"
+                            android:fontFamily="@font/google_sans"/>
+
+                        <com.google.android.material.progressindicator.LinearProgressIndicator
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone"
+                            android:id="@+id/progress_download"
+                            app:trackCornerRadius="15dp"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            app:trackColor="#B5B5B5"
+                            app:indicatorColor="@color/grey"
+                            />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </net.cachapa.expandablelayout.ExpandableLayout>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
-            android:gravity="right"
-            android:paddingRight="10dp"
-            android:text="@string/wifi_networks"
-            android:textSize="14dp"
-            android:textStyle="bold" />
-    </com.google.android.material.card.MaterialCardView>
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        app:cardElevation="3dp"
-        android:clickable="true"
-        android:id="@+id/dashboard_local"
-        app:rippleColor="#59673AB7"
-        android:layout_margin="10dp"
-        app:cardCornerRadius="15dp">
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_margin="10dp"
-            android:src="@drawable/local_network"
-            android:tint="#673AB7"
-            />
+            android:textSize="25dp"
+            android:text="@string/userhello"
+            android:id="@+id/user_hello"
+            android:fontFamily="@font/google_sans"
+            android:layout_marginStart="22dp"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:fontFamily="@font/google_sans"
+            android:text="-----"
+            android:textAllCaps="false"
+            android:textSize="12dp"
+            android:visibility="gone"
+            android:textStyle="italic" />
+        <net.cachapa.expandablelayout.ExpandableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:el_expanded="true"
+            android:id="@+id/license_notif">
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:visibility="gone"
+                app:cardBackgroundColor="#EC3C78"
+                app:cardCornerRadius="15dp">
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:src="@drawable/close"
+                    android:id="@+id/license_close"
+                    android:layout_gravity="right"
+                    android:layout_margin="10dp"
+                    android:tint="@color/white"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/error"
+                        android:layout_margin="5dp"
+                        android:tint="@color/white"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:padding="5dp"
+                        android:textColor="@color/white"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/google_sans"/>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+        </net.cachapa.expandablelayout.ExpandableLayout>
+        <net.cachapa.expandablelayout.ExpandableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:el_expanded="false"
+            android:id="@+id/magisk_notif">
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+
+                app:cardBackgroundColor="#F57F17"
+                app:cardCornerRadius="15dp">
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:src="@drawable/close"
+                    android:id="@+id/magisk_close"
+                    android:layout_gravity="right"
+                    android:layout_margin="10dp"
+                    android:tint="@color/white"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/magisk"
+                        android:layout_margin="5dp"
+                        android:tint="@color/white"/>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:text="@string/magisk_stryker"
+                        android:padding="5dp"
+                        android:layout_gravity="center"
+                        android:textColor="@color/white"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/google_sans"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+        </net.cachapa.expandablelayout.ExpandableLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
-
-            android:gravity="right"
-            android:paddingRight="10dp"
-            android:text="@string/local_network"
-            android:textSize="14dp"
-            android:textStyle="bold" />
-
-    </com.google.android.material.card.MaterialCardView>
-
-</LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+            android:textSize="25dp"
+            android:text="@string/news"
+            android:fontFamily="@font/google_sans"
+            android:layout_marginStart="22dp"/>
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:cardElevation="3dp"
-            android:id="@+id/dashboard_hs"
-            android:clickable="true"
-            app:rippleColor="#8FFF9800"
-            android:layout_margin="10dp"
-            app:cardCornerRadius="15dp">
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_margin="10dp"
-                android:src="@drawable/hs_folder"
-                android:tint="#FF9800"
-                />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-
-                android:gravity="right"
-                android:paddingRight="10dp"
-                android:text="@string/handshakes"
-                android:textSize="14dp"
-                android:textStyle="bold" />
-        </com.google.android.material.card.MaterialCardView>
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:cardElevation="3dp"
-            android:clickable="true"
-            android:id="@+id/dashboard_exploit"
-            app:rippleColor="#74009688"
-            android:layout_margin="10dp"
-            app:cardCornerRadius="15dp">
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_margin="10dp"
-                android:src="@drawable/exploithub"
-                android:tint="#009688"
-                />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-
-                android:gravity="right"
-                android:paddingRight="10dp"
-                android:text="@string/exploit_hub"
-                android:textSize="14dp"
-                android:textStyle="bold" />
-
-        </com.google.android.material.card.MaterialCardView>
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:cardElevation="3dp"
-            android:id="@+id/dashboard_core_manager"
-            android:clickable="true"
-            app:rippleColor="#809C27B0"
-            android:layout_margin="10dp"
-            app:cardCornerRadius="15dp">
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_margin="10dp"
-                android:src="@drawable/chroot_manager"
-                android:tint="#9C27B0"
-                />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-
-                android:gravity="right"
-                android:paddingRight="10dp"
-                android:text="@string/core_manager"
-                android:textSize="14dp"
-                android:textStyle="bold" />
-        </com.google.android.material.card.MaterialCardView>
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:cardElevation="3dp"
-            android:clickable="true"
-            android:id="@+id/dashboard_modules_repo"
-            app:rippleColor="#5E03A9F4"
-            android:layout_margin="10dp"
-            app:cardCornerRadius="15dp">
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_margin="10dp"
-                android:src="@drawable/module_repo"
-                android:tint="#03A9F4"
-                />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-
-                android:gravity="right"
-                android:paddingRight="10dp"
-                android:text="@string/modules_repo"
-                android:textSize="14dp"
-                android:textStyle="bold" />
-
-        </com.google.android.material.card.MaterialCardView>
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        >
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:id="@+id/dashboard_settings"
+            android:layout_margin="20dp"
             app:cardCornerRadius="15dp"
-            app:cardElevation="3dp"
-            app:rippleColor="#6B4CAF50">
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_margin="10dp"
-                android:src="@drawable/settings"
-                android:tint="#4CAF50" />
-
+            android:layout_height="wrap_content">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-
-                android:gravity="right"
-                android:paddingRight="10dp"
-                android:text="@string/app_setting"
-                android:textSize="14dp"
-                android:textStyle="bold" />
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:id="@+id/dashboard_about"
-            app:cardCornerRadius="15dp"
-            app:cardElevation="3dp"
-            app:rippleColor="#77E91E63">
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_margin="10dp"
-                android:src="@drawable/about"
-                android:tint="#E91E63" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-
-                android:gravity="right"
-                android:paddingRight="10dp"
-                android:text="@string/about_app"
-                android:textSize="14dp"
-                android:textStyle="bold" />
-
+                android:text="@string/no_news"
+                android:gravity="center"
+                android:layout_margin="20dp"
+                android:textSize="12dp"/>
         </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
-</LinearLayout>
 </ScrollView>

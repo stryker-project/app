@@ -13,6 +13,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 
 
+/**
+ * This class is used to check if the device is connected to a specific SSID
+ */
 public class GetConnectedSsid extends AsyncTask<Void, String, Boolean> {
     public String ssid;
 

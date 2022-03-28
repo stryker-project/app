@@ -2,6 +2,7 @@ package com.zalexdev.stryker;
 
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -16,9 +17,12 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,11 +33,13 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
+import androidx.core.view.MotionEventCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
@@ -54,8 +60,12 @@ import com.zalexdev.stryker.three_wifi.LoginPage;
 import com.zalexdev.stryker.utils.CheckDir;
 import com.zalexdev.stryker.utils.Core;
 import com.zalexdev.stryker.utils.CustomCommand;
+import com.zalexdev.stryker.utils.GetPersonalID;
+import com.zalexdev.stryker.utils.OnSwipeListener;
 import com.zalexdev.stryker.wifi.Wifi;
 import com.zalexdev.stryker.wifi.utils.GetInterfaces;
+
+import net.cachapa.expandablelayout.ExpandableLayout;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -72,34 +82,61 @@ import java.util.concurrent.ExecutionException;
 public class MainActivity extends AppCompatActivity {
     public Core core;
     public int versionInt = BuildConfig.VERSION_CODE;
-    private DrawerLayout mDrawer;
-    public Toolbar toolbar;
     public boolean usbstate = false;
-    private ActionBarDrawerToggle drawerToggle;
-    public NavigationView nvDrawer;
+    public int eggcounter = 0;
+    public Fragment tempfrag;
 
+    public ExpandableLayout menu;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        nvDrawer = findViewById(R.id.nvView);
-        setupDrawerContent(nvDrawer);
         core = new Core(this);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        mDrawer = findViewById(R.id.drawer_layout);
-        drawerToggle = setupDrawerToggle();
-        drawerToggle.setDrawerIndicatorEnabled(true);
-        drawerToggle.syncState();
-        mDrawer.addDrawerListener(drawerToggle);
-        mDrawer = findViewById(R.id.drawer_layout);
-
-        Core core = new Core(this);
         int night = core.getInt("night");
+        ImageView account = findViewById(R.id.account_icon);
+        ImageView settings = findViewById(R.id.settings_icon);
+         menu = findViewById(R.id.menu_expand);
+        account.setOnClickListener(view -> {
+            Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.flContent);
+            if (currentFragment instanceof Settings) {
+                menu.collapse();
+                settings.setImageDrawable(getDrawable(R.drawable.settings));
+            }
+            if (currentFragment instanceof Account) {
+                account.setImageDrawable(getDrawable(R.drawable.account));
+                menu.collapse();
+                getSupportFragmentManager().beginTransaction().replace(R.id.flContent, tempfrag).commit();
+            }else{
 
+                menu.collapse();
+                account.setImageDrawable(getDrawable(R.drawable.close));
+                if (!(currentFragment instanceof Settings)) {
+                    tempfrag = getSupportFragmentManager().findFragmentById(R.id.flContent);}
+
+                getSupportFragmentManager().beginTransaction().replace(R.id.flContent, new Account()).commit();
+            }
+        });
+        settings.setOnClickListener(view -> {
+            Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.flContent);
+            if (currentFragment instanceof Account) {
+                account.setImageDrawable(getDrawable(R.drawable.account));
+                menu.collapse();
+            }
+            if (currentFragment instanceof Settings) {
+                settings.setImageDrawable(getDrawable(R.drawable.settings));
+                menu.collapse();
+                getSupportFragmentManager().beginTransaction().replace(R.id.flContent, tempfrag).commit();
+            }else{
+                menu.collapse();
+                settings.setImageDrawable(getDrawable(R.drawable.close));
+                if (!(currentFragment instanceof Account)) {
+                tempfrag = getSupportFragmentManager().findFragmentById(R.id.flContent);}
+                getSupportFragmentManager().beginTransaction().replace(R.id.flContent, new Settings()).commit();
+            }
+        });
         core.checkroot();
         checkforusb();
+
         try {
             if (new CheckDir("/data/local/stryker/beta/usr").execute().get()){
             Intent update = new Intent(this, AppIntroActivity.class);
@@ -112,11 +149,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(install);
             }
             else{
+                //
                 core.mountcore();FragmentManager fragmentManager = getSupportFragmentManager();
                 if (!new CheckDir("/data/local/stryker/release/sdcard/Stryker").execute().get()){
                     fragmentManager.beginTransaction().replace(R.id.flContent, new Error()).commit();
+
                 }else{
-                fragmentManager.beginTransaction().replace(R.id.flContent, new Dashboard(nvDrawer)).commit();
+                fragmentManager.beginTransaction().replace(R.id.flContent, new Dashboard()).commit();
                 }
             }
         } catch (ExecutionException | InterruptedException e) {
@@ -125,23 +164,169 @@ public class MainActivity extends AppCompatActivity {
         copyAssets();
         checkforusb();
         core.putString("chroot_path", "/data/local/stryker/release/");
-        new CustomCommand("chmod 777 -R /data/data/com.zalexdev.stryker/", core).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-        if (!core.checkmod("Searchsploit")){nvDrawer.getMenu().getItem(8).setVisible(false); }
-        if (!core.is64Bit() ||!core.checkmod("GeoMac")){nvDrawer.getMenu().getItem(9).setVisible(false); }
-        if (!core.is64Bit() || !core.checkmod("Router Scan")){nvDrawer.getMenu().getItem(10).setVisible(false);}
-        if (!core.checkmod("Router Scan")){nvDrawer.getMenu().getItem(11).setVisible(false);}
 
-        if (night==0){
+        new CustomCommand("chmod 777 -R /data/data/com.zalexdev.stryker/", core).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        if (night==0 && core.getBoolean("first_open")){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         }else if (night==1){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         }else{
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
         }
+        TextView logo = findViewById(R.id.stryker_main_logo);
+
+        ImageView menu_toggle = findViewById(R.id.menu_img);
+        menu_toggle.setOnClickListener(view -> menu.toggle());
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+        logo.setOnClickListener(view -> {
+            eggcounter++;
+            if (eggcounter >4){
+                logo.setText("Stryker \uD83C\uDDFA\uD83C\uDDE6");
+                eggcounter = 0;
+            }
+        });
+
+        MaterialCardView wifi = findViewById(R.id.menu_wifi);
+        MaterialCardView localnetwork = findViewById(R.id.menu_localnetwork);
+        MaterialCardView dashboard = findViewById(R.id.menu_dashboard);
+        MaterialCardView searchsploit = findViewById(R.id.menu_searchsploit);
+        MaterialCardView manager = findViewById(R.id.menu_manager);
+        MaterialCardView geo = findViewById(R.id.menu_geomac);
+        MaterialCardView metasploit = findViewById(R.id.menu_msf);
+        MaterialCardView three = findViewById(R.id.menu_three_wifi);
+        MaterialCardView scan = findViewById(R.id.menu_router);
+        MaterialCardView repo = findViewById(R.id.menu_repo);
+        MaterialCardView site = findViewById(R.id.menu_website);
+        MaterialCardView exploits = findViewById(R.id.menu_exloits);
+        MaterialCardView nmap = findViewById(R.id.menu_nmap);
+        MaterialCardView terminal = findViewById(R.id.menu_terminal);
+        wifi.setOnClickListener(view -> {
+            settings.setImageDrawable(getDrawable(R.drawable.settings));
+            account.setImageDrawable(getDrawable(R.drawable.account));
+            fragmentManager.beginTransaction().replace(R.id.flContent, new Wifi()).commit();
+            menu.collapse();
+        });
+        dashboard.setOnClickListener(view -> {
+            settings.setImageDrawable(getDrawable(R.drawable.settings));
+            account.setImageDrawable(getDrawable(R.drawable.account));
+            fragmentManager.beginTransaction().replace(R.id.flContent, new Dashboard()).commit();
+            menu.collapse();
+        });
+        localnetwork.setOnClickListener(view -> {
+            settings.setImageDrawable(getDrawable(R.drawable.settings));
+            account.setImageDrawable(getDrawable(R.drawable.account));
+            fragmentManager.beginTransaction().replace(R.id.flContent, new LocalMain()).commit();
+            menu.collapse();
+        });
+        repo.setOnClickListener(view -> {
+            settings.setImageDrawable(getDrawable(R.drawable.settings));
+            account.setImageDrawable(getDrawable(R.drawable.account));
+            fragmentManager.beginTransaction().replace(R.id.flContent, new ModulesFragment()).commit();
+            menu.collapse();
+        });
+        manager.setOnClickListener(view -> {
+            settings.setImageDrawable(getDrawable(R.drawable.settings));
+            account.setImageDrawable(getDrawable(R.drawable.account));
+            fragmentManager.beginTransaction().replace(R.id.flContent, new CoreManager()).commit();
+            menu.collapse();
+        });
+        if (core.checkmod("Searchsploit")){
+            searchsploit.setOnClickListener(view -> {
+                settings.setImageDrawable(getDrawable(R.drawable.settings));
+                account.setImageDrawable(getDrawable(R.drawable.account));
+                fragmentManager.beginTransaction().replace(R.id.flContent, new SearchSploit()).commit();
+                menu.collapse();
+            });
+        }else{
+            searchsploit.setOnClickListener(view -> {
+                settings.setImageDrawable(getDrawable(R.drawable.settings));
+                account.setImageDrawable(getDrawable(R.drawable.account));
+                fragmentManager.beginTransaction().replace(R.id.flContent, new PlsInstallModule("Searchsploit")).commit();
+                menu.collapse();
+            });
+        }
+        if (core.checkmod("GeoMac")){
+            geo.setOnClickListener(view -> {
+                settings.setImageDrawable(getDrawable(R.drawable.settings));
+                account.setImageDrawable(getDrawable(R.drawable.account));
+                fragmentManager.beginTransaction().replace(R.id.flContent, new GeoMac()).commit();
+                menu.collapse();
+            });
+        }else {
+            geo.setOnClickListener(view -> {
+                settings.setImageDrawable(getDrawable(R.drawable.settings));
+                account.setImageDrawable(getDrawable(R.drawable.account));
+                fragmentManager.beginTransaction().replace(R.id.flContent, new PlsInstallModule("GeoMac")).commit();
+                menu.collapse();
+            });
+        }
+        if (core.checkmod("Router Scan")){
+            three.setOnClickListener(view -> {
+                settings.setImageDrawable(getDrawable(R.drawable.settings));
+                account.setImageDrawable(getDrawable(R.drawable.account));
+                fragmentManager.beginTransaction().replace(R.id.flContent, new LoginPage()).commit();
+                menu.collapse();
+            });
+            scan.setOnClickListener(view -> {
+                settings.setImageDrawable(getDrawable(R.drawable.settings));
+                account.setImageDrawable(getDrawable(R.drawable.account));
+                fragmentManager.beginTransaction().replace(R.id.flContent, new RouterScanMain()).commit();
+                menu.collapse();
+            });
+        }else{
+            three.setOnClickListener(view -> {
+                settings.setImageDrawable(getDrawable(R.drawable.settings));
+                account.setImageDrawable(getDrawable(R.drawable.account));
+                fragmentManager.beginTransaction().replace(R.id.flContent, new PlsInstallModule("Router Scan")).commit();
+                menu.collapse();
+            });
+            scan.setOnClickListener(view -> {
+                settings.setImageDrawable(getDrawable(R.drawable.settings));
+                account.setImageDrawable(getDrawable(R.drawable.account));
+                fragmentManager.beginTransaction().replace(R.id.flContent, new PlsInstallModule("Router Scan")).commit();
+                menu.collapse();
+            });
+        }
+        metasploit.setOnClickListener(view -> {
+            settings.setImageDrawable(getDrawable(R.drawable.settings));
+            account.setImageDrawable(getDrawable(R.drawable.account));
+            fragmentManager.beginTransaction().replace(R.id.flContent, new StillDeveloping()).commit();
+            menu.collapse();
+        });
+        site.setOnClickListener(view -> {
+            settings.setImageDrawable(getDrawable(R.drawable.settings));
+            account.setImageDrawable(getDrawable(R.drawable.account));
+            fragmentManager.beginTransaction().replace(R.id.flContent, new StillDeveloping()).commit();
+            menu.collapse();
+        });
+        nmap.setOnClickListener(view -> {
+            settings.setImageDrawable(getDrawable(R.drawable.settings));
+            account.setImageDrawable(getDrawable(R.drawable.account));
+            fragmentManager.beginTransaction().replace(R.id.flContent, new NmapScanner()).commit();
+            menu.collapse();
+        });
+        exploits.setOnClickListener(view -> {
+            settings.setImageDrawable(getDrawable(R.drawable.settings));
+            account.setImageDrawable(getDrawable(R.drawable.account));
+            fragmentManager.beginTransaction().replace(R.id.flContent, new ExploitScreen()).commit();
+            menu.collapse();
+        });
+        terminal.setOnClickListener(view -> {
+            settings.setImageDrawable(getDrawable(R.drawable.settings));
+            account.setImageDrawable(getDrawable(R.drawable.account));
+            fragmentManager.beginTransaction().replace(R.id.flContent, new StillDeveloping()).commit();
+            menu.collapse();
+        });
 
 
     }
 
+
+
+    /**
+     * This function is used to show the dialog box when the user clicks on the USB button.
+     */
     public void usbdialog(){
         final BottomSheetDialog usbdialog = new BottomSheetDialog(this, R.style.AppBottomSheetDialogTheme);
         usbdialog.setContentView(R.layout.usb_dialog);
@@ -155,6 +340,12 @@ public class MainActivity extends AppCompatActivity {
         changedeauth.setOnClickListener(view -> getWlanMonitore(false));
         usbdialog.show();
     }
+    /**
+     * It creates a dialog box that allows the user to pick a network interface
+     *
+     * @param isscan boolean, if true, the user is picking a wlan interface to scan with, if false, the
+     * user is picking a wlan interface to deauth with
+     */
     public void getWlanMonitore(boolean isscan) {
         ArrayList<String> w = null;
         try {
@@ -207,13 +398,10 @@ public class MainActivity extends AppCompatActivity {
                 })
                 .show();
     }
-    private void setupDrawerContent(NavigationView navigationView) {
-        navigationView.setNavigationItemSelectedListener(
-                menuItem -> {
-                    selectDrawerItem(menuItem);
-                    return true;
-                });
-    }
+
+    /**
+     * If the user is not rooted, show an error message and exit the app
+     */
     public void noroot() {
         new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.error)
@@ -226,71 +414,22 @@ public class MainActivity extends AppCompatActivity {
                 .show();
     }
 
-    private ActionBarDrawerToggle setupDrawerToggle() {
-        return new ActionBarDrawerToggle(this, mDrawer, toolbar, R.string.drawer_open, R.string.drawer_close);
 
-    }
+    /**
+     * Check if the process is connected to the network.
+     *
+     * @return A boolean value.
+     */
     public boolean isConnected() {
         return getpid() != null;
     }
 
-    public void selectDrawerItem(MenuItem menuItem) {
-        Fragment fragment = null;
-        ImageView disablemon = toolbar.findViewById(R.id.disablemobn);
-        disablemon.setVisibility(View.GONE);
-        if (menuItem.getItemId() == R.id.wifi) {
-            fragment = Wifi.newInstance();
-            disablemon.setVisibility(View.VISIBLE);
-        } else if (menuItem.getItemId() == R.id.settings) {
-            fragment = new Settings();
-        } else if (menuItem.getItemId() == R.id.local) {
-            fragment = new LocalMain();
-      } else if (menuItem.getItemId() == R.id.about) {fragment = new About();
-        } else if (menuItem.getItemId() == R.id.core_manager) {
-            fragment = new CoreManager();
-        }  else if (menuItem.getItemId() == R.id.hs_storage) {
-            fragment = new HandshakeStorage();
-        } else if (menuItem.getItemId() == R.id.searchsploit) {
-            fragment = new SearchSploit();
-        } else if (menuItem.getItemId() == R.id.exploit_hub) {
-            fragment = new ExploitScreen();
-       // } else if (menuItem.getItemId() == R.id.msf) {
-       //     fragment = new MsfConsole();
-        }
-        else if (menuItem.getItemId() == R.id.modules_repo) {
-            fragment = new ModulesFragment();
-        } else if (menuItem.getItemId() == R.id.three_wifi) {
-            fragment = new LoginPage();
-        } else if (menuItem.getItemId() == R.id.nmap_scan) {
-            fragment = new NmapScanner();
-        } else if (menuItem.getItemId() == R.id.geomac) {
-            fragment = new GeoMac();
-        } else if (menuItem.getItemId() == R.id.router) {
-            fragment = new RouterScanMain();
-        } else if (menuItem.getItemId() == R.id.dashboard_menu) {
-            fragment = new Dashboard(nvDrawer);
-        }
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        assert fragment != null;
-        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
-        menuItem.setChecked(true);
 
-        mDrawer.closeDrawers();
-    }
 
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-
-        drawerToggle.syncState();
-    }
-
-    @Override
-    public void onConfigurationChanged(@NonNull Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        drawerToggle.onConfigurationChanged(newConfig);
-    }
-
+    /**
+     * It copies all the files from the assets folder to the /data/data/com.zalexdev.stryker/files/
+     * folder
+     */
     private void copyAssets() {
         AssetManager assetManager = getAssets();
         String[] files = null;
@@ -330,6 +469,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    // Copying a file from one location to another.
     private void copyFile(InputStream in, OutputStream out) throws IOException {
         byte[] buffer = new byte[1024];
         int read;
@@ -338,6 +478,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Prints a message on the screen
+     *
+     * @param msg The message to display in the toast.
+     */
     public void toaster(String msg) {
         Toast toast = Toast.makeText(this,
                 msg, Toast.LENGTH_SHORT);
@@ -346,12 +491,23 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+    /**
+     * This function returns a list of all the interfaces that are currently up and running
+     *
+     * @return An ArrayList of Strings.
+     */
     private ArrayList<String> getinterfaces() throws ExecutionException, InterruptedException {
         GetInterfaces airmon = new GetInterfaces(new Core(this));
         return airmon.execute().get();
     }
 
 
+    /**
+     * If the user has not given permission to write to the external storage, then request permission
+     *
+     * @return Nothing.
+     */
     public boolean checkpermission() {
             if (checkSelfPermission(WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(
@@ -364,6 +520,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * This function checks if the USB is connected to the device every 3 seconds
+     */
     public void checkforusb(){
         Timer usb = new Timer();
         usb.scheduleAtFixedRate(new TimerTask() {
@@ -377,6 +536,11 @@ public class MainActivity extends AppCompatActivity {
             }
         },0,3000);
     }
+    /**
+     * Get the device id of the connected device
+     *
+     * @return The device id of the connected device.
+     */
     public String getpid(){
         String deviceid = null;
         UsbManager manager = (UsbManager) MainActivity.this.getSystemService(Context.USB_SERVICE);
@@ -399,7 +563,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        mDrawer.openDrawer(GravityCompat.START);
+        if (menu.isExpanded()){
+        super.onBackPressed();}else{
+            menu.expand();
+        }
     }
-
 }

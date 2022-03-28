@@ -19,6 +19,9 @@ import java.nio.channels.AcceptPendingException;
 import java.util.ArrayList;
 import java.util.Locale;
 
+/**
+ * This class is used to get the data from db with WiFi networks around the user
+ */
 public class GetWiFI extends AsyncTask<Void, Void, ArrayList<WiFiNetwork>> {
     public String key;
     public String bssid;

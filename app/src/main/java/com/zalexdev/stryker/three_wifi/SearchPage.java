@@ -1,5 +1,6 @@
 package com.zalexdev.stryker.three_wifi;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -18,6 +19,9 @@ import com.zalexdev.stryker.custom.Cabinet;
 import com.zalexdev.stryker.custom.WiFiNetwork;
 import com.zalexdev.stryker.three_wifi.utils.GetWiFI;
 import com.zalexdev.stryker.utils.Core;
+import com.zalexdev.stryker.utils.OnSwipeListener;
+
+import net.cachapa.expandablelayout.ExpandableLayout;
 
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
@@ -45,6 +49,7 @@ public class SearchPage extends Fragment {
     }
 
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -53,6 +58,14 @@ public class SearchPage extends Fragment {
         View view = inflater.inflate(R.layout.three_wifi_fragment, container, false);
         context = getContext();
         activity = getActivity();
+        ExpandableLayout menu = activity.findViewById(R.id.menu_expand);
+        view.setOnTouchListener(new OnSwipeListener(context) {
+            public void onSwipeTop() {core.closemenu(menu); }
+            @SuppressLint("ClickableViewAccessibility")
+            public void onSwipeRight() { }
+            public void onSwipeLeft() { }
+            public void onSwipeBottom() { core.openmenu(menu); }
+        });
         mRecyclerView = view.findViewById(R.id.search_list);
         search = view.findViewById(R.id.search);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(activity));
@@ -61,6 +74,9 @@ public class SearchPage extends Fragment {
         TextInputEditText getmac = view.findViewById(R.id.getsearch);
         Cabinet cabinet = new Cabinet(context);
         cabinet.getStored();
+        // This is the code that runs when the search button is clicked. It gets the key from the
+        // cabinet, and the mac address from the text field.
+        // It then runs a new thread to get the results from the server.
         search.setOnClickListener(view1 -> {
             String key = cabinet.getKeyView();
             String mac = String.valueOf(getmac.getText());

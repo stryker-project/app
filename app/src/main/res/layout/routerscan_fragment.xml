@@ -19,6 +19,18 @@
         android:paddingBottom="10dp"
         android:orientation="horizontal"
         >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ip_ranges"
+                android:paddingStart="15dp"/>
+
+
         <com.google.android.material.card.MaterialCardView
             android:layout_width="180dp"
             android:layout_height="80dp"
@@ -37,6 +49,17 @@
                 android:scrollbars = "vertical"
                 android:id="@+id/router_ranges_text"/>
         </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ports"
+                android:paddingStart="15dp"/>
         <com.google.android.material.card.MaterialCardView
             android:layout_width="75dp"
             android:layout_height="80dp"
@@ -55,6 +78,7 @@
                 android:scrollbars = "vertical"
                 android:id="@+id/router_ports"/>
         </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -73,6 +97,7 @@
                     android:layout_height="30dp"
                     android:layout_marginEnd="5dp"
                     android:src="@drawable/save"
+                    android:tint="@color/grey"
                     />
                 <ImageView
                     android:id="@+id/router_settings_icon"
@@ -80,7 +105,7 @@
                     android:layout_height="30dp"
 
                     android:src="@drawable/settings"
-                    android:tint="#606060"
+                    android:tint="@color/grey"
                     />
             </LinearLayout>
 
@@ -88,8 +113,7 @@
                 android:id="@+id/start_scanner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
-                android:fontFamily="@font/montserrat"
+                android:fontFamily="@font/google_sans"
                 android:text="@string/start"
                 android:textSize="12dp"
                 app:icon="@drawable/run"

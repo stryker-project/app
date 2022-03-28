@@ -17,6 +17,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
+/**
+ * This class is used to get the coordinates of a device by its MAC address
+ */
 public class GetGeoByMac extends AsyncTask<Void, String, String> {
     public String mac;
     public Core core;

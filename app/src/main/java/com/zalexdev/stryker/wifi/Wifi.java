@@ -1,10 +1,12 @@
 package com.zalexdev.stryker.wifi;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,10 +29,13 @@ import com.zalexdev.stryker.custom.Cabinet;
 import com.zalexdev.stryker.custom.WiFiNetwork;
 import com.zalexdev.stryker.three_wifi.utils.GetWiFI;
 import com.zalexdev.stryker.utils.Core;
+import com.zalexdev.stryker.utils.OnSwipeListener;
 import com.zalexdev.stryker.wifi.utils.DisableMonitor;
 import com.zalexdev.stryker.wifi.utils.EnableInterface;
 import com.zalexdev.stryker.wifi.utils.GetInterfaces;
 import com.zalexdev.stryker.wifi.utils.ScanWifi;
+
+import net.cachapa.expandablelayout.ExpandableLayout;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -47,6 +52,8 @@ public class Wifi extends Fragment {
     private WiFI_Adapter mAdapter;
     public Activity activity;
     public Context context;
+    public TextView tryagain;
+    public int failedscancount = 0;
     public Wifi() {
 
     }
@@ -74,20 +81,39 @@ public class Wifi extends Fragment {
         refresh = view.findViewById(R.id.refresh);
         img = view.findViewById(R.id.scan_img);
         text1 = view.findViewById(R.id.scan_text);
+        tryagain = view.findViewById(R.id.try_again);
         core = new Core(context);
         wlan = core.getString("wlan_scan");
+        tryagain.setOnClickListener(view1 -> {
+            core.toaster("Test");
+            scan();
+        });
         refresh.setOnRefreshListener(this::scan);
         if (activity !=null){
         mRecyclerView.setLayoutManager(new LinearLayoutManager(activity));}
         scan();
+        ExpandableLayout menu = activity.findViewById(R.id.menu_expand);
+        // A class that is used to detect swipes on the screen.
+        view.setOnTouchListener(new OnSwipeListener(context) {
+            public void onSwipeTop() {core.closemenu(menu); }
+            @SuppressLint("ClickableViewAccessibility")
+            public void onSwipeRight() { }
+            public void onSwipeLeft() { }
+            public void onSwipeBottom() { core.openmenu(menu); }
+        });
         return view;
     }
 
+    /**
+     * This function scans for available networks and stores them in a list
+     */
     public void scan() {
+        img.setAnimation(R.raw.scan_wifi);
+        img.playAnimation();
+        text1.setText(R.string.scanning_wifi);
+        tryagain.setVisibility(View.GONE);
         wlan = core.getString("wlan_scan");
-        Toolbar toolbar = activity.findViewById(R.id.toolbar);
-        ImageView disablemon = toolbar.findViewById(R.id.disablemobn);
-        disablemon.setOnClickListener(view -> disable());
+
         Thread scan = new Thread(() -> {
             try {
                 boolean inter;
@@ -110,18 +136,16 @@ public class Wifi extends Fragment {
                 }
                 if (inter) {
                         list = new ScanWifi(wlan, core).execute().get();
-                        if (list.isEmpty()) {
-                            list = new ScanWifi(wlan, core).execute().get();
-                            if (list.isEmpty()) {
-                                if (activity !=null) {
-                                    activity.runOnUiThread(() -> {
-                                        img.setAnimation(R.raw.nothing);
-                                        img.playAnimation();
-                                        text1.setText(R.string.cant_find_netw);
-                                        refresh.setEnabled(true);
-                                    });
-                                }
+                        while (list.isEmpty() && failedscancount <5) {
+                            if (failedscancount == 4){
+                                break;
+                            }else{
+                                Log.e("Failed scan","N: "+failedscancount);
+                                failedscancount++;
+                                Thread.sleep(3000);
+                                list = new ScanWifi(wlan, core).execute().get();
                             }
+
                         }
 
                         for (int i = 0; i < list.size(); i++) {
@@ -139,6 +163,7 @@ public class Wifi extends Fragment {
                             activity.runOnUiThread(() -> {
                                 img.setAnimation(R.raw.nothing);
                                 img.playAnimation();
+                                tryagain.setVisibility(View.VISIBLE);
                                 text1.setText(R.string.cant_find_netw);
                                 refresh.setEnabled(true);
                             });
@@ -184,8 +209,12 @@ public class Wifi extends Fragment {
                         });}
                     } else {
                     if (activity !=null){
-                        activity.runOnUiThread(() -> text1.setText(getString(R.string.error_inter) +" "+ wlan));}
-                    }
+                        activity.runOnUiThread(() -> {
+                            tryagain.setVisibility(View.VISIBLE);
+                            img.setAnimation(R.raw.error);
+                            img.playAnimation();
+                            text1.setText(getString(R.string.error_inter) +" "+ wlan);
+                        });}}
 
             } catch (ExecutionException | InterruptedException e) {
                 e.printStackTrace();
@@ -193,6 +222,10 @@ public class Wifi extends Fragment {
         });
         scan.start();
     }
+    /**
+     * It creates a dialog box that displays all the interfaces that are currently in monitor mode. The
+     * user can then select one of the interfaces to disable
+     */
     public void disable() {
         ArrayList<String> w;
         try {
@@ -213,6 +246,11 @@ public class Wifi extends Fragment {
             e.printStackTrace();
         }
     }
+    /**
+     * Returns true if wifi is enabled, false otherwise
+     *
+     * @return A boolean value.
+     */
     public boolean wifienabled() {
         boolean ok = false;
         if (context !=null){
@@ -223,6 +261,11 @@ public class Wifi extends Fragment {
         }
         return ok;
     }
+    /**
+     * This function returns a list of all the interfaces that are currently up and running
+     *
+     * @return An ArrayList of Strings.
+     */
     private ArrayList<String> getinterfaces() throws ExecutionException, InterruptedException {
         GetInterfaces airmon = new GetInterfaces(core);
         return airmon.execute().get();

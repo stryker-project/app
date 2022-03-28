@@ -1,5 +1,8 @@
 package com.zalexdev.stryker.custom;
 
+/**
+ * A Package and version
+ */
 public class Package {
     public String name;
     public String version;

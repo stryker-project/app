@@ -14,7 +14,7 @@ android {
         applicationId "com.zalexdev.stryker"
         minSdk 23
         targetSdk 28
-        versionCode 20
+        versionCode 23
         versionName "2.0 Release"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
