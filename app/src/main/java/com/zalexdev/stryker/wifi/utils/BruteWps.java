@@ -9,7 +9,7 @@ import android.util.Log;
 import android.widget.TextView;
 
 import com.zalexdev.stryker.R;
-import com.zalexdev.stryker.custom.WiFiNetwork;
+import com.zalexdev.stryker.custom.WiFINetwork;
 import com.zalexdev.stryker.utils.Core;
 
 import java.io.BufferedReader;
@@ -24,7 +24,7 @@ import java.util.regex.Pattern;
 /**
  * This class is used to run the wps brute attack
  */
-public class BruteWps extends AsyncTask<Void, String, WiFiNetwork> {
+public class BruteWps extends AsyncTask<Void, String, WiFINetwork> {
     public String exec = Core.EXECUTE;
     public String chroot;
     public Activity mActivity;
@@ -52,9 +52,9 @@ public class BruteWps extends AsyncTask<Void, String, WiFiNetwork> {
 
     @SuppressLint("WrongThread")
     @Override
-    protected WiFiNetwork doInBackground(Void... command) {
+    protected WiFINetwork doInBackground(Void... command) {
         String line;
-        WiFiNetwork result = new WiFiNetwork();
+        WiFINetwork result = new WiFINetwork();
 
         try {
             process = Runtime.getRuntime().exec("su -mm");
@@ -115,7 +115,7 @@ public class BruteWps extends AsyncTask<Void, String, WiFiNetwork> {
     }
 
     @Override
-    protected void onPostExecute(WiFiNetwork result) {
+    protected void onPostExecute(WiFINetwork result) {
 
         super.onPostExecute(result);
     }
@@ -126,11 +126,11 @@ public class BruteWps extends AsyncTask<Void, String, WiFiNetwork> {
 
     }
 
-    public WiFiNetwork issuccess(ArrayList<String> out) {
+    public WiFINetwork issuccess(ArrayList<String> out) {
         String pin;
         String pass;
 
-        WiFiNetwork back = new WiFiNetwork();
+        WiFINetwork back = new WiFINetwork();
         for (int i = 0; i < out.size(); i++) {
             String s = out.get(i);
             if (s.contains("[+] WPS PIN:")) {

@@ -20,7 +20,7 @@ import androidx.core.app.NotificationCompat;
 
 import com.zalexdev.stryker.MainActivity;
 import com.zalexdev.stryker.R;
-import com.zalexdev.stryker.custom.WiFiNetwork;
+import com.zalexdev.stryker.custom.WiFINetwork;
 import com.zalexdev.stryker.utils.Core;
 
 import java.io.BufferedReader;
@@ -35,7 +35,7 @@ import java.util.regex.Pattern;
 /**
  * This class is used to run the aircrack-ng and brute handshake
  */
-public class BruteHandshake extends AsyncTask<Void, String, WiFiNetwork> {
+public class BruteHandshake extends AsyncTask<Void, String, WiFINetwork> {
     public String exec = Core.EXECUTE;
     public String path;
     public String wordlist;
@@ -66,9 +66,9 @@ public class BruteHandshake extends AsyncTask<Void, String, WiFiNetwork> {
 
     @SuppressLint("WrongThread")
     @Override
-    protected WiFiNetwork doInBackground(Void... command) {
+    protected WiFINetwork doInBackground(Void... command) {
         String line;
-        WiFiNetwork result = new WiFiNetwork();
+        WiFINetwork result = new WiFINetwork();
         try {
             process = Runtime.getRuntime().exec("su");
             OutputStream stdin = process.getOutputStream();
@@ -113,7 +113,7 @@ public class BruteHandshake extends AsyncTask<Void, String, WiFiNetwork> {
     }
 
     @Override
-    protected void onPostExecute(WiFiNetwork result) {
+    protected void onPostExecute(WiFINetwork result) {
         super.onPostExecute(result);
 
 
