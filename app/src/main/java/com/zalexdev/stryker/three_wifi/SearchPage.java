@@ -16,18 +16,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.zalexdev.stryker.R;
 import com.zalexdev.stryker.custom.Cabinet;
-import com.zalexdev.stryker.custom.WiFiNetwork;
+import com.zalexdev.stryker.custom.WiFINetwork;
 import com.zalexdev.stryker.three_wifi.utils.GetWiFI;
 import com.zalexdev.stryker.utils.Core;
 import com.zalexdev.stryker.utils.OnSwipeListener;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
 
-import org.json.JSONObject;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
@@ -82,7 +77,7 @@ public class SearchPage extends Fragment {
             String mac = String.valueOf(getmac.getText());
             new Thread(() -> {
                 try {
-                    ArrayList<WiFiNetwork> w = new GetWiFI(key, mac).execute().get();
+                    ArrayList<WiFINetwork> w = new GetWiFI(key, mac).execute().get();
                     activity.runOnUiThread(() -> {
                         if (w.isEmpty()) {
                             core.toaster(core.str("no_results"));

@@ -82,6 +82,16 @@ public class Slide3 extends Fragment {
             title.setText(core.str("install2"));
             title.startAnimation(fade);
             progress_status.setVisibility(View.VISIBLE);
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    //Downloading sqlite3 and trying to off magisk notif...
+                    
+                }
+            }).start();
+
+
             new Thread(() -> {
                 clear();
                 boolean core_ok;

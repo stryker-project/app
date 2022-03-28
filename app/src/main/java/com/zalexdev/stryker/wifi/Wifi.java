@@ -10,8 +10,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,10 +21,9 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.zalexdev.stryker.MainActivity;
 import com.zalexdev.stryker.R;
 import com.zalexdev.stryker.custom.Cabinet;
-import com.zalexdev.stryker.custom.WiFiNetwork;
+import com.zalexdev.stryker.custom.WiFINetwork;
 import com.zalexdev.stryker.three_wifi.utils.GetWiFI;
 import com.zalexdev.stryker.utils.Core;
 import com.zalexdev.stryker.utils.OnSwipeListener;
@@ -38,11 +35,10 @@ import com.zalexdev.stryker.wifi.utils.ScanWifi;
 import net.cachapa.expandablelayout.ExpandableLayout;
 
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
 public class Wifi extends Fragment {
-    public ArrayList<WiFiNetwork> list = new ArrayList<>();
+    public ArrayList<WiFINetwork> list = new ArrayList<>();
     public SwipeRefreshLayout refresh;
     public LottieAnimationView img;
     public TextView text1;
@@ -117,7 +113,7 @@ public class Wifi extends Fragment {
         Thread scan = new Thread(() -> {
             try {
                 boolean inter;
-                ArrayList<String> wlans = new GetInterfaces(core).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).get();
+                ArrayList<String> wlans = core.getInterfacesList();
                 if (wlans.contains(wlan+"mon")){wlan = wlan+"mon";}
                 if (wlans.contains(wlan)) {
                     inter = true;
@@ -151,7 +147,7 @@ public class Wifi extends Fragment {
                         for (int i = 0; i < list.size(); i++) {
                             String mac = list.get(i).getMac();
                             if (!core.getnetwork(mac).isEmpty()) {
-                                WiFiNetwork w = list.get(i);
+                                WiFINetwork w = list.get(i);
                                 w.setOK(true);
                                 w.setPsk(core.getListString(mac).get(0));
                                 if (core.getnetwork(mac).size() > 1){
@@ -184,11 +180,11 @@ public class Wifi extends Fragment {
                                 cabinet.getStored();
                                 if (cabinet.getKeyView().length() > 3) {
                                     int i = 0;
-                                    for (WiFiNetwork temp : list) {
+                                    for (WiFINetwork temp : list) {
                                         int finalI = i;
                                         new Thread(() -> {
                                             try {
-                                                ArrayList<WiFiNetwork> three = new GetWiFI(cabinet.getKeyView(), temp.getMac()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).get();
+                                                ArrayList<WiFINetwork> three = new GetWiFI(cabinet.getKeyView(), temp.getMac()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR).get();
                                                 if (!three.isEmpty()) {
                                                     temp.setPsk(three.get(0).getPsk());
                                                     temp.setPin(three.get(0).getPin());
@@ -267,7 +263,6 @@ public class Wifi extends Fragment {
      * @return An ArrayList of Strings.
      */
     private ArrayList<String> getinterfaces() throws ExecutionException, InterruptedException {
-        GetInterfaces airmon = new GetInterfaces(core);
-        return airmon.execute().get();
+        return core.getInterfacesList();
     }
 }

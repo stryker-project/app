@@ -184,9 +184,8 @@ public class Settings extends Fragment {
 
     }
 
-    private ArrayList<String> getinterfaces() throws ExecutionException, InterruptedException {
-        GetInterfaces airmon = new GetInterfaces(new Core(context));
-        return airmon.execute().get();
+    private ArrayList<String> getinterfaces() {
+        return core.getInterfacesList();
     }
 
     public void getWlanMonitore(boolean isscan) throws ExecutionException, InterruptedException {
