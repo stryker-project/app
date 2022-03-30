@@ -81,7 +81,6 @@ public class Wifi extends Fragment {
         core = new Core(context);
         wlan = core.getString("wlan_scan");
         tryagain.setOnClickListener(view1 -> {
-            core.toaster("Test");
             scan();
         });
         refresh.setOnRefreshListener(this::scan);
