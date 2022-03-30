@@ -77,7 +77,7 @@ public class Account extends Fragment {
         MaterialCardView bitcoin = viewroot.findViewById(R.id.bitcoin);
         MaterialCardView card = viewroot.findViewById(R.id.creditcard);
         ExpandableLayout menu = activity.findViewById(R.id.menu_expand);
-        ExpandableLayout coffee = activity.findViewById(R.id.coffee);
+        MaterialCardView coffee = viewroot.findViewById(R.id.coffee);
         web.setOnClickListener(view -> openlink("https://stryker.zalex.dev"));
         tg.setOnClickListener(view -> openlink("https://t.me/stryker"));
         pda.setOnClickListener(view -> openlink("https://4pda.to/forum/index.php?showtopic=1037129"));
