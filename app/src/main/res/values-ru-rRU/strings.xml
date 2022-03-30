@@ -117,7 +117,7 @@
     <string name="stop">Стоп </string>
     <string name="start">Старт </string>
     <string name="scan_finised">Сканирование завершено! </string>
-    <string name="scan_finished_desc">Сканирование завершено! Ты можешь сохранить результат с помощью иконкой вверху! </string>
+    <string name="scan_finished_desc">Сканирование завершено! Ты можешь сохранить результат с помощью иконки вверху! </string>
     <string name="save">Сохранить </string>
     <string name="saved_to_exp">Сохранено в эксплоиты! </string>
     <string name="pin">Пин: </string>
