@@ -235,9 +235,9 @@ public class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.ViewHolder> 
         ip_view.setText(ip);
 
         if (!new Core(context).getBoolean("hide")) {
-            mac_view.setText(mac + " "+"OS: " + os);
+            mac_view.setText(mac + "\n"+"OS: " + os);
         } else {
-            mac_view.setText("XX:XX:XX:XX:XX"+ " "+"OS: " + os);
+            mac_view.setText("XX:XX:XX:XX:XX"+ "\n"+"OS: " + os);
         }
         port_count.setText(String.valueOf(port.size()));
         device_img.setImageDrawable(img);
