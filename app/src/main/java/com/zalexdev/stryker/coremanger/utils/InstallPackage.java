@@ -68,7 +68,7 @@ public class InstallPackage extends AsyncTask<Void, String, Boolean> {
             process.destroy();
             p = process.exitValue() == 0;
         } catch (IOException | InterruptedException e) {
-            Log.d(TAG, "An IOException was caught: " + e.getMessage());
+            Log.d("Debug: ", "An IOException was caught: " + e.getMessage());
         }
 
         return p;

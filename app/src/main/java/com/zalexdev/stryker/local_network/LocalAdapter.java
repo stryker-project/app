@@ -279,7 +279,7 @@ public class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.ViewHolder> 
                             if (ar.contains("GW")){exploit.setGw(devices.get(0).getIp());ar.remove("GW");}
                             if (ar.contains("PORT")){
                                 activity.runOnUiThread(() -> selectPort(port));
-                                while (portcustom.equals("")){Log.d(TAG, "run: test");}
+                                while (portcustom.equals("")){Log.d("Debug: ", "run: test");}
                                 exploit.setPort(portcustom);
                                 ar.remove("PORT");portcustom="";
                             }
@@ -301,7 +301,7 @@ public class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.ViewHolder> 
                                     valuedialog.show();
                                 });
                                 while (temp[0].equals("")){
-                                    Log.d(TAG,"test");
+                                    Log.d("Debug: ","test");
                                 }
                                 cmd = cmd.replace("{"+s+"}",temp[0]);
 
@@ -342,7 +342,7 @@ public class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.ViewHolder> 
                                     setProg(prog,progper[0]);
                                 }).start();
                                 new Thread(() -> {
-                                    while (wait[0] != 1){Log.d(TAG,"waiting...");}
+                                    while (wait[0] != 1){Log.d("Debug: ","waiting...");}
                                     if (success[0] == 0){setText(progress,core.str("sorry_not_vuln"));setProgColor(prog,image,1);}
                                     else {setText(progress,core.str("vuln_for")+res.toString());setProgColor(prog,image,2); }
                                     setText(cancel,"OK");
@@ -414,7 +414,7 @@ public class LocalAdapter extends RecyclerView.Adapter<LocalAdapter.ViewHolder> 
                 setProg(prog,progper[0]);
             }).start();}
         new Thread(() -> {
-            while (wait[0] != exploits.size()){Log.d(TAG,"waiting...");}
+            while (wait[0] != exploits.size()){Log.d("Debug: ","waiting...");}
             if (success[0] == 0){setText(progress,core.str("not_vuln_local"));setProgColor(prog,image,1);}
             else {setText(progress,core.str("vuln_for")+res.toString());setProgColor(prog,image,2); }
             setText(cancel,"OK");

@@ -94,9 +94,9 @@ public class CustomPin extends AsyncTask<Void, String, WiFINetwork> {
             process.waitFor();
             process.destroy();
         } catch (IOException e) {
-            Log.d(TAG, "An IOException was caught: " + e.getMessage());
+            Log.d("Debug: ", "An IOException was caught: " + e.getMessage());
         } catch (InterruptedException ex) {
-            Log.d(TAG, "An InterruptedException was caught: " + ex.getMessage());
+            Log.d("Debug: ", "An InterruptedException was caught: " + ex.getMessage());
         }
         if (canceled) {
             result.setCanceled(true);

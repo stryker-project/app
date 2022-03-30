@@ -69,7 +69,7 @@ public class GetSploit extends AsyncTask<Void, String, ArrayList<Sploit>> {
             process.waitFor();
             process.destroy();
         } catch (IOException | InterruptedException e) {
-            Log.d(TAG, "An IOException was caught: " + e.getMessage());
+            Log.d("Debug: ", "An IOException was caught: " + e.getMessage());
         }
 
         return parse(json.toString());

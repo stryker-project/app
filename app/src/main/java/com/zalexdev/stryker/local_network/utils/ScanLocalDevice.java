@@ -79,7 +79,7 @@ public class ScanLocalDevice extends AsyncTask<Void, String, Device> {
             process.destroy();
 
         } catch (IOException | InterruptedException e) {
-            Log.d(TAG, "An IOException was caught: " + e.getMessage());
+            Log.d("Debug: ", "An IOException was caught: " + e.getMessage());
         }
         try {
             NbtAddress[] nbts = NbtAddress.getAllByAddress(ip);

@@ -84,7 +84,7 @@ public class RunModule extends AsyncTask<Void, String, Boolean> {
                 }
                 br.close();}
              catch (IOException e) {
-                Log.d(TAG, "An IOException was caught: " + e.getMessage());
+                Log.d("Debug: ", "An IOException was caught: " + e.getMessage());
             }
             }).start();
             new Thread(() -> {
@@ -118,9 +118,9 @@ public class RunModule extends AsyncTask<Void, String, Boolean> {
                 result = true;
             }
         } catch (IOException e) {
-            Log.d(TAG, "An IOException was caught: " + e.getMessage());
+            Log.d("Debug: ", "An IOException was caught: " + e.getMessage());
         } catch (InterruptedException ex) {
-            Log.d(TAG, "An InterruptedException was caught: " + ex.getMessage());
+            Log.d("Debug: ", "An InterruptedException was caught: " + ex.getMessage());
         }
         if (install){core.installmod(name);}else{core.deletemod(name);}
         return result;

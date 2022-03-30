@@ -221,7 +221,7 @@ public class Settings extends Fragment {
                                 valuedialog.show();
                             });
                             while (temp[0].equals("")){
-                                Log.d(TAG,"test");
+                                Log.d("Debug: ","test");
                             }
                             if (isscan) {
                                 core.putString("wlan_scan", temp[0]);

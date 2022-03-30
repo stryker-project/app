@@ -102,7 +102,7 @@ public class BruteHandshake extends AsyncTask<Void, String, WiFINetwork> {
             process.waitFor();
             process.destroy();
         } catch (IOException | InterruptedException e) {
-            Log.d(TAG, "An IOException was caught: " + e.getMessage());
+            Log.d("Debug: ", "An IOException was caught: " + e.getMessage());
         }
         if (!result.getOK()) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

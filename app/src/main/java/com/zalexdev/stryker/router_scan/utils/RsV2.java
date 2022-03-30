@@ -94,9 +94,9 @@ public class RsV2 extends AsyncTask<Void, String, Router> {
             r = rs_result(out2);
 
         } catch (IOException e) {
-            Log.d(TAG, "An IOException was caught: " + e.getMessage());
+            Log.d("Debug: ", "An IOException was caught: " + e.getMessage());
         } catch (InterruptedException ex) {
-            Log.d(TAG, "An InterruptedException was caught: " + ex.getMessage());
+            Log.d("Debug: ", "An InterruptedException was caught: " + ex.getMessage());
         }
 
         return r;
