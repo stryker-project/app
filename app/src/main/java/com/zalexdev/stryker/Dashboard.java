@@ -90,7 +90,7 @@ public class Dashboard extends Fragment  {
         img_close_magisk.setOnClickListener(view -> magisk_notif.collapse());
         ExpandableLayout menu = activity.findViewById(R.id.menu_expand);
         // The above code is setting the text of the label to "userhello" and the username of the user.
-        user_hello.setText(core.str("userhello")+" "+core.getString("username"));
+        user_hello.setText(core.str("userhello") + core.getString("username"));
         try {
             // This code is checking if Magisk notifications about root access is active. If it is, it will
             // show the notification.
