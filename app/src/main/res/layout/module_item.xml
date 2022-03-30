@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content" >
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/item"
@@ -14,55 +12,54 @@
         android:elevation="6dp"
         android:focusable="true"
         app:cardCornerRadius="8dp"
-        app:rippleColor="#54595959">
+        app:rippleColor="#54595959" >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="10dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal" >
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical" >
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/module_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Module name"
-                    android:textSize="22dp"
+                    android:textSize="18dp"
                     android:textStyle="bold" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/module_author_and_ver"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:layout_marginTop="3dp"
-                    android:text="By Zalexdev (ver 1.0)"
-                    android:textSize="12dp"
-                    android:textStyle="italic" />`
+                    android:text="Module author"
+                    android:textSize="15dp"
+                    android:textStyle="italic" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/module_desc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginStart="8dp"
                     android:layout_marginTop="3dp"
                     android:text="Module description"
-                    android:textSize="15dp"
-                    android:layout_marginBottom="10dp"
-                  />`
-
-
+                    android:textSize="15dp" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="30dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal" >
 
                 <com.google.android.material.progressindicator.CircularProgressIndicator
                     android:id="@+id/module_indicator"
@@ -79,5 +76,4 @@
             </LinearLayout>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
-
 </RelativeLayout>
