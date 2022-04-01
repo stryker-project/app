@@ -226,7 +226,7 @@ public class Dashboard extends Fragment  {
     public void updatedialog(String name, String urlapk, String urlchroot32,String urlchroot64) {
         new MaterialAlertDialogBuilder(context)
                 .setTitle(R.string.new_update)
-                .setMessage(getString(R.string.want_update) + "23" + getString(R.string.doo) + name + getString(R.string.rvregre))
+                .setMessage(getString(R.string.want_update) + " 23 " + getString(R.string.doo) + " " + name + getString(R.string.rvregre))
                 .setPositiveButton(R.string.yes, (dialogInterface, i) -> {
                     FragmentManager fragmentManager = getFragmentManager();
                     fragmentManager.beginTransaction().replace(R.id.flContent, new Updater(urlapk,urlchroot32,urlchroot64)).commit();
