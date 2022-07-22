@@ -16,7 +16,7 @@ Stryker 是新一代的移动渗透测试应用程序。它将帮助小白在没
 
 [下载](https://github.com/stryker-project/app/releases "Releases")
 
-[频道和群组（外语）](http://t.me/stryker "Channel & Chat")
+[群组](http://t.me/stryker "Channel & Chat")
 
 [youtube介绍频道](https://youtu.be/2n6NxE_sGm4 "Short features overview")
 
