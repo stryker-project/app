@@ -1,23 +1,23 @@
 ## <center> Stryker app</center>
 [![Icon](https://zalex.dev/icon.ico "Icon")](https://zalex.dev "Icon")
-###### Requirements
+###### 运行要求
 
-1. Android 8.0+ 
-2. Root (Magisk 23.0+)
-3. 64bit CPU (preferred)
+1. 安卓 8.0+ 
+2. 已获取Root权限 (Magisk 23.0+)
+3. 64位 处理器 (推荐)
 
-###### Description
+###### 简介
 
-Stryker is a new generation mobile pentest application. It will help you to test your networks and devices for common vulnerabilities without special skills and knowledge. And also provides you to add your expolits and new features!
+Stryker 是新一代的移动渗透测试应用程序。它将帮助小白在没有特殊技能和知识的情况下测试他们网络设备的常见漏洞。并且还为您提供了添加利用漏洞的脚本和新的功能！
 
-### Links
+### 链接
 
-[Downloads](https://github.com/stryker-project/app/releases "Releases")
+[下载](https://github.com/stryker-project/app/releases "Releases")
 
-[Channel & Chat](http://t.me/stryker "Channel & Chat")
+[频道和群组（外语）](http://t.me/stryker "Channel & Chat")
 
-[Short features overview](https://youtu.be/2n6NxE_sGm4 "Short features overview")
+[youtube介绍频道](https://youtu.be/2n6NxE_sGm4 "Short features overview")
 
-### Support
+### 支持我们
 
-Bitcoin: bc1q0sewu9cr9rh2uf7qzvxmmvc2z7x7vc9wp7v8f8
+比特币: bc1q0sewu9cr9rh2uf7qzvxmmvc2z7x7vc9wp7v8f8
