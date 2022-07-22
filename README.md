@@ -1,5 +1,6 @@
 ## <center> Stryker app</center>
 [![Icon](https://zalex.dev/icon.ico "Icon")](https://zalex.dev "Icon")
+[English](../../README.md)
 ###### 运行要求
 
 1. 安卓 8.0+ 
