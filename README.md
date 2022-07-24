@@ -1,5 +1,7 @@
 ## <center> Stryker app</center>
 [![Icon](https://zalex.dev/icon.ico "Icon")](https://zalex.dev "Icon")
+
+[中文介绍](./docs/zh-CN/README.md)
 ###### Requirements
 
 1. Android 8.0+ 
