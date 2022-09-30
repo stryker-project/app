@@ -16,10 +16,10 @@ Stryker is a new generation mobile pentest application. It will help you to test
 
 [Downloads](https://github.com/stryker-project/app/releases "Releases")
 
-[Channel & Chat](http://t.me/stryker "Channel & Chat")
+[Channel & Chat](http://t.me/strykerapp "Channel & Chat")
 
 [Short features overview](https://youtu.be/2n6NxE_sGm4 "Short features overview")
 
 ### Support
 
-Bitcoin: bc1q0sewu9cr9rh2uf7qzvxmmvc2z7x7vc9wp7v8f8
+Buy premium on offical site
