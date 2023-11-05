@@ -1,5 +1,6 @@
 ## <center> Stryker app</center>
-[![Icon](https://zalex.dev/icon.ico "Icon")](https://zalex.dev "Icon")
+
+<img src="https://cdn.strykerdefence.com/static/img/logos/white_border.png" width="100" height="100"/>
 
 [中文介绍](./docs/zh-CN/README.md)
 ###### Requirements
