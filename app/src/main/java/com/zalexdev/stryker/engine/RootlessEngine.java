@@ -1,8 +1,11 @@
 package com.zalexdev.stryker.engine;
 
 import android.content.Context;
+import android.hardware.usb.UsbDevice;
 import android.util.Log;
 
+import com.zalexdev.stryker.netdetect.ChipsetDb;
+import com.zalexdev.stryker.netdetect.ChipsetInfo;
 import com.zalexdev.stryker.utils.Core;
 
 import java.io.BufferedReader;
@@ -796,9 +799,11 @@ public final class RootlessEngine {
         }
         if (ifs.isEmpty()) {
             usbDriverOk = false;
+            String hint = chipsetDriverHint();
             GuestExec.logToStore("USB adapter: DRIVER MISSING — the dongle is attached to the VM but "
-                    + "'iw dev' shows no interface after " + (timeoutMs / 1000) + "s. Install the driver "
-                    + "or firmware for this chipset from the Terminal, then retry.");
+                    + "'iw dev' shows no interface after " + (timeoutMs / 1000) + "s."
+                    + (hint != null ? " Detected: " + hint + (hint.endsWith(".") ? "" : ".") : "")
+                    + " Install the driver or firmware for this chipset from the Terminal, then retry.");
             return false;
         }
         usbDriverOk = true;
@@ -810,6 +815,26 @@ public final class RootlessEngine {
             GuestExec.logToStore("USB adapter: driver OK — guest exposes " + ifs);
         }
         return true;
+    }
+
+    private String chipsetDriverHint() {
+        if (usb == null) return null;
+        List<UsbDevice> picks = usb.pickWifiDevices();
+        if (picks == null || picks.isEmpty()) return null;
+        StringBuilder sb = new StringBuilder();
+        for (UsbDevice d : picks) {
+            if (!usb.isAttached(d)) continue;
+            ChipsetInfo info = ChipsetDb.lookup(
+                    String.format(java.util.Locale.ENGLISH, "%04x", d.getVendorId() & 0xFFFF),
+                    String.format(java.util.Locale.ENGLISH, "%04x", d.getProductId() & 0xFFFF));
+            if (info == null || info.kind != ChipsetInfo.Kind.WIFI) continue;
+            if (sb.length() > 0) sb.append("; ");
+            sb.append(info.displayName()).append(" (driver ").append(info.driver).append(")");
+            if (info.notes != null && !info.notes.isEmpty()) {
+                sb.append(" — ").append(info.notes);
+            }
+        }
+        return sb.length() == 0 ? null : sb.toString();
     }
 
     public UsbPassthroughManager usb() { return usb; }
